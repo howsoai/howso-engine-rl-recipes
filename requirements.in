@@ -1,0 +1,5 @@
+howso-engine
+gymnasium
+gymnasium[classic-control]
+pandas<=1.5
+numpy<1.24

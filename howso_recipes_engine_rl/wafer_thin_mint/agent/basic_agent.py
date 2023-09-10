@@ -1,0 +1,155 @@
+import logging
+
+from howso import engine
+import pandas as pd
+
+from ...common.agent import BaseAgent
+
+logger = logging.getLogger('howso.rl.examples.wafer_thin_mint')
+
+
+class BasicAgent(BaseAgent[int, int]):
+    """
+    Wafer-Thin-Mint value-learning agent.
+
+    Utilizes only the original observation space as context features along
+    with 'score' to track rewards. Predicts the action to take given the
+    observation state and a desired score. The desired score is calculated
+    as the maximum score achieved plus one.
+
+    This approach may be used if there is no or low temporal complexity and if
+    the action space is simple.
+
+    Flow:
+    Generate an action given the current state of Wafer-Thin-Mint while
+    attempting to find similar situations from previous games where the score
+    of those situations was similar to the desired score.
+
+    Train on played game, assigning all cases in the round the final reward of
+    the round.
+    """
+
+    def setup(self) -> None:
+        """Setup the agent."""
+        self.desired_score = 1
+
+        self.features = {
+            'wafer_count': {'type': 'ordinal'},
+            'score': {'type': 'ordinal'},
+            'action': {
+                'type': 'nominal',
+                'data_type': 'number',
+                'bounds': {'allowed': [0, 1], 'allow_null': False}
+            }
+        }
+
+        self.reward_features = ['score']
+        self.context_features = ['wafer_count'] + self.reward_features
+        self.action_features = ['action']
+
+        self.trainee = engine.Trainee(features=self.features)
+        self.trainee.set_auto_analyze_params(
+            auto_analyze_enabled=True,
+            context_features=self.context_features,
+            action_features=self.action_features,
+        )
+        if self.seed is not None:
+            self.trainee.set_random_seed(self.seed)
+        # Show all DataFrame columns
+        pd.set_option('display.max_columns', None)
+
+    def done(self, won=False) -> None:
+        """Cleanup when finished."""
+        self.trainee.delete()
+
+    def act(self, observation, round_num, step) -> int:
+        """React to the observation to get the action."""
+        desired_conviction = 1
+
+        details = {}
+        if self.explanation_level >= 2:
+            details['influential_cases'] = True
+
+        if self.explanation_level >= 3:
+            details['feature_mda'] = True
+            details['feature_residuals'] = True
+            details['case_feature_residuals'] = True
+            details['boundary_cases'] = 3
+
+        react = self.trainee.react(
+            desired_conviction=desired_conviction,
+            contexts=[[observation, self.desired_score]],
+            context_features=self.context_features,
+            action_features=self.action_features,
+            into_series_store=str(round_num),
+            details=details,
+        )
+        action = react['action']['action'][0]
+
+        self.output_explanations(react)
+
+        return int(action)
+
+    def assign_reward(self, observation, scores, round_num, step) -> None:
+        """Assign reward to model."""
+        score = scores[-1]
+
+        # Set the desired reward to the max seen so far
+        self.desired_score = max(self.desired_score, score + 1)
+
+        self.trainee.train(
+            features=self.reward_features,
+            cases=[[score]],
+            series=str(round_num),
+        )
+
+        logger.info(
+            'Round %s: score=%.0f', round_num, score)
+
+    def output_explanations(self, react) -> None:
+        """
+        Log react explanations based on explanation_level.
+
+        Parameters
+        ----------
+        react : dict
+            A react response.
+        """
+        if self.explanation_level >= 2:
+            # Get influential cases
+            influential_cases_data = react['explanation']['influential_cases']
+            if influential_cases_data is not None:
+                influential_cases_list = influential_cases_data[0]
+                influential_cases = pd.DataFrame(influential_cases_list)
+                logger.info("Most influential cases: \n%s", influential_cases)
+
+        if self.explanation_level >= 3:
+            # Get boundary cases
+            boundary_cases_data = react['explanation']['boundary_cases']
+            if boundary_cases_data is not None:
+                boundary_cases_list = boundary_cases_data[0]
+                boundary_cases = pd.DataFrame(boundary_cases_list)
+                logger.info("Boundary cases: \n%s", boundary_cases)
+
+            # Get mean decrease in accuracy
+            mda_data = react['explanation']['feature_mda'][0]
+            if mda_data is not None:
+                for feature in mda_data:
+                    logger.info(
+                        "Removing feature '%s' reduces accuracy of best action by: %s",
+                        feature, mda_data[feature])
+
+            # Get residuals
+            residuals_data = react['explanation']['case_feature_residuals'][0]
+            if residuals_data is not None:
+                for feature in residuals_data:
+                    logger.info(
+                        "Feature %s has a residual of: %s",
+                        feature, residuals_data[feature])
+
+            residuals_data = react['explanation']['feature_residuals'][0]
+            if residuals_data is not None:
+                for feature in residuals_data:
+                    logger.info(
+                        "Feature %s has a residual of: %s",
+                        feature, residuals_data[feature])
