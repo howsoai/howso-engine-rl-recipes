@@ -27,14 +27,14 @@ setup(
     description='Howso Recipes Engine RL',
     author='Howso Incorporated',
     author_email='support@howso.com',
-    license='Proprietary',
+    license='GNU Affero General Public License v3',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Science/Research',
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
         'Topic :: Scientific/Engineering :: Machine Learning',
         'Topic :: Scientific/Engineering :: Data Mining',
-        'License :: Other/Proprietary License',
+        'License :: OSI Approved :: GNU Affero General Public License v3',
         'Programming Language :: Python :: 3'
     ],
     include_package_data=True,
