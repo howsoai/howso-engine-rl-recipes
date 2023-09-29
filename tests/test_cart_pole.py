@@ -11,7 +11,7 @@ logger = logging.getLogger("howso.rl.tests")
     ('basic', 3, 500),
     ('value-learning', 3, 500),
 ])
-def test_agents(agent_type, iterations, max_avg_rounds):
+def test_agents_regression(agent_type, iterations, max_avg_rounds):
     """Test cart pole is solved by all agent types."""
     sim = Simulation(iterations=iterations, max_workers=iterations)
     results = sim.run(game_type=GameType.CART_POLE, agent_type=agent_type,
@@ -40,7 +40,7 @@ def test_agents_experimental(agent_type, iterations, max_avg_rounds):
     """Test cart pole is solved by all agent types."""
     sim = Simulation(iterations=iterations, max_workers=iterations)
     results = sim.run(game_type=GameType.CART_POLE, agent_type=agent_type,
-                      max_rounds=600)
+                      max_rounds=1_200)
 
     logger.info({
         "agent_type": agent_type,
