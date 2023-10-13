@@ -22,9 +22,9 @@ def parse_requirements(requirements):
 
 
 setup(
-    name='howso-recipes-engine-rl',
-    version=get_version("howso_recipes_engine_rl/__init__.py"),
-    description='Howso Recipes Engine RL',
+    name='howso-engine-rl-recipes',
+    version=get_version("howso_engine_rl_recipes/__init__.py"),
+    description='Howso Engine Reinforcement Learning Recipes',
     author='Howso Incorporated',
     author_email='support@howso.com',
     license='GNU Affero General Public License v3',
@@ -32,10 +32,12 @@ setup(
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Science/Research',
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
-        'Topic :: Scientific/Engineering :: Machine Learning',
-        'Topic :: Scientific/Engineering :: Data Mining',
         'License :: OSI Approved :: GNU Affero General Public License v3',
-        'Programming Language :: Python :: 3'
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
     ],
     include_package_data=True,
     install_requires=parse_requirements('requirements.in'),

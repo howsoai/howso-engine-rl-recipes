@@ -1,7 +1,7 @@
 import logging
 import pytest
 
-from howso_recipes_engine_rl.simulation import GameType, Simulation
+from howso_engine_rl_recipes.simulation import GameType, Simulation
 
 logger = logging.getLogger("howso.rl.tests")
 
