@@ -14,22 +14,8 @@ defaults:
 jobs:
 
   build-test-package:
-    uses: "./.github/workflows/build-test-package.yml"
+    uses: "./.github/workflows/build.yml"
     secrets: inherit
     with:
       version: ${{ inputs.version }}
-
-  create-release:
-    needs: ['build-test-package']
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: Create Release
-      uses: ncipollo/release-action@v1
-      with:
-        tag: ${{ inputs.version }}
-        commit: ${{ github.sha }}
-        name: "Howso Engine RL Recipes ${{ inputs.version }}"
-        artifactErrorsFailBuild: true
-        generateReleaseNotes: true
-        makeLatest: legacy
+      build-type: 'release'
