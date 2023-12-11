@@ -34,7 +34,7 @@ jobs:
     name: Pytest (${{ inputs.python-version }})
     needs: ["get-howso-engine-py-details", "get-amalgam-lang-py-details"]
     runs-on: howso-ubuntu-runner-latest
-    timeout-minutes: 90
+    timeout-minutes: 120
     steps:
 
       - name: Collect Workflow Telemetry
