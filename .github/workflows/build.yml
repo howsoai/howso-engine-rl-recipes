@@ -98,6 +98,8 @@ jobs:
       upstream-details: ${{ needs.metadata.outputs.upstream-details }}
 
   pytest-linux-3-8-st:
+    # Only run on branch builds
+    if: inputs.build-type == ''
     needs: ['metadata', 'build']
     uses: howsoai/.github/.github/workflows/pytest.yml@main
     secrets: inherit
@@ -112,6 +114,8 @@ jobs:
       upstream-details: ${{ needs.metadata.outputs.upstream-details }}
 
   pytest-linux-3-11-mt:
+    # Only run on branch builds
+    if: inputs.build-type == ''
     needs: ['metadata', 'build']
     uses: howsoai/.github/.github/workflows/pytest.yml@main
     secrets: inherit
@@ -125,6 +129,8 @@ jobs:
       upstream-details: ${{ needs.metadata.outputs.upstream-details }}
 
   pytest-windows-3-11-mt:
+    # Only run on branch builds
+    if: inputs.build-type == ''
     needs: ['metadata', 'build']
     uses: howsoai/.github/.github/workflows/pytest.yml@main
     secrets: inherit
@@ -138,6 +144,8 @@ jobs:
       upstream-details: ${{ needs.metadata.outputs.upstream-details }}
 
   pytest-macos-3-11-mt:
+    # Only run on branch builds
+    if: inputs.build-type == ''
     needs: ['metadata', 'build']
     uses: howsoai/.github/.github/workflows/pytest.yml@main
     secrets: inherit
@@ -153,10 +161,6 @@ jobs:
   release:
     needs:
       - metadata
-      - pytest-linux-3-8-st
-      - pytest-linux-3-11-mt
-      - pytest-windows-3-11-mt
-      - pytest-macos-3-11-mt
     if: inputs.build-type == 'release'
     permissions:
       contents: write
