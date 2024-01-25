@@ -1,15 +1,30 @@
-name: Reusable WF - Build
+name: Build
+run-name: "Branch Build (${{ github.run_attempt }}.${{ github.run_number }}) - ${{ github.ref_name }}"
 
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
-      version:
-        required: true
-        type: string
-      payload:
+      amalgam-lang-py-build:
+        description: |
+          (Optional) amalgam-lang-py build or version number. Defaults to pinned release.
+          
+          Examples:
+            '6807310618',
+            'https://github.com/howsoai/amalgam-lang-py/actions/runs/6807310618',
+            '4.0.1'
         required: false
         type: string
+      howso-engine-py-build:
+        description: |
+          (Optional) howso-engine-py build or version number. Defaults to pinned release.
+        required: false
+        type: string
+  workflow_call:
+    inputs:
       build-type:
+        required: false
+        type: string
+      optional-release-tag:
         required: false
         type: string
 
@@ -19,40 +34,148 @@ defaults:
 
 jobs:
 
+  metadata:
+    uses: howsoai/.github/.github/workflows/set-metadata.yml@main
+    secrets: inherit
+    with:
+      # Remove unused parameters
+      build-type: ${{ inputs.build-type }}
+      optional-release-tag: ${{ inputs.optional-release-tag }}
+      amalgam-lang-py-build: ${{ inputs.amalgam-lang-py-build }}
+      howso-engine-py-build: ${{ inputs.howso-engine-py-build }}
+
+  build:
+    needs: ["metadata"]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+    - name: Install pypa/build
+      run: >-
+        python3 -m
+        pip install
+        build
+        --user
+
+    - name: Build a binary wheel and a source tarball
+      run: >-
+        python3 -m
+        build
+        --sdist
+        --wheel
+        --outdir dist/
+        .
+      env:
+        SETUPTOOLS_SCM_PRETEND_VERSION: ${{ needs.metadata.outputs.version }}
+
+    - name: Upload Tarball Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: "howso-engine-rl-recipes-${{ needs.metadata.outputs.version }}"
+        path: "dist/howso-engine-rl-recipes-${{ needs.metadata.outputs.version }}.tar.gz"
+        if-no-files-found: error
+
+    - name: Upload Wheel Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: "howso_engine_rl_recipes-${{ needs.metadata.outputs.version }}-py3-none-any"
+        path: "dist/howso_engine_rl_recipes-${{ needs.metadata.outputs.version }}-py3-none-any.whl"
+        if-no-files-found: error
+
   workflow-summary:
-    if: inputs.build-type != 'release' && inputs.build-type != 'PR'
-    uses: "./.github/workflows/workflow-summary.yml"
+    needs: ['metadata']
+    uses: "howsoai/.github/.github/workflows/workflow-summary.yml@main"
     secrets: inherit
     with:
-      payload: "${{ inputs.payload }}"
+      upstream-details: ${{ needs.metadata.outputs.upstream-details }}
 
-  test-3-8:
-    if: inputs.build-type != 'release' && inputs.build-type != 'PR'
-    uses: "./.github/workflows/pytest.yml"
+  pytest-linux-3-8-st:
+    needs: ['metadata', 'build']
+    uses: howsoai/.github/.github/workflows/pytest.yml@main
     secrets: inherit
     with:
-      python-version: "3.8"
-      payload: "${{ inputs.payload }}"
+      platform: 'howso-ubuntu-runner-latest'
+      platform-pretty: 'Linux'
+      amalgam-plat-arch: 'linux-amd64'
+      python-version: '3.8'
+      config-fp: './config/latest-st-debug-howso.yml'
+      config-pretty: 'ST'
+      workers: 'auto'
+      upstream-details: ${{ needs.metadata.outputs.upstream-details }}
 
-  test-3-11:
-    if: inputs.build-type != 'release' && inputs.build-type != 'PR'
-    uses: "./.github/workflows/pytest.yml"
+  pytest-linux-3-11-mt:
+    needs: ['metadata', 'build']
+    uses: howsoai/.github/.github/workflows/pytest.yml@main
     secrets: inherit
     with:
-      python-version: "3.11"
-      payload: "${{ inputs.payload }}"
+      platform: 'howso-ubuntu-runner-latest'
+      platform-pretty: 'Linux'
+      amalgam-plat-arch: 'linux-amd64'
+      python-version: '3.11'
+      config-fp: './config/latest-mt-debug-howso.yml'
+      config-pretty: 'MT'
+      upstream-details: ${{ needs.metadata.outputs.upstream-details }}
 
-  create-release:
+  pytest-windows-3-11-mt:
+    needs: ['metadata', 'build']
+    uses: howsoai/.github/.github/workflows/pytest.yml@main
+    secrets: inherit
+    with:
+      platform: 'howso-windows-runner-latest'
+      platform-pretty: 'Windows'
+      amalgam-plat-arch: 'windows-amd64'
+      python-version: '3.11'
+      config-fp: './config/latest-mt-debug-howso.yml'
+      config-pretty: 'MT'
+      upstream-details: ${{ needs.metadata.outputs.upstream-details }}
+
+  pytest-macos-3-11-mt:
+    needs: ['metadata', 'build']
+    uses: howsoai/.github/.github/workflows/pytest.yml@main
+    secrets: inherit
+    with:
+      platform: 'macos-latest-large'
+      platform-pretty: 'MacOS'
+      amalgam-plat-arch: 'darwin-arm64'
+      python-version: '3.11'
+      config-fp: './config/latest-mt-debug-howso.yml'
+      config-pretty: 'MT'
+      upstream-details: ${{ needs.metadata.outputs.upstream-details }}
+
+  release:
+    needs:
+      - metadata
+      - pytest-linux-3-8-st
+      - pytest-linux-3-11-mt
+      - pytest-windows-3-11-mt
+      - pytest-macos-3-11-mt
     if: inputs.build-type == 'release'
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
+
+    - name: Download Artifacts
+      uses: actions/download-artifact@v3
+      with:
+        path: ./tmp
 
     - name: Create Release
       uses: ncipollo/release-action@v1
       with:
-        tag: ${{ inputs.version }}
+        tag: ${{ needs.metadata.outputs.version }}
         commit: ${{ github.sha }}
-        name: "Howso Engine RL Recipes ${{ inputs.version }}"
+        name: "${{ github.event.repository.name }} ${{ needs.metadata.outputs.version }}"
         artifactErrorsFailBuild: true
         generateReleaseNotes: true
         makeLatest: legacy
+        artifacts: "./tmp/howso-engine-rl-recipes-*/howso-engine-rl-recipes-*.tar.gz,./tmp/howso_engine_rl_recipes-*/howso_engine_rl_recipes-*.whl"
+        artifactContentType: application/gzip
