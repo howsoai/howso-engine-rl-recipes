@@ -77,14 +77,14 @@ jobs:
         SETUPTOOLS_SCM_PRETEND_VERSION: ${{ needs.metadata.outputs.version }}
 
     - name: Upload Tarball Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: "howso-engine-rl-recipes-${{ needs.metadata.outputs.version }}"
         path: "dist/howso-engine-rl-recipes-${{ needs.metadata.outputs.version }}.tar.gz"
         if-no-files-found: error
 
     - name: Upload Wheel Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: "howso_engine_rl_recipes-${{ needs.metadata.outputs.version }}-py3-none-any"
         path: "dist/howso_engine_rl_recipes-${{ needs.metadata.outputs.version }}-py3-none-any.whl"
@@ -168,7 +168,7 @@ jobs:
     steps:
 
     - name: Download Artifacts
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         path: ./tmp
 
