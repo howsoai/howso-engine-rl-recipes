@@ -17,12 +17,12 @@ UNKNOWN
 UNKNOWN
 
 Faker
-22.5.1
+23.2.1
 MIT License
 joke2k
 https://github.com/joke2k/faker
 Faker is a Python package that generates fake data for you.
-/home/runner/.local/lib/python3.10/site-packages/Faker-22.5.1.dist-info/LICENSE.txt
+/home/runner/.local/lib/python3.10/site-packages/Faker-23.2.1.dist-info/LICENSE.txt
 Copyright (c) 2012 Daniele Faraglia
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -258,12 +258,12 @@ UNKNOWN
 UNKNOWN
 
 argcomplete
-3.2.1
+3.2.2
 Apache Software License
 Andrey Kislyuk
 https://github.com/kislyuk/argcomplete
 Bash tab completion for argparse
-/usr/local/lib/python3.10/dist-packages/argcomplete-3.2.1.dist-info/LICENSE.rst
+/usr/local/lib/python3.10/dist-packages/argcomplete-3.2.2.dist-info/LICENSE.rst
 
                                  Apache License
                            Version 2.0, January 2004
@@ -480,12 +480,12 @@ UNKNOWN
 UNKNOWN
 
 certifi
-2023.11.17
+2024.2.2
 Mozilla Public License 2.0 (MPL 2.0)
 Kenneth Reitz
 https://github.com/certifi/python-certifi
 Python package for providing Mozilla's CA Bundle.
-/home/runner/.local/lib/python3.10/site-packages/certifi-2023.11.17.dist-info/LICENSE
+/home/runner/.local/lib/python3.10/site-packages/certifi-2024.2.2.dist-info/LICENSE
 This package contains a modified version of ca-bundle.crt:
 
 ca-bundle.crt -- Bundle of CA Root Certificates
@@ -625,12 +625,12 @@ UNKNOWN
 UNKNOWN
 
 cryptography
-42.0.1
+42.0.4
 Apache Software License; BSD License
 The Python Cryptographic Authority and individual contributors <cryptography-dev@python.org>
 https://github.com/pyca/cryptography
 cryptography is a package which provides cryptographic recipes and primitives to Python developers.
-/home/runner/.local/lib/python3.10/site-packages/cryptography-42.0.1.dist-info/LICENSE
+/home/runner/.local/lib/python3.10/site-packages/cryptography-42.0.4.dist-info/LICENSE
 This software is made available under the terms of *either* of the licenses
 found in LICENSE.APACHE or LICENSE.BSD. Contributions to cryptography are made
 under the terms of *both* these licenses.
@@ -2211,12 +2211,12 @@ SOFTWARE.
 
 
 platformdirs
-4.1.0
+4.2.0
 MIT License
 UNKNOWN
 https://github.com/platformdirs/platformdirs
 A small Python package for determining appropriate platform-specific dirs, e.g. a "user data dir".
-/usr/local/lib/python3.10/dist-packages/platformdirs-4.1.0.dist-info/licenses/LICENSE
+/usr/local/lib/python3.10/dist-packages/platformdirs-4.2.0.dist-info/licenses/LICENSE
 MIT License
 
 Copyright (c) 2010-202x The platformdirs developers
@@ -2358,7 +2358,7 @@ UNKNOWN
 UNKNOWN
 
 python-apt
-2.4.0+ubuntu2
+2.4.0+ubuntu3
 GNU GPL
 APT Development Team
 UNKNOWN
@@ -2456,12 +2456,12 @@ UNKNOWN
 UNKNOWN
 
 pytz
-2023.3.post1
+2024.1
 MIT License
 Stuart Bishop
 http://pythonhosted.org/pytz
 World timezone definitions, modern and historical
-/home/runner/.local/lib/python3.10/site-packages/pytz-2023.3.post1.dist-info/LICENSE.txt
+/home/runner/.local/lib/python3.10/site-packages/pytz-2024.1.dist-info/LICENSE.txt
 Copyright (c) 2003-2019 Stuart Bishop <stuart@stuartbishop.net>
 
 Permission is hereby granted, free of charge, to any person obtaining a
@@ -2942,12 +2942,12 @@ UNKNOWN
 UNKNOWN
 
 urllib3
-2.1.0
+2.2.1
 MIT License
 Andrey Petrov <andrey.petrov@shazow.net>
 https://github.com/urllib3/urllib3/blob/main/CHANGES.rst
 HTTP library with thread-safe connection pooling, file post, and more.
-/home/runner/.local/lib/python3.10/site-packages/urllib3-2.1.0.dist-info/licenses/LICENSE.txt
+/home/runner/.local/lib/python3.10/site-packages/urllib3-2.2.1.dist-info/licenses/LICENSE.txt
 MIT License
 
 Copyright (c) 2008-2020 Andrey Petrov and contributors.
