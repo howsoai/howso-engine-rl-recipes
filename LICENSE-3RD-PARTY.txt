@@ -17,12 +17,12 @@ UNKNOWN
 UNKNOWN
 
 Faker
-23.2.1
+24.2.0
 MIT License
 joke2k
 https://github.com/joke2k/faker
 Faker is a Python package that generates fake data for you.
-/home/runner/.local/lib/python3.10/site-packages/Faker-23.2.1.dist-info/LICENSE.txt
+/home/runner/.local/lib/python3.10/site-packages/Faker-24.2.0.dist-info/LICENSE.txt
 Copyright (c) 2012 Daniele Faraglia
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -258,12 +258,12 @@ UNKNOWN
 UNKNOWN
 
 argcomplete
-3.2.2
+3.2.3
 Apache Software License
 Andrey Kislyuk
 https://github.com/kislyuk/argcomplete
 Bash tab completion for argparse
-/usr/local/lib/python3.10/dist-packages/argcomplete-3.2.2.dist-info/LICENSE.rst
+/usr/local/lib/python3.10/dist-packages/argcomplete-3.2.3.dist-info/LICENSE.rst
 
                                  Apache License
                            Version 2.0, January 2004
@@ -562,7 +562,7 @@ UNKNOWN
 UNKNOWN
 
 cloud-init
-23.3.3
+23.4.4
 Dual-licensed under GPLv3 or Apache 2.0
 Scott Moser
 http://launchpad.net/cloud-init/
@@ -625,12 +625,12 @@ UNKNOWN
 UNKNOWN
 
 cryptography
-42.0.4
+42.0.5
 Apache Software License; BSD License
 The Python Cryptographic Authority and individual contributors <cryptography-dev@python.org>
 https://github.com/pyca/cryptography
 cryptography is a package which provides cryptographic recipes and primitives to Python developers.
-/home/runner/.local/lib/python3.10/site-packages/cryptography-42.0.4.dist-info/LICENSE
+/home/runner/.local/lib/python3.10/site-packages/cryptography-42.0.5.dist-info/LICENSE
 This software is made available under the terms of *either* of the licenses
 found in LICENSE.APACHE or LICENSE.BSD. Contributions to cryptography are made
 under the terms of *both* these licenses.
@@ -2120,12 +2120,12 @@ UNKNOWN
 UNKNOWN
 
 packaging
-23.2
+24.0
 Apache Software License; BSD License
 Donald Stufft <donald@stufft.io>
 https://github.com/pypa/packaging
 Core utilities for Python packages
-/usr/local/lib/python3.10/dist-packages/packaging-23.2.dist-info/LICENSE
+/usr/local/lib/python3.10/dist-packages/packaging-24.0.dist-info/LICENSE
 This software is made available under the terms of *either* of the licenses
 found in LICENSE.APACHE or LICENSE.BSD. Contributions to this software is made
 under the terms of *both* these licenses.
@@ -2367,12 +2367,12 @@ UNKNOWN
 UNKNOWN
 
 python-dateutil
-2.8.2
+2.9.0.post0
 Apache Software License; BSD License
 Gustavo Niemeyer
 https://github.com/dateutil/dateutil
 Extensions to the standard Python datetime module
-/home/runner/.local/lib/python3.10/site-packages/python_dateutil-2.8.2.dist-info/LICENSE
+/home/runner/.local/lib/python3.10/site-packages/python_dateutil-2.9.0.post0.dist-info/LICENSE
 Copyright 2017- Paul Ganssle <paul@ganssle.io>
 Copyright 2017- dateutil contributors (see AUTHORS file)
 
@@ -2493,12 +2493,12 @@ UNKNOWN
 UNKNOWN
 
 rich
-13.7.0
+13.7.1
 MIT License
 Will McGugan
 https://github.com/Textualize/rich
 Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal
-/home/runner/.local/lib/python3.10/site-packages/rich-13.7.0.dist-info/LICENSE
+/home/runner/.local/lib/python3.10/site-packages/rich-13.7.1.dist-info/LICENSE
 Copyright (c) 2020 Will McGugan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -2627,12 +2627,12 @@ SOFTWARE.
 
 
 typing_extensions
-4.9.0
+4.10.0
 Python Software Foundation License
 "Guido van Rossum, Jukka Lehtosalo, Łukasz Langa, Michael Lee" <levkivskyi@gmail.com>
 https://github.com/python/typing_extensions
 Backported and Experimental Type Hints for Python 3.8+
-/home/runner/.local/lib/python3.10/site-packages/typing_extensions-4.9.0.dist-info/LICENSE
+/home/runner/.local/lib/python3.10/site-packages/typing_extensions-4.10.0.dist-info/LICENSE
 A. HISTORY OF THE SOFTWARE
 ==========================
 
@@ -2972,12 +2972,12 @@ SOFTWARE.
 
 
 userpath
-1.9.1
+1.9.2
 MIT License
 Ofek Lev <oss@ofek.dev>
 https://github.com/ofek/userpath
 Cross-platform tool for adding locations to the user PATH
-/usr/local/lib/python3.10/dist-packages/userpath-1.9.1.dist-info/licenses/LICENSE.txt
+/usr/local/lib/python3.10/dist-packages/userpath-1.9.2.dist-info/licenses/LICENSE.txt
 MIT License
 
 Copyright (c) 2017-present Ofek Lev <oss@ofek.dev>
