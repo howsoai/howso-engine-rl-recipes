@@ -7,7 +7,7 @@ on:
       amalgam-lang-py-build:
         description: |
           (Optional) amalgam-lang-py build or version number. Defaults to pinned release.
-          
+
           Examples:
             '6807310618',
             'https://github.com/howsoai/amalgam-lang-py/actions/runs/6807310618',
@@ -181,5 +181,5 @@ jobs:
         artifactErrorsFailBuild: true
         generateReleaseNotes: true
         makeLatest: legacy
-        artifacts: "./tmp/howso-engine-rl-recipes-*/howso-engine-rl-recipes-*.tar.gz,./tmp/howso_engine_rl_recipes-*/howso_engine_rl_recipes-*.whl"
+        artifacts: "./tmp/howso-engine-rl-recipes-*.tar.gz,./tmp/howso_engine_rl_recipes-*.whl"
         artifactContentType: application/gzip
