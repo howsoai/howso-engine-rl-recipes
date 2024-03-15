@@ -159,8 +159,7 @@ jobs:
       upstream-details: ${{ needs.metadata.outputs.upstream-details }}
 
   release:
-    needs:
-      - metadata
+    needs: [ 'metadata', 'build' ]
     if: inputs.build-type == 'release'
     permissions:
       contents: write
