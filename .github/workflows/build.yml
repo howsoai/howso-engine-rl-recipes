@@ -158,6 +158,21 @@ jobs:
       config-pretty: 'MT'
       upstream-details: ${{ needs.metadata.outputs.upstream-details }}
 
+  test_job:
+    needs: [ 'metadata', 'build' ]
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Download Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: ./tmp
+
+    - name: Whats in temp
+      run: find ./tmp -type f
+
   release:
     needs: [ 'metadata', 'build' ]
     if: inputs.build-type == 'release'
