@@ -180,5 +180,5 @@ jobs:
         artifactErrorsFailBuild: true
         generateReleaseNotes: true
         makeLatest: legacy
-        artifacts: "./tmp/howso-engine-rl-recipes-*.tar.gz,./tmp/howso_engine_rl_recipes-*.whl"
+        artifacts: "./tmp/howso-engine-rl-recipes-*/howso-engine-rl-recipes-*.tar.gz,./tmp/howso_engine_rl_recipes-*/howso_engine_rl_recipes-*.whl"
         artifactContentType: application/gzip
