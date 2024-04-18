@@ -35,8 +35,8 @@ dependencies = [
    "howso-engine~=16.1",
    "gymnasium",
    "gymnasium[classic-control]",
-   "pandas<=1.5",
-   "numpy<1.24",
+   "pandas",
+   "numpy",
 ]
 
 [project.optional-dependencies]
