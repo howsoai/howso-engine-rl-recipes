@@ -97,7 +97,7 @@ jobs:
     with:
       upstream-details: ${{ needs.metadata.outputs.upstream-details }}
 
-  pytest-linux-3-8-st:
+  pytest-linux-3-9-st:
     # Only run on branch builds
     if: inputs.build-type == ''
     needs: ['metadata', 'build']
@@ -107,13 +107,13 @@ jobs:
       platform: 'ubuntu-latest'
       platform-pretty: 'Linux'
       amalgam-plat-arch: 'linux-amd64'
-      python-version: '3.8'
+      python-version: '3.9'
       config-fp: './config/latest-st-debug-howso.yml'
       config-pretty: 'ST'
       workers: 'auto'
       upstream-details: ${{ needs.metadata.outputs.upstream-details }}
 
-  pytest-linux-3-11-mt:
+  pytest-linux-3-12-mt:
     # Only run on branch builds
     if: inputs.build-type == ''
     needs: ['metadata', 'build']
@@ -123,12 +123,12 @@ jobs:
       platform: 'ubuntu-latest'
       platform-pretty: 'Linux'
       amalgam-plat-arch: 'linux-amd64'
-      python-version: '3.11'
+      python-version: '3.12'
       config-fp: './config/latest-mt-debug-howso.yml'
       config-pretty: 'MT'
       upstream-details: ${{ needs.metadata.outputs.upstream-details }}
 
-  pytest-windows-3-11-mt:
+  pytest-windows-3-12-mt:
     # Only run on branch builds
     if: inputs.build-type == ''
     needs: ['metadata', 'build']
@@ -138,12 +138,12 @@ jobs:
       platform: 'windows-latest'
       platform-pretty: 'Windows'
       amalgam-plat-arch: 'windows-amd64'
-      python-version: '3.11'
+      python-version: '3.12'
       config-fp: './config/latest-mt-debug-howso.yml'
       config-pretty: 'MT'
       upstream-details: ${{ needs.metadata.outputs.upstream-details }}
 
-  pytest-macos-3-11-mt:
+  pytest-macos-3-12-mt:
     # Only run on branch builds
     if: inputs.build-type == ''
     needs: ['metadata', 'build']
@@ -153,7 +153,7 @@ jobs:
       platform: 'macos-latest'
       platform-pretty: 'MacOS'
       amalgam-plat-arch: 'darwin-amd64'
-      python-version: '3.11'
+      python-version: '3.12'
       config-fp: './config/latest-mt-noavx-debug-howso.yml'
       config-pretty: 'MT'
       upstream-details: ${{ needs.metadata.outputs.upstream-details }}
