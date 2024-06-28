@@ -86,9 +86,9 @@ class ValueLearningAgent(BaseAgent[np.ndarray, int]):
             details['influential_cases'] = True
 
         if self.explanation_level >= 3:
-            details['feature_mda'] = True
-            details['feature_residuals'] = True
-            details['case_feature_residuals'] = True
+            details['feature_mda_robust'] = True
+            details['feature_residuals_robust'] = True
+            details['case_feature_residuals_robust'] = True
             details['boundary_cases'] = 3
 
         # Find score if we push left by providing value for push in contexts
@@ -181,7 +181,7 @@ class ValueLearningAgent(BaseAgent[np.ndarray, int]):
                 logger.info("Boundary cases: \n%s", boundary_cases)
 
             # Get mean decrease in accuracy
-            mda_data = react['explanation']['feature_mda'][0]
+            mda_data = react['explanation']['feature_mda_robust'][0]
             if mda_data is not None:
                 for feature in mda_data:
                     logger.info(
@@ -189,14 +189,14 @@ class ValueLearningAgent(BaseAgent[np.ndarray, int]):
                         feature, mda_data[feature])
 
             # Get residuals
-            residuals_data = react['explanation']['case_feature_residuals'][0]
+            residuals_data = react['explanation']['case_feature_residuals_robust'][0]
             if residuals_data is not None:
                 for feature in residuals_data:
                     logger.info(
                         "Feature %s has a residual of: %s",
                         feature, residuals_data[feature])
 
-            residuals_data = react['explanation']['feature_residuals'][0]
+            residuals_data = react['explanation']['feature_residuals_robust'][0]
             if residuals_data is not None:
                 for feature in residuals_data:
                     logger.info(
