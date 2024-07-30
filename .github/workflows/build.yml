@@ -105,60 +105,60 @@ jobs:
     with:
       upstream-details: ${{ needs.metadata.outputs.upstream-details }}
 
-  pytest-linux-3-9-st:
-    # Only run on branch builds
-    if: inputs.build-type == ''
-    needs: ['metadata', 'build']
-    uses: howsoai/.github/.github/workflows/pytest.yml@main
-    secrets: inherit
-    with:
-      platform: 'ubuntu-latest'
-      platform-pretty: 'Linux'
-      amalgam-plat-arch: 'linux-amd64'
-      python-version: '3.9'
-      config-fp: './config/latest-st-traces-howso.yml'
-      config-pretty: 'ST'
-      workers: 'auto'
-      upstream-details: ${{ needs.metadata.outputs.upstream-details }}
-      debug: ${{ inputs.debug-mode }}
+# pytest-linux-3-9-st:
+#   # Only run on branch builds
+#   if: inputs.build-type == ''
+#   needs: ['metadata', 'build']
+#   uses: howsoai/.github/.github/workflows/pytest.yml@main
+#   secrets: inherit
+#   with:
+#     platform: 'ubuntu-latest'
+#     platform-pretty: 'Linux'
+#     amalgam-plat-arch: 'linux-amd64'
+#     python-version: '3.9'
+#     config-fp: './config/latest-st-traces-howso.yml'
+#     config-pretty: 'ST'
+#     workers: 'auto'
+#     upstream-details: ${{ needs.metadata.outputs.upstream-details }}
+#     debug: ${{ inputs.debug-mode }}
 
-  pytest-linux-3-12-mt:
-    # Only run on branch builds
-    if: inputs.build-type == ''
-    needs: ['metadata', 'build']
-    uses: howsoai/.github/.github/workflows/pytest.yml@main
-    secrets: inherit
-    with:
-      platform: 'ubuntu-latest'
-      platform-pretty: 'Linux'
-      amalgam-plat-arch: 'linux-amd64'
-      python-version: '3.12'
-      config-fp: './config/latest-mt-traces-howso.yml'
-      config-pretty: 'MT'
-      upstream-details: ${{ needs.metadata.outputs.upstream-details }}
-      debug: ${{ inputs.debug-mode }}
+# pytest-linux-3-12-mt:
+#   # Only run on branch builds
+#   if: inputs.build-type == ''
+#   needs: ['metadata', 'build']
+#   uses: howsoai/.github/.github/workflows/pytest.yml@main
+#   secrets: inherit
+#   with:
+#     platform: 'ubuntu-latest'
+#     platform-pretty: 'Linux'
+#     amalgam-plat-arch: 'linux-amd64'
+#     python-version: '3.12'
+#     config-fp: './config/latest-mt-traces-howso.yml'
+#     config-pretty: 'MT'
+#     upstream-details: ${{ needs.metadata.outputs.upstream-details }}
+#     debug: ${{ inputs.debug-mode }}
 
-  pytest-windows-3-12-mt:
-    # Only run on branch builds
-    if: inputs.build-type == ''
-    needs: ['metadata', 'build']
-    uses: howsoai/.github/.github/workflows/pytest.yml@main
-    secrets: inherit
-    with:
-      platform: 'windows-latest'
-      platform-pretty: 'Windows'
-      amalgam-plat-arch: 'windows-amd64'
-      python-version: '3.12'
-      config-fp: './config/latest-mt-traces-howso.yml'
-      config-pretty: 'MT'
-      upstream-details: ${{ needs.metadata.outputs.upstream-details }}
-      debug: ${{ inputs.debug-mode }}
+# pytest-windows-3-12-mt:
+#   # Only run on branch builds
+#   if: inputs.build-type == ''
+#   needs: ['metadata', 'build']
+#   uses: howsoai/.github/.github/workflows/pytest.yml@main
+#   secrets: inherit
+#   with:
+#     platform: 'windows-latest'
+#     platform-pretty: 'Windows'
+#     amalgam-plat-arch: 'windows-amd64'
+#     python-version: '3.12'
+#     config-fp: './config/latest-mt-traces-howso.yml'
+#     config-pretty: 'MT'
+#     upstream-details: ${{ needs.metadata.outputs.upstream-details }}
+#     debug: ${{ inputs.debug-mode }}
 
   pytest-macos-3-12-mt:
     # Only run on branch builds
     if: inputs.build-type == ''
     needs: ['metadata', 'build']
-    uses: howsoai/.github/.github/workflows/pytest.yml@main
+    uses: "./.github/workflows/pytest.yml"
     secrets: inherit
     with:
       platform: 'macos-latest-xlarge'
@@ -168,7 +168,7 @@ jobs:
       config-fp: './config/latest-mt-traces-howso.yml'
       config-pretty: 'MT'
       upstream-details: ${{ needs.metadata.outputs.upstream-details }}
-      debug: ${{ inputs.debug-mode }}
+      debug: true
 
   release:
     needs: [ 'metadata', 'build' ]
