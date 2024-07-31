@@ -12,7 +12,7 @@ logger = logging.getLogger("howso.rl.tests")
     ('basic', 30),
 ])
 def test_wafer_thin_mint(agent_type, iterations):
-    max_workers = int(cpu_count() / 2 - 1)
+    max_workers = 1
     sim = Simulation(iterations=iterations, max_workers=max_workers)
     results = sim.run(game_type=GameType.WTM, agent_type=agent_type)
     logger.info({
