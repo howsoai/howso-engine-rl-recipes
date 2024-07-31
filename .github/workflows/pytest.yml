@@ -234,7 +234,7 @@ jobs:
           set +e
 
           # Capture LLDB output
-          lldb_output=$(lldb --batch -o "target create python" -o "settings set -- target.run-args -m pytest -s ${{ matrix.target }}" -o "settings set target.process.stop-on-exec false" -o "run" -o "bt" -- 2>&1)
+          lldb_output=$(lldb --batch -o "target create python" -o "settings set -- target.run-args -m pytest -s ${{ matrix.target }}" -o "settings set target.process.stop-on-exec false" -o "b exit" -o "run" -o "bt" -- 2>&1)
           lldb_exit_code=$?
           echo "$lldb_output"
 
