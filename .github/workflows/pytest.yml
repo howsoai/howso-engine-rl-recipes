@@ -230,6 +230,7 @@ jobs:
 
           # Run GDB in batch mode and capture the output
           echo "LLDB installation complete"
+          export PYTHONFAULTHANDLER=1
           set +e
 
           # Capture LLDB output
