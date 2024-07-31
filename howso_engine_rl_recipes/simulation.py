@@ -4,6 +4,7 @@ from enum import Enum
 import json
 import logging
 import sys
+import traceback
 from multiprocessing import Lock
 
 from howso.utilities.monitors import Timer
@@ -138,7 +139,11 @@ class Simulation:
                     }
                     for future in as_completed(tasks):
                         iteration = tasks[future]
-                        runs[iteration] = result = future.result()
+                        try:
+                            runs[iteration] = result = future.result()
+                        except Exception:
+                            # dump stack trace?
+                            raise Exception(traceback.format_exc())
                         logger.info('Iteration %.0f finished: win=%s rounds=%s',
                                     iteration, result['win'], result['rounds'])
                 except KeyboardInterrupt:
