@@ -126,7 +126,6 @@ class TimeSeriesAgent(BaseAgent[np.ndarray, int]):
         self.trainee.set_auto_analyze_params(
             auto_analyze_enabled=True,
             analyze_threshold=2_000,
-            auto_analyze_limit_size=30_000,
         )
         if self.seed is not None:
             self.trainee.set_random_seed(self.seed)
