@@ -34,8 +34,8 @@ class BasicAgent(BaseAgent[int, int]):
         self.desired_score = 1
 
         self.features = {
-            'wafer_count': {'type': 'ordinal'},
-            'score': {'type': 'ordinal'},
+            'wafer_count': {'type': 'ordinal', 'data_type': 'number'},
+            'score': {'type': 'ordinal', 'data_type': 'number'},
             'action': {
                 'type': 'nominal',
                 'data_type': 'number',
