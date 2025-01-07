@@ -1,13 +1,15 @@
 import argparse
 from concurrent.futures import ProcessPoolExecutor, as_completed
+from csv import DictWriter
 from enum import Enum
 import json
 import logging
 import sys
 from multiprocessing import Lock
 
-from howso.utilities.monitors import Timer
 import numpy as np
+
+from howso.utilities.monitors import Timer
 
 
 class GameType(str, Enum):
@@ -65,6 +67,12 @@ class Simulation:
         parser.add_argument(
             '--log-level', dest='log_level', default=logging.INFO,
             help="The the log level to use.")
+        parser.add_argument(
+            '--csv', dest='csv', metavar='FILE', type=str,
+            help="Append results to FILE")
+        parser.add_argument(
+            '--configuration', dest='configuration', type=str,
+            help="Record CONFIGURATION in CSV-format output")
 
         return parser.parse_args(arguments)
 
@@ -75,6 +83,8 @@ class Simulation:
         logging.basicConfig(stream=sys.stdout, level=args.pop('log_level'),
                             format="[%(asctime)s] %(levelname)s: %(message)s")
         sim = cls(args.pop('iterations'), max_workers=args.pop('workers'))
+        csvname = args.pop('csv')
+        configuration = args.pop('configuration')
         result = sim.run(**args)
 
         # Output results
@@ -99,6 +109,28 @@ class Simulation:
               f"    Avg. winning game high score: {avg_win_high_score:.1f}\n"
               f"    Avg. winning game duration: {avg_win_duration}\n"
               f"    Elapsed time: {result['duration']}")
+
+        if csvname:
+            with open(csvname, 'a', newline='') as csvfile:
+                writer = DictWriter(
+                    csvfile,
+                    ['game_type', 'agent_type', 'configuration', 'iteration', 'win', 'rounds', 'high_score',
+                     'total_cases', 'duration']
+                )
+                if csvfile.tell() == 0:
+                    writer.writeheader()
+                for iteration, run in runs.items():
+                    writer.writerow({
+                        'game_type': args.get('game_type'),
+                        'agent_type': args.get('agent_type'),
+                        'configuration': configuration,
+                        'iteration': int(iteration),
+                        'win': 'true' if run['win'] else 'false',
+                        'rounds': run['rounds'],
+                        'high_score': run['high_score'],
+                        'total_cases': run['total_cases'],
+                        'duration': run['duration'].total_seconds()
+                    })
 
     @staticmethod
     def _process_initializer(lock, logger):
