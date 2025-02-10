@@ -17,7 +17,9 @@ class WaferThinMintGame(BaseGame):
     """
 
     game_id = 'WaferThinMint-v0'
-    win_threshold = 6  # Required average score across all rounds to consider the game won
+
+    win_threshold = 6
+    """Required average score across all rounds to consider the game won."""
 
     def __init__(self, agent_type: str, **kwargs) -> None:
         try:

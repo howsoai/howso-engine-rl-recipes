@@ -44,6 +44,7 @@ class BasicAgent(BaseAgent[int, int]):
         self.reward_features = ['score']
         self.context_features = ['wafer_count']
         self.action_features = ['action']
+        self.goal_features_map = dict(zip(self.reward_features, [{"goal": "max"}]))
 
         self.trainee = engine.Trainee(features=self.features)
         self.trainee.set_auto_analyze_params(
@@ -79,7 +80,7 @@ class BasicAgent(BaseAgent[int, int]):
             contexts=[[observation]],
             context_features=self.context_features,
             action_features=self.action_features,
-            goal_features_map=dict(zip(self.reward_features, [{"goal": "max"}])),
+            goal_features_map=self.goal_features_map,
             into_series_store=str(round_num),
             details=details,
         )
