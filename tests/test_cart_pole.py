@@ -9,7 +9,6 @@ logger = logging.getLogger("howso.rl.tests")
 @pytest.mark.regression
 @pytest.mark.parametrize('agent_type, iterations, max_avg_rounds', [
     ('basic', 3, 500),
-    ('value-learning', 3, 500),
 ])
 def test_agents_regression(agent_type, iterations, max_avg_rounds):
     """Test cart pole is solved by all agent types."""

@@ -125,8 +125,9 @@ class TimeSeriesAgent(BaseAgent[np.ndarray, int]):
         self.trainee = engine.Trainee(features=self.features)
         self.trainee.set_auto_analyze_params(
             auto_analyze_enabled=True,
-            analyze_threshold=2_000,
         )
+        self.goal_map = dict(zip(self.reward_features, [{"goal": "max"}]))
+
         if self.seed is not None:
             self.trainee.set_random_seed(self.seed)
         # Show all DataFrame columns
@@ -139,7 +140,6 @@ class TimeSeriesAgent(BaseAgent[np.ndarray, int]):
     def act(self, observation, round_num, step) -> int:
         """React to the observation to get the action."""
         desired_conviction = 5
-        desired_score = self.max_avg_score + 1
 
         details = {}
         if self.explanation_level >= 2:
@@ -153,11 +153,12 @@ class TimeSeriesAgent(BaseAgent[np.ndarray, int]):
 
         react = self.trainee.react(
             desired_conviction=desired_conviction,
-            contexts=[[*observation, *self.last_observation, self.last_push_direction, desired_score]],
-            context_features=self.context_features + self.lag_features + self.reward_features,
+            contexts=[[*observation, *self.last_observation, self.last_push_direction]],
+            context_features=self.context_features + self.lag_features,
             action_features=self.action_features,
+            goal_features_map=self.goal_map,
             into_series_store=str(round_num),
-            details=details,
+            details=details
         )
 
         push_direction = react['action']['push_direction'][0]
@@ -179,12 +180,12 @@ class TimeSeriesAgent(BaseAgent[np.ndarray, int]):
 
         # assign each action a score, high to low, maximum value capped at self.max_avg_score
         game_final_values = [
-            [min(round(self.max_avg_score), score - i), i, game_id]
+            [score - i, i, game_id]
             for i in range(step)
         ]
 
         # only train on games that did better than the current max avg score
-        if score >= self.max_avg_score:
+        if score >= self.max_avg_score + 1:
             self.trainee.train(
                 features=self.reward_features + self.time_features + self.id_features,
                 cases=game_final_values,

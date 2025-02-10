@@ -31,8 +31,6 @@ class BasicAgent(BaseAgent[int, int]):
 
     def setup(self) -> None:
         """Setup the agent."""
-        self.desired_score = 1
-
         self.features = {
             'wafer_count': {'type': 'ordinal', 'data_type': 'number'},
             'score': {'type': 'ordinal', 'data_type': 'number'},
@@ -44,13 +42,13 @@ class BasicAgent(BaseAgent[int, int]):
         }
 
         self.reward_features = ['score']
-        self.context_features = ['wafer_count'] + self.reward_features
+        self.context_features = ['wafer_count']
         self.action_features = ['action']
 
         self.trainee = engine.Trainee(features=self.features)
         self.trainee.set_auto_analyze_params(
             auto_analyze_enabled=True,
-            context_features=self.context_features,
+            context_features=self.context_features + self.reward_features,
             action_features=self.action_features,
         )
         if self.seed is not None:
@@ -64,7 +62,7 @@ class BasicAgent(BaseAgent[int, int]):
 
     def act(self, observation, round_num, step) -> int:
         """React to the observation to get the action."""
-        desired_conviction = 1
+        desired_conviction = 3
 
         details = {}
         if self.explanation_level >= 2:
@@ -78,9 +76,10 @@ class BasicAgent(BaseAgent[int, int]):
 
         react = self.trainee.react(
             desired_conviction=desired_conviction,
-            contexts=[[observation, self.desired_score]],
+            contexts=[[observation]],
             context_features=self.context_features,
             action_features=self.action_features,
+            goal_features_map=dict(zip(self.reward_features, [{"goal": "max"}])),
             into_series_store=str(round_num),
             details=details,
         )
@@ -93,9 +92,6 @@ class BasicAgent(BaseAgent[int, int]):
     def assign_reward(self, observation, scores, round_num, step) -> None:
         """Assign reward to model."""
         score = scores[-1]
-
-        # Set the desired reward to the max seen so far
-        self.desired_score = max(self.desired_score, score + 1)
 
         self.trainee.train(
             features=self.reward_features,

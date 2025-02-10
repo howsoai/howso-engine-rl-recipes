@@ -41,7 +41,7 @@ class Simulation:
             help='The game type to play.')
         parser.add_argument(
             'agent_type', default='basic', nargs='?',
-            choices=['basic', 'value-learning', 'time-series'],
+            choices=['basic', 'time-series'],
             help='The agent type to use to play the game. (Not all games '
                  'support all agents)')
         parser.add_argument(

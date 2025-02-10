@@ -24,7 +24,7 @@ class WaferThinMintGame(BaseGame):
         except KeyError:
             raise ValueError("Invalid agent type. Allowed types include: "
                              f"[{', '.join(agent_registry.keys())}]")
-        kwargs.setdefault("max_rounds", 3000)
+        kwargs.setdefault("max_rounds", 150)
         super().__init__(agent, **kwargs)
 
     def play(self) -> GameResult:
@@ -110,4 +110,5 @@ class WaferThinMintGame(BaseGame):
             'high_score': highest_score,
             'duration': timer.duration,
             'total_cases': total_cases,
+            'average_score': sum(final_scores)/len(final_scores)
         }
