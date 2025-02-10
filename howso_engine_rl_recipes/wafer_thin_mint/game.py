@@ -1,6 +1,7 @@
 import logging
 
 from howso.utilities.monitors import Timer
+import numpy as np
 
 from ..common.game import BaseGame, GameResult
 from .agent import agent_registry
@@ -16,7 +17,7 @@ class WaferThinMintGame(BaseGame):
     """
 
     game_id = 'WaferThinMint-v0'
-    win_threshold = 100  # Required number of consecutive rounds to solve
+    win_threshold = 6  # Required average score across all rounds to consider the game won
 
     def __init__(self, agent_type: str, **kwargs) -> None:
         try:
@@ -40,7 +41,6 @@ class WaferThinMintGame(BaseGame):
 
         round_num = 1
         step = 1
-        consecutive_rounds = 0
         highest_score = 0
         final_scores = []
         round_score = 0
@@ -51,8 +51,14 @@ class WaferThinMintGame(BaseGame):
         timer.start()
 
         while True:
-            if round_num >= self.max_rounds:
-                logger.error(f"Failed to win within {round_num} games")
+            if round_num > self.max_rounds:
+                avg_score = np.mean(final_scores)
+                if avg_score >= self.win_threshold:
+                    logger.info(f"Game won after {self.max_rounds} games with an average score of {avg_score:.3f}")
+                    is_win = True
+                else:
+                    logger.error(
+                        f"Failed to win within {self.max_rounds} games with an average score of {avg_score:.3f}")
                 break
 
             action = agent.act(observation, round_num, step)
@@ -72,21 +78,7 @@ class WaferThinMintGame(BaseGame):
                              round_num, step, observation)
                 final_scores.append(round_score)
 
-                if round_score == self.env.unwrapped.explode_threshold - 1:
-                    # Round won
-                    consecutive_rounds += 1
-                else:
-                    # Round lost
-                    consecutive_rounds = 0
-
-                if consecutive_rounds >= self.win_threshold:
-                    logger.info(f"Game won after {round_num} games with a high "
-                                f"score of {highest_score}")
-                    is_win = True
-                    break
-                else:
-                    agent.assign_reward(
-                        observation, final_scores, round_num, step)
+                agent.assign_reward(observation, final_scores, round_num, step)
 
                 observation, _ = self.env.reset()
                 highest_score = max(highest_score, round_score)
@@ -106,9 +98,9 @@ class WaferThinMintGame(BaseGame):
         timer.end()
         return {
             'win': is_win,
-            'rounds': round_num,
+            'rounds': len(final_scores),
             'high_score': highest_score,
             'duration': timer.duration,
             'total_cases': total_cases,
-            'average_score': sum(final_scores)/len(final_scores)
+            'average_score': float(np.mean(final_scores)),
         }
