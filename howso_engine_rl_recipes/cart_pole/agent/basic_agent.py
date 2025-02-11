@@ -62,7 +62,7 @@ class BasicAgent(BaseAgent[np.ndarray, int]):
             'pole_angular_velocity': {'type': 'continuous'},
         }
 
-        self.reward_features = ['score', ]
+        self.goal_features = ['score', ]
         self.action_features = ['push_direction', ]
         self.context_features = [
             'cart_position',
@@ -74,8 +74,9 @@ class BasicAgent(BaseAgent[np.ndarray, int]):
         self.trainee = engine.Trainee(features=self.features)
         self.trainee.set_auto_analyze_params(
             auto_analyze_enabled=True,
+            context_features=self.context_features
         )
-        self.goal_map = dict(zip(self.reward_features, [{"goal": "max"}]))
+        self.goal_map = dict(zip(self.goal_features, [{"goal": "max"}]))
 
         if self.seed is not None:
             self.trainee.set_random_seed(self.seed)
@@ -131,7 +132,7 @@ class BasicAgent(BaseAgent[np.ndarray, int]):
         # only train on games that did better than the current max avg score
         if score >= self.max_avg_score + 1:
             self.trainee.train(
-                features=self.reward_features,
+                features=self.goal_features,
                 cases=rewards,
                 series=str(round_num),
             )

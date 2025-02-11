@@ -29,7 +29,7 @@ class BaseGame(ABC):
         The type of agent to use.
     explanation_level : int, default 1
         The react explanation level.
-    max_rounds : int, default 1000
+    max_rounds : int, default 2000
         The maximum games to attempt.
     render_mode : str
         The Gym render mode.
@@ -44,7 +44,7 @@ class BaseGame(ABC):
         agent: t.Type[BaseAgent],
         *,
         explanation_level: int = 1,
-        max_rounds: int = 1000,
+        max_rounds: int = 2000,
         render_mode: t.Optional[str] = None,
         seed: t.Optional[int] = None
     ) -> None:

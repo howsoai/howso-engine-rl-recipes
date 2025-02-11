@@ -41,15 +41,15 @@ class BasicAgent(BaseAgent[int, int]):
             }
         }
 
-        self.reward_features = ['score']
+        self.goal_features = ['score']
         self.context_features = ['wafer_count']
         self.action_features = ['action']
-        self.goal_features_map = dict(zip(self.reward_features, [{"goal": "max"}]))
+        self.goal_features_map = dict(zip(self.goal_features, [{"goal": "max"}]))
 
         self.trainee = engine.Trainee(features=self.features)
         self.trainee.set_auto_analyze_params(
             auto_analyze_enabled=True,
-            context_features=self.context_features + self.reward_features,
+            context_features=self.context_features + self.goal_features,
             action_features=self.action_features,
         )
         if self.seed is not None:
@@ -95,7 +95,7 @@ class BasicAgent(BaseAgent[int, int]):
         score = scores[-1]
 
         self.trainee.train(
-            features=self.reward_features,
+            features=self.goal_features,
             cases=[[score]],
             series=str(round_num),
         )
