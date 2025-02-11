@@ -49,8 +49,7 @@ class BasicAgent(BaseAgent[int, int]):
         self.trainee = engine.Trainee(features=self.features)
         self.trainee.set_auto_analyze_params(
             auto_analyze_enabled=True,
-            context_features=self.context_features + self.goal_features,
-            action_features=self.action_features,
+            context_features=self.context_features + self.action_features,
         )
         if self.seed is not None:
             self.trainee.set_random_seed(self.seed)
@@ -63,7 +62,9 @@ class BasicAgent(BaseAgent[int, int]):
 
     def act(self, observation, round_num, step) -> int:
         """React to the observation to get the action."""
-        desired_conviction = 5
+        # Note: setting desired_conviction to 2 will cause the average score to
+        # be notably higher but will result in occasional failures to learn
+        desired_conviction = 1
 
         details = {}
         if self.explanation_level >= 2:
