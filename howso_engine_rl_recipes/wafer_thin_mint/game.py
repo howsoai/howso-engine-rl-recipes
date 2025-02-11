@@ -13,7 +13,8 @@ class WaferThinMintGame(BaseGame):
     """
     Play the cart pole game.
 
-    Considered solved when the maximum score is achieved 100 consecutive rounds.
+    Considered solved when the average score across 150 rounds is greater than
+    or equal to the win threshold.
     """
 
     game_id = 'WaferThinMint-v0'

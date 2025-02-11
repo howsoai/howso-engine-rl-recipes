@@ -178,7 +178,7 @@ class TimeSeriesAgent(BaseAgent[np.ndarray, int]):
         self.max_avg_score = max(self.max_avg_score, avg_score)
         game_id = str(round_num)
 
-        # assign each action a score, high to low, maximum value capped at self.max_avg_score
+        # assign each action a score, high to low, representing how many ticks before failure
         game_final_values = [
             [score - i, i, game_id]
             for i in range(step)
