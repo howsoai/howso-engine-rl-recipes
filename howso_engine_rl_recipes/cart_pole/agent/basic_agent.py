@@ -89,7 +89,8 @@ class BasicAgent(BaseAgent[np.ndarray, int]):
 
     def act(self, observation, round_num, step) -> int:
         """React to the observation to get the action."""
-        desired_conviction = 1
+        # TODO:22817 - lower conviction to 1
+        desired_conviction = 2
 
         details = {}
         if self.explanation_level >= 2:
