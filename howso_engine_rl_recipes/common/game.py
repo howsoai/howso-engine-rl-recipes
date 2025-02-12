@@ -44,7 +44,7 @@ class BaseGame(ABC):
         agent: t.Type[BaseAgent],
         *,
         explanation_level: int = 1,
-        max_rounds: int = 2000,
+        max_rounds: int = 1000,
         render_mode: t.Optional[str] = None,
         seed: t.Optional[int] = None
     ) -> None:
