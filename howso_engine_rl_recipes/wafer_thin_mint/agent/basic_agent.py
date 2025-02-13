@@ -31,8 +31,6 @@ class BasicAgent(BaseAgent[int, int]):
 
     def setup(self) -> None:
         """Setup the agent."""
-        self.desired_score = 1
-
         self.features = {
             'wafer_count': {'type': 'ordinal', 'data_type': 'number'},
             'score': {'type': 'ordinal', 'data_type': 'number'},
@@ -43,15 +41,15 @@ class BasicAgent(BaseAgent[int, int]):
             }
         }
 
-        self.reward_features = ['score']
-        self.context_features = ['wafer_count'] + self.reward_features
+        self.goal_features = ['score']
+        self.context_features = ['wafer_count']
         self.action_features = ['action']
+        self.goal_features_map = dict(zip(self.goal_features, [{"goal": "max"}]))
 
         self.trainee = engine.Trainee(features=self.features)
         self.trainee.set_auto_analyze_params(
             auto_analyze_enabled=True,
-            context_features=self.context_features,
-            action_features=self.action_features,
+            context_features=self.context_features + self.action_features,
         )
         if self.seed is not None:
             self.trainee.set_random_seed(self.seed)
@@ -64,7 +62,10 @@ class BasicAgent(BaseAgent[int, int]):
 
     def act(self, observation, round_num, step) -> int:
         """React to the observation to get the action."""
-        desired_conviction = 1
+        # Note: setting desired_conviction to 2 will cause the average score to
+        # be notably higher but will result in occasional failures to learn
+        # TODO:22817 - lower conviction to 1
+        desired_conviction = 2
 
         details = {}
         if self.explanation_level >= 2:
@@ -78,9 +79,10 @@ class BasicAgent(BaseAgent[int, int]):
 
         react = self.trainee.react(
             desired_conviction=desired_conviction,
-            contexts=[[observation, self.desired_score]],
+            contexts=[[observation]],
             context_features=self.context_features,
             action_features=self.action_features,
+            goal_features_map=self.goal_features_map,
             into_series_store=str(round_num),
             details=details,
         )
@@ -94,11 +96,8 @@ class BasicAgent(BaseAgent[int, int]):
         """Assign reward to model."""
         score = scores[-1]
 
-        # Set the desired reward to the max seen so far
-        self.desired_score = max(self.desired_score, score + 1)
-
         self.trainee.train(
-            features=self.reward_features,
+            features=self.goal_features,
             cases=[[score]],
             series=str(round_num),
         )

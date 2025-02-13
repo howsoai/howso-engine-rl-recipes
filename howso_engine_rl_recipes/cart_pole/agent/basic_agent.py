@@ -62,21 +62,22 @@ class BasicAgent(BaseAgent[np.ndarray, int]):
             'pole_angular_velocity': {'type': 'continuous'},
         }
 
-        self.reward_features = ['score', ]
+        self.goal_features = ['score', ]
         self.action_features = ['push_direction', ]
         self.context_features = [
             'cart_position',
             'cart_velocity',
             'pole_angle',
             'pole_angular_velocity',
-            'score',
         ]
 
         self.trainee = engine.Trainee(features=self.features)
         self.trainee.set_auto_analyze_params(
             auto_analyze_enabled=True,
-            analyze_threshold=1000,
+            context_features=self.context_features + self.action_features
         )
+        self.goal_map = dict(zip(self.goal_features, [{"goal": "max"}]))
+
         if self.seed is not None:
             self.trainee.set_random_seed(self.seed)
         # Show all DataFrame columns
@@ -88,8 +89,8 @@ class BasicAgent(BaseAgent[np.ndarray, int]):
 
     def act(self, observation, round_num, step) -> int:
         """React to the observation to get the action."""
-        desired_conviction = 5
-        desired_score = self.max_avg_score + 1
+        # TODO:22817 - lower conviction to 1
+        desired_conviction = 2
 
         details = {}
         if self.explanation_level >= 2:
@@ -103,9 +104,10 @@ class BasicAgent(BaseAgent[np.ndarray, int]):
 
         react = self.trainee.react(
             desired_conviction=desired_conviction,
-            contexts=[[*observation, desired_score]],
+            contexts=[[*observation]],
             context_features=self.context_features,
             action_features=self.action_features,
+            goal_features_map=self.goal_map,
             into_series_store=str(round_num),
             details=details,
         )
@@ -122,16 +124,16 @@ class BasicAgent(BaseAgent[np.ndarray, int]):
         avg_score = np.mean(scores[-self.win_threshold:])
         self.max_avg_score = max(self.max_avg_score, avg_score)
 
-        # assign each action a score, high to low, maximum value capped at self.max_avg_score
+        # assign each action a score, high to low, representing how many ticks before failure
         rewards = [
-            [min(round(self.max_avg_score), score - i)]
+            [score - i]
             for i in range(step)
         ]
 
         # only train on games that did better than the current max avg score
-        if score >= self.max_avg_score:
+        if score >= self.max_avg_score + 1:
             self.trainee.train(
-                features=self.reward_features,
+                features=self.goal_features,
                 cases=rewards,
                 series=str(round_num),
             )

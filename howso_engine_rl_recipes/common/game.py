@@ -15,6 +15,8 @@ class GameResult(t.TypedDict):
     high_score: float
     total_cases: int
     duration: timedelta
+    total_average_score: t.NotRequired[float]
+    average_score: float
 
 
 class BaseGame(ABC):
@@ -27,7 +29,7 @@ class BaseGame(ABC):
         The type of agent to use.
     explanation_level : int, default 1
         The react explanation level.
-    max_rounds : int, default 1000
+    max_rounds : int, default 2000
         The maximum games to attempt.
     render_mode : str
         The Gym render mode.
