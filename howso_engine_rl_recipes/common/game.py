@@ -4,6 +4,7 @@ import typing as t
 
 
 import gymnasium as gym
+from typing_extensions import NotRequired
 
 from .agent import BaseAgent
 
@@ -15,7 +16,7 @@ class GameResult(t.TypedDict):
     high_score: float
     total_cases: int
     duration: timedelta
-    total_average_score: t.NotRequired[float]
+    total_average_score: NotRequired[float]
     average_score: float
 
 
