@@ -4,14 +4,15 @@
 #
 #    pip-compile --allow-unsafe --extra=dev --generate-hashes --no-emit-index-url --output-file=requirements-3.12-dev.txt
 #
-amalgam-lang==12.3.13 \
-    --hash=sha256:0d0f23e0a39115ed32cf77db4e303a797e260350eebd5bb7e47725e0bc5c4b66 \
-    --hash=sha256:26e5b49373ac29f41cb134b940cace9597e17f56c1967860c1914404c1a99f80 \
-    --hash=sha256:3d55b6ccc02ae2ca7dc86844660ad22c75339a3066403608b6bbfc53e47ea827 \
-    --hash=sha256:45df24be8aa1384acae9ab36603175a24196b88cc2ba998cde1c8436ecb82a7c \
-    --hash=sha256:5cebc632cadb72b0cb0f9448bd5cf1f284410fd0c108f85b861743f47ebd22d0 \
-    --hash=sha256:9fd20b08c717d823a5f522b83d29c297d1eeec4eeaa100de5f633227385f48c2 \
-    --hash=sha256:d3040ca4ede6fd1ec5ff36477c62fbfec3e5be70b717bd9d6551679659eac999
+amalgam-lang==18.0.1 \
+    --hash=sha256:1d46c161ab296ee8a9a060a295337393527653b78bc68d783fd66409edd96334 \
+    --hash=sha256:7fb092b4d5411d16eed7d1a21407c71f7225a291256f2a83093bbfe8b04017eb \
+    --hash=sha256:9acff8312f96f83871cb8b1d2570225a23f9c21add2fd6150494d9e1894df2fa \
+    --hash=sha256:a6fb90377bee6750fde053c6a580e01fa4b0b01e82716782421cdd1edf2a7ed9 \
+    --hash=sha256:b6055ea039a7e8563717d9428ad2e8daa1122be26a8fc4454d7fa9883315b050 \
+    --hash=sha256:d6853c4afba8f7a28dc286d3f10ce2bffedb5745dba1f8d414c78153c3d41057 \
+    --hash=sha256:e81ce431766cccf591d37643f68b0ea5ba120d5480d600ebdc614ef83be7e659 \
+    --hash=sha256:ff9c71d7e43092abbb07fe7e3bf5f349044a040dcfae1b03879bd33ddc26f4ab
     # via howso-engine
 certifi==2025.1.31 \
     --hash=sha256:3d5da6925056f6f18f119200434a4780a94263f10d1c21d032a6f6b2baa20651 \
@@ -243,9 +244,9 @@ gymnasium[classic-control]==1.0.0 \
     --hash=sha256:9d2b66f30c1b34fe3c2ce7fae65ecf365d0e9982d2b3d860235e773328a3b403 \
     --hash=sha256:b6f40e1e24c5bd419361e1a5b86a9117d2499baecc3a660d44dfff4c465393ad
     # via howso-engine-rl-recipes (pyproject.toml)
-howso-engine==29.0.7 \
-    --hash=sha256:3ed5d139238f42b256422a22a9d4b6b5887c6ab7f66a6ba8c56f0bedea773e1b \
-    --hash=sha256:4d1e79bc34b9bcd6a7899d8a44a18addf1b0955f40cae0d24028566553ae4a9c
+howso-engine==35.0.1 \
+    --hash=sha256:18f68d25c83956a1810977f21f502a0e7e7144ed5981f95c6ad6d19fdbbd6cab \
+    --hash=sha256:46bb5de92802448b1a1a2509cc7fe5204b600e8529c03e904195da827272cac9
     # via howso-engine-rl-recipes (pyproject.toml)
 humanize==4.12.0 \
     --hash=sha256:106a7436a2d545d742c147c469716b3a08424aa143a82103630147c489a89f48 \
