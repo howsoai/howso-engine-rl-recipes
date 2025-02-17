@@ -64,7 +64,8 @@ class BasicAgent(BaseAgent[int, int]):
         """React to the observation to get the action."""
         # Note: setting desired_conviction to 2 will cause the average score to
         # be notably higher but will result in occasional failures to learn
-        desired_conviction = 1
+        # TODO:22817 - lower conviction to 1
+        desired_conviction = 2
 
         details = {}
         if self.explanation_level >= 2:
