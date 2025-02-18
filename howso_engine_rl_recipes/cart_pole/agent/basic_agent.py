@@ -131,7 +131,7 @@ class BasicAgent(BaseAgent[np.ndarray, int]):
         ]
 
         # only train on games that did better than the current max avg score
-        if score >= self.max_avg_score + 1:
+        if score >= self.max_avg_score:
             self.trainee.train(
                 features=self.goal_features,
                 cases=rewards,
