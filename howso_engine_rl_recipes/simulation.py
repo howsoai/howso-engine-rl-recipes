@@ -191,6 +191,9 @@ class Simulation:
         """Run a single simulation of a game."""
         # Import locally so loggers are created after setup
         GameClass = import_game(game_type)
+        # force a random seed for every iteration
+        if "seed" not in kwargs:
+            kwargs["seed"] = (1 + iteration) * int(100000 * np.random.rand())
         with GameClass(**kwargs) as game:
             result = game.play()
         return result
