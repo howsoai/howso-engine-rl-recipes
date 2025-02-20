@@ -97,9 +97,9 @@ class BasicAgent(BaseAgent[np.ndarray, int]):
             details['influential_cases'] = True
 
         if self.explanation_level >= 3:
-            details['feature_mda_full'] = True
-            details['feature_residuals_full'] = True
-            details['case_feature_residuals_full'] = True
+            details['feature_full_accuracy_contributions'] = True
+            details['feature_full_residuals'] = True
+            details['feature_full_residuals_for_case'] = True
             details['boundary_cases'] = 3
 
         react = self.trainee.react(
@@ -171,22 +171,22 @@ class BasicAgent(BaseAgent[np.ndarray, int]):
                 logger.info("Boundary cases: \n%s", boundary_cases)
 
             # Get mean decrease in accuracy
-            mda_data = react['explanation']['feature_mda_full'][0]
-            if mda_data is not None:
-                for feature in mda_data:
+            ac_data = react['explanation']['feature_full_accuracy_contributions'][0]
+            if ac_data is not None:
+                for feature in ac_data:
                     logger.info(
                         "Removing feature '%s' reduces accuracy of best action by: %s",
-                        feature, mda_data[feature])
+                        feature, ac_data[feature])
 
             # Get residuals
-            residuals_data = react['explanation']['case_feature_residuals_full'][0]
+            residuals_data = react['explanation']['feature_full_residuals_for_case'][0]
             if residuals_data is not None:
                 for feature in residuals_data:
                     logger.info(
                         "Feature %s has a residual of: %s",
                         feature, residuals_data[feature])
 
-            residuals_data = react['explanation']['feature_residuals_full'][0]
+            residuals_data = react['explanation']['feature_full_residuals'][0]
             if residuals_data is not None:
                 for feature in residuals_data:
                     logger.info(
