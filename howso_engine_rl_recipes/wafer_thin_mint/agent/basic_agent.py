@@ -85,8 +85,7 @@ class BasicAgent(BaseAgent[int, int]):
             action_features=self.action_features,
             goal_features_map=self.goal_features_map,
             into_series_store=str(round_num),
-            details=details,
-            use_case_weights=True
+            details=details
         )
         action = react['action']['action'][0]
 
