@@ -32,7 +32,7 @@ classifiers = [
         "Operating System :: POSIX :: Linux",
 ]
 dependencies = [
-   "howso-engine~=36.0",
+   "howso-engine",
    "gymnasium",
    "gymnasium[classic-control]",
    "pandas",
