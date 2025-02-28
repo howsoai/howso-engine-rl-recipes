@@ -50,6 +50,7 @@ class BasicAgent(BaseAgent[int, int]):
         self.trainee.set_auto_analyze_params(
             auto_analyze_enabled=True,
             context_features=self.context_features + self.action_features,
+            rebalance_features=self.goal_features
         )
         if self.seed is not None:
             self.trainee.set_random_seed(self.seed)
@@ -85,6 +86,7 @@ class BasicAgent(BaseAgent[int, int]):
             goal_features_map=self.goal_features_map,
             into_series_store=str(round_num),
             details=details,
+            use_case_weights=True
         )
         action = react['action']['action'][0]
 
