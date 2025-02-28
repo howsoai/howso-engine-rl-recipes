@@ -541,12 +541,12 @@ A library to handle automated deprecations
 
 
 gymnasium
-1.0.0
+1.1.0
 MIT License
 Farama Foundation <contact@farama.org>
 https://farama.org
 A standard API for reinforcement learning and a diverse set of reference environments (formerly Gym).
-/home/runner/.pyenv/versions/3.13.2/lib/python3.13/site-packages/gymnasium-1.0.0.dist-info/LICENSE
+/home/runner/.pyenv/versions/3.13.2/lib/python3.13/site-packages/gymnasium-1.1.0.dist-info/LICENSE
 The MIT License
 
 Copyright (c) 2016 OpenAI
