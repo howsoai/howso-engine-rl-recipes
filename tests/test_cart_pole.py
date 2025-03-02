@@ -1,5 +1,6 @@
 import logging
 import pytest
+from multiprocessing import cpu_count
 
 from howso_engine_rl_recipes.simulation import GameType, Simulation
 
