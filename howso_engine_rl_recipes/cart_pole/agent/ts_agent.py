@@ -125,7 +125,8 @@ class TimeSeriesAgent(BaseAgent[np.ndarray, int]):
         self.trainee = engine.Trainee(features=self.features)
         self.trainee.set_auto_analyze_params(
             auto_analyze_enabled=True,
-            context_features=self.context_features + self.lag_features + self.action_features
+            context_features=self.context_features + self.lag_features + self.action_features,
+            rebalance_features=self.goal_features
         )
         self.goal_map = dict(zip(self.goal_features, [{"goal": "max"}]))
 
