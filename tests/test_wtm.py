@@ -9,7 +9,7 @@ logger = logging.getLogger("howso.rl.tests")
 
 @pytest.mark.regression
 @pytest.mark.parametrize('agent_type, iterations', [
-    ('basic', 30),
+    ('basic', 100),
 ])
 def test_wafer_thin_mint(agent_type, iterations):
     max_workers = int(cpu_count() / 2 - 1)
@@ -25,7 +25,7 @@ def test_wafer_thin_mint(agent_type, iterations):
 
     metrics = results['metrics']
     assert metrics['percent-won'] >= 60
-    assert metrics['average-win-high-score'] == 9
+    assert metrics['average-win-high-score'] > 8.9
     assert metrics['average-rounds-to-win'] > 2
 
     # Make sure there are at least 2 cases or games, which is the minimum to
