@@ -9,7 +9,7 @@ logger = logging.getLogger("howso.rl.tests")
 
 @pytest.mark.regression
 @pytest.mark.parametrize('agent_type, iterations, max_avg_rounds', [
-    ('basic', 6, 600),
+    ('basic', 12, 600),
 ])
 def test_agents_regression(agent_type, iterations, max_avg_rounds):
     """Test cart pole is solved by all agent types."""
@@ -35,7 +35,7 @@ def test_agents_regression(agent_type, iterations, max_avg_rounds):
 
 @pytest.mark.experimental
 @pytest.mark.parametrize('agent_type, iterations, max_avg_rounds', [
-    ('time-series', 4, 1000),
+    ('time-series', 8, 1000),
 ])
 def test_agents_experimental(agent_type, iterations, max_avg_rounds):
     """Test cart pole is solved by all agent types."""
@@ -54,6 +54,6 @@ def test_agents_experimental(agent_type, iterations, max_avg_rounds):
     assert len(results['runs']) == iterations
 
     metrics = results['metrics']
-    assert metrics['total-won'] >= 2
+    assert metrics['total-won'] >= 4
     assert metrics['average-rounds-to-win'] < max_avg_rounds
     assert metrics['average-win-high-score'] >= 300
