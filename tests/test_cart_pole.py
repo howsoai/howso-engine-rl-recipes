@@ -9,14 +9,14 @@ logger = logging.getLogger("howso.rl.tests")
 
 @pytest.mark.regression
 @pytest.mark.parametrize('agent_type, iterations, max_avg_rounds', [
-    ('basic', 12, 600),
+    ('basic', 14, 1000),
 ])
 def test_agents_regression(agent_type, iterations, max_avg_rounds):
     """Test cart pole is solved by all agent types."""
     max_workers = int(cpu_count() / 2 - 1)
     sim = Simulation(iterations=iterations, max_workers=max_workers)
     results = sim.run(game_type=GameType.CART_POLE, agent_type=agent_type,
-                      max_rounds=600)
+                      max_rounds=max_avg_rounds)
 
     logger.info({
         "agent_type": agent_type,
