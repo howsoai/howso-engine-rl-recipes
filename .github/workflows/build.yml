@@ -105,23 +105,6 @@ jobs:
     with:
       upstream-details: ${{ needs.metadata.outputs.upstream-details }}
 
-  pytest-linux-3-10-st:
-    # Only run on branch builds
-    if: inputs.build-type == ''
-    needs: ['metadata', 'build']
-    uses: howsoai/.github/.github/workflows/pytest.yml@main
-    secrets: inherit
-    with:
-      platform: 'ubuntu-latest'
-      platform-pretty: 'Linux'
-      amalgam-plat-arch: 'linux-amd64'
-      python-version: '3.10'
-      config-fp: './config/latest-st-traces-howso.yml'
-      config-pretty: 'ST'
-      workers: 'auto'
-      upstream-details: ${{ needs.metadata.outputs.upstream-details }}
-      debug: ${{ inputs.debug-mode }}
-
   pytest-linux-3-12-mt:
     # Only run on branch builds
     if: inputs.build-type == ''
@@ -138,7 +121,7 @@ jobs:
       upstream-details: ${{ needs.metadata.outputs.upstream-details }}
       debug: ${{ inputs.debug-mode }}
 
-  pytest-windows-3-12-mt:
+  pytest-windows-3-10-mt:
     # Only run on branch builds
     if: inputs.build-type == ''
     needs: ['metadata', 'build']
@@ -148,23 +131,23 @@ jobs:
       platform: 'windows-latest'
       platform-pretty: 'Windows'
       amalgam-plat-arch: 'windows-amd64'
-      python-version: '3.12'
+      python-version: '3.10'
       config-fp: './config/latest-mt-traces-howso.yml'
       config-pretty: 'MT'
       upstream-details: ${{ needs.metadata.outputs.upstream-details }}
       debug: ${{ inputs.debug-mode }}
 
-  pytest-macos-3-12-mt:
+  pytest-macos-3-11-mt:
     # Only run on branch builds
     if: inputs.build-type == ''
     needs: ['metadata', 'build']
     uses: howsoai/.github/.github/workflows/pytest.yml@main
     secrets: inherit
     with:
-      platform: 'macos-latest-xlarge'
+      platform: 'macos-latest'
       platform-pretty: 'MacOS'
       amalgam-plat-arch: 'darwin-arm64'
-      python-version: '3.12'
+      python-version: '3.11'
       config-fp: './config/latest-mt-traces-howso.yml'
       config-pretty: 'MT'
       upstream-details: ${{ needs.metadata.outputs.upstream-details }}
