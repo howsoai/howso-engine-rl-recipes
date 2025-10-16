@@ -1,0 +1,6 @@
+environment,agent_type,iteration,win,rounds,average_score_final_window,average_score_total,high_score,total_cases,duration
+cartpole,time-series,0,False,1000,15.37,16.203203203203202,56.0,56,0:00:21.265323
+cartpole,time-series,1,True,511,196.22,115.10371819960861,500.0,43524,0:10:21.708380
+cartpole,time-series,2,True,136,195.17,153.86029411764707,500.0,18605,0:02:33.813625
+cartpole,time-series,3,True,282,196.32,90.1063829787234,470.0,20243,0:02:56.071266
+cartpole,time-series,4,True,139,195.92,150.9568345323741,500.0,18410,0:02:18.813347

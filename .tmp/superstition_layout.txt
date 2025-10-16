@@ -1,0 +1,1545 @@
+Proceedings of the Fifteenth AAAI Conference on Artiﬁcial
+
+Intelligence and Interactive Digital Entertainment (AIIDE-19)
+
+“Superstition” in the Network:
+Deep Reinforcement Learning Plays Deceptive Games
+
+Philip Bontrager,1 Ahmed Khalifa,1 Damien Anderson,2 Matthew Stephenson,3
+Christoph Salge,4 Julian Togelius1
+1New York University, 2University of Strathclyde, 3Maastricht University, 4University of Hertfordshire
+{philipjb, ahmed.khalifa}@nyu.edu, damien.anderson@strath.ac.uk, matthew.stephenson@maastrichtuniversity.nl,
+ChristophSalge@gmail.com, julian@togelius.com
+
+Abstract
+
+Deep reinforcement learning has learned to play many games
+well, but
+failed on others. To better characterize the modes
+and reasons of failure of deep reinforcement learners, we test
+the widely used Asynchronous Actor-Critic (A2C) algorithm
+on four deceptive games, which are specially designed to pro-
+vide challenges to game-playing agents. These games are im-
+plemented in the General Video Game AI framework, which
+allows us to compare the behavior of reinforcement learning-
+based agents with planning agents based on tree search. We
+these games reliably deceive deep rein-
+ﬁnd that several of
+forcement learners, and that the resulting behavior highlights
+the learning algorithm. The particular
+the shortcomings of
+from how planning-based
+ways
+agents fail,
+these algo-
+typology of deceptions which
+rithms. We propose an initial
+could help us better understand pitfalls and failure modes of
+(deep) reinforcement learning.
+
+illuminating the character of
+
+in which agents
+
+fail differ
+
+further
+
+Introduction
+
+In general,
+
+learning (RL) (Sutton and Barto 1998) an
+In reinforcement
+is tasked with learning a policy that maximizes ex-
+agent
+interactions with the en-
+pected reward based only on its
+vironment.
+there is no guarantee that any such
+procedure will lead to an optimal policy; while convergence
+they only apply to a tiny and rather uninter-
+proofs exist,
+esting class of environments. Reinforcement
+learning still
+performs well for a wide range of scenarios not covered by
+those convergence proofs. However, while recent successes
+in game-playing with deep reinforcement learning (Justesen
+et al. 2017) have led to a high degree of conﬁdence in the
+deep RL approach,
+there are still scenarios or games where
+deep RL fails. Some oft-mentioned reasons why RL algo-
+rithms fail are partial observability and long time spans be-
+tween actions and rewards. But are there other causes?
+
+that
+
+In this paper, we want to address these questions by look-
+ing at games
+are designed to be deliberately decep-
+tive. Deceptive games are deﬁned as those where the reward
+structure is designed to lead away from an optimal policy.
+For example, games where learning to take the action which
+produces early rewards curtails further exploration. Decep-
+lying (or presenting false in-
+tion does not
+
+include outright
+
+Copyright
+Intelligence (www.aaai.org). All rights reserved.
+
+(cid:2) 2019, Association for the Advancement of Artiﬁcial
+
+c
+
+to be
+
+tailored to a
+
+an algorithm needs
+
+their observation (as per
+
+formation). More generally speaking, deception is the ex-
+ploitation of cognitive biases. Better and faster AIs have to
+to improve their performance or
+make some assumptions
+the no free lunch
+generalize over
+theorem,
+class of
+to improve performance on those prob-
+problems in order
+lems (Wolpert and Macready 1997)). These assumptions in
+turn make them susceptible to deceptions that subvert these
+very assumptions. For example, evolutionary optimization
+approaches assume locality, i.e., that solutions that are close
+if very bad so-
+in genome space have a similar ﬁtness - but
+lutions surround a very good solution,
+then an evolutionary
+algorithm would be less likely to ﬁnd it than random search.
+While we are speciﬁcally looking at digital games here,
+the ideas we discuss are related to the question of optimiza-
+tion and decision making in a broader context. Many real-
+world problems
+for ex-
+ample, while eating sugar brings momentary satisfaction, a
+long-term policy of eating as much sugar as possible is not
+optimal in terms of health outcomes.
+
+involve some form of deception;
+
+In a recent paper, a handful of deceptive games were pro-
+posed, and the performance of a number of planning algo-
+rithms were tested on them (Anderson et al. 2018).
+It was
+shown that many otherwise competent game-playing agents
+succumbed to these deceptions and that different types of de-
+ceptions affected different kinds of planning algorithms; for
+example, agents that build up a model of the effects of in-
+game objects are vulnerable to deceptions based on chang-
+to see how well
+ing those effects.
+deep reinforcement learning performs on these games. This
+approach aims to gain a better understanding of the vulnera-
+bilities of deep reinforcement learning.
+
+In this paper, we want
+
+Background
+
+learning algorithms
+
+Reinforcement
+learn through interact-
+ing with an environment and receiving rewards (Sutton and
+Barto 1998). There are different
+types of algorithms that ﬁt
+this bill. A core distinction between the types are between
+learn within episodes from the
+ontogenetic algorithms,
+reward that
+algorithms,
+that
+learn between episodes based on the aggregate reward
+at the end of each episode (Togelius et al. 2009).
+
+that
+they encounter,
+
+and phylogenetic
+
+For some time, reinforcement learning had few clear suc-
+the combination of
+
+in the last ﬁve years,
+
+cesses. However,
+
+10
+
+(Justesen
+
+in particular
+
+successes,
+al.
+
+ontogenetic RL algorithms with deep neural networks have
+in playing video
+seen signiﬁcant
+2D arcade
+games
+games (Mnih et al. 2015) to more advanced games like Dota
+2 and Starcraft
+(OpenAI 2018; Vinyals et al. 2019). This
+combination, generally referred to as deep reinforcement
+learning, is the focus of much research.
+
+simple
+
+2017)
+
+such
+
+as
+
+et
+
+The deceptive games presented in this paper were devel-
+oped for the GVGAI (General Video Game Artiﬁcial Intelli-
+gence (Perez-Liebana et al. 2016)) framework. The GVGAI
+framework itself is based on VGDL (Video Game Descrip-
+tion Language (Ebner et al. 2013; Schaul 2013)) which is
+a language that was developed to express a range of arcade
+games, like Sokoban and Space Invaders. VGDL was devel-
+oped to encourage research into more general video game
+playing (Levine et al. 2013) by providing a language and an
+interface to a range of arcade games. Currently the GVGAI
+corpus has over 150 games. The deceptive games discussed
+in this paper are fully compatible with the framework.
+
+Methods
+
+the effectiveness of the deception in ev-
+To empirically test
+ery game, we train a reinforcement
+learning algorithm and
+run six planning algorithms on each game. The beneﬁt of
+working in GVGAI is that we are able to evaluate the same
+game implementations with algorithms that require an avail-
+able forward model and with learning agents. GVGAI has a
+Java interface for planning agents as well as an OpenAI Gym
+interface
+al. 2016;
+Rodriguez Torrado et al. 2018; Brockman et al. 2016).
+
+learning agents
+
+(Perez-Liebana
+
+for
+
+et
+
+All algorithms were evaluated on each game 150 times.
+scores are evaluated along with play through
+The agent’s
+videos. The qualitative analyses of
+the videos provide key
+insights into the causes behind certain scores and into what
+an agent is actually learning. The quantitative and qualitative
+results are then used for the ﬁnal analysis.
+
+Reinforcement Learning
+
+if
+
+To test
+these games are capable of deceiving an agent
+trained via reinforcement learning, we use Advantage Actor-
+Critic (A2C) to learn to play the games (Mnih et al. 2016).
+A2C is a good benchmark algorithm and has been shown
+to be capable of playing GVGAI games with some success
+(Rodriguez Torrado et al. 2018; Justesen et al. 2018). A2C
+is a model-free,extrinsically driven algorithm that allows for
+examining the effects of different
+reward patterns. A2C is
+also relevant due to the popularity of model-free agents.
+
+Due to the arcade nature of GVGAI games, we train on
+pixels with the same setup developed for the Atari Learning
+Environment
+framework (Bellemare et al. 2013). The atari
+conﬁguration has been shown to work well for GVGAI and
+the
+allows a consistent baseline with which to compare all
+games
+tuning
+the algorithms for the games, we designed the games for the
+algorithms. We use the OpenAI Baselines implementation of
+A2C (Dhariwal et al. 2017). The neural network architecture
+is the same as the original designed by Mnih et al.
+(Mnih
+et al. 2016). The hyper-parameters are the default from the
+
+(Rodriguez Torrado et al. 2018).
+
+Instead of
+
+original paper as implemented by OpenAI: step size of 5, no
+frame skipping, constant
+learning rate of 0.007, RMS, and
+we used 12 workers.
+
+For
+
+each
+
+trained ﬁve
+
+environment, we
+
+tried training for
+
+different A2C
+In initial
+agents to play, each starting from random seeds.
+and
+testing, we
+the agents converged very quickly, normally
+we found that
+within two million frames of
+training. We therefore stan-
+dardized the experiments to all train for ﬁve million frames.
+One stochastic environment, WaferThinMints, did not con-
+verge and might have beneﬁted from more training time.
+
+twenty million frames,
+
+Planning Agents
+
+are
+
+algorithms
+
+into
+For comparison with previous work and better insight
+the universality of
+the deceptive problems posed here, we
+compare our results to planning algorithms. What we mean
+by planning agents
+forward
+model to search for an ideal game state. In the GVGAI plan-
+ning track, each algorithm is provided with the current state
+and a forward model and it has to return the next action in a
+small time frame (40 milliseconds). This time frame doesn’t
+give the algorithm enough time to ﬁnd the best action. This
+limitation forces traditional planning algorithms to be some-
+what greedy which, for most of these games, is a trap.
+
+that utilize
+
+a
+
+In this paper, we are using six different planning algo-
+rithms. Three of them (aStar, greedySearch, and sampleM-
+CTS) are directly from the GVGAI
+framework, while the
+rest (NovelTS, Return42, and YBCriber) are collected from
+the previous GVGAI competitions. Two of these algorithms,
+Return42, and YBCriber, are hybrid algorithms. They use
+one approach for deterministic games, such as A* or Itera-
+tive Width, and a different one for stochastic games, such as
+random walk or MCTS. Both algorithms use hand designed
+heuristics to judge game states. These hybrid algorithms also
+use online learning to bypass the small time per frame. The
+online learning agents try to understand the game rules, from
+the forward model during each time step, and then use that
+knowledge to improve the search algorithm.
+
+Deceptive Games
+
+In our previous work, a suite of deceptive games was created
+in order to take a look at the effects that these deceptive me-
+chanics would have on agents (Anderson et al. 2018). These
+deceptive games were designed in order to deceive different
+types of agents in different ways.
+
+From a game design perspective,
+
+the category of decep-
+tive games partially overlaps with “abusive games”, as de-
+ﬁned by Wilson and Sicart (Wilson and Sicart 2010). In par-
+ticular, the abuse modalities of “unfair design” can be said to
+apply to some of the games we describe below. Wilson and
+Sicart note that
+in many com-
+mercial games, even successful and beloved games, espe-
+cially those from the 8-bit era.
+
+these modalities are present
+
+This section describes some of these games in detail, and
+deﬁnes optimal play for an agent playing each game. We
+these games
+focus on four key categories of deception that
+exploit. We believe these categories represent general prob-
+lems that learning agents face and these simple games allow
+
+11
+
+(a) DeceptiCoins Level 1 
+
+(b) DeceptiCoins Level 2 
+
+Figure 2: The ﬁrst level of WaferThinMints
+
+(c) DeceptiCoins Level 3 
+
+Figure 1: DeceptiCoins Levels
+
+us to shine a spotlight on weaknesses that model-free, deep
+reinforcement learning agents still face. For a more compre-
+hensive list of types of deceptions and deceptive games see
+Deceptive Games (Anderson et al. 2018).
+
+The following four different categories of deception will
+be discussed further in the discussion section: Lack of Hier-
+archical Understanding, Subverted Generalization, Delayed
+Gratiﬁcation, and Delayed Reward.
+
+DeceptiCoins (DC)
+
+DeceptiCoins, Figure 1, offers an agent
+
+two paths
+Game
+which both lead to the win condition. The ﬁrst path presents
+immediate points to the agent, in the form of gold coins. The
+second path contains more gold coins, but
+they are further
+away and may not be immediately visible to a short-sighted
+they become trapped
+agent. Once the agent selects a path,
+within their chosen path and can only continue to the bottom
+exit. The levels used here are increasingly larger versions of
+the same challenge, but remain relatively small overall.
+
+The optimal strategy for DeceptiCoins is to select the path
+the levels
+this is achieved by taking the right side
+total score (i.e., more gold
+
+with the highest overall number of points. For
+shown in Figure 1,
+path, as it
+coins can be collected before completing the level).
+
+leads to the highest
+
+The game offers a simple form of deception that tar-
+Goal
+learn-
+gets the exploration versus exploitation problem that
+to
+ing algorithms face. The only way for the learning agent
+discover the higher reward is for it
+to forgo the natural re-
+ward it discovers early on completely. By designing different
+sized levels, we can see how quickly the exploration space
+becomes too large. At the same time, an agent that correctly
+learns, on the short route, about coins and navigation could
+then see that going right is superior.
+
+two
+
+levels
+
+The ﬁrst
+
+of DeceptiCoins
+
+Results
+very
+small, and the agent fairly quickly learns the optimal strat-
+egy. However,
+times
+longer to discover the optimal strategy, as expected from an
+agent that can only look at the rewards of individual moves.
+Level 3 proves to be too hard, and the agent converges on the
+
+took several
+
+In level
+
+two the
+
+agent
+
+are
+
+12
+
+suboptimal strategy. By comparison, a randomly initialized
+agent is very likely to select the easy path, since it starts next
+to it, before being forced to move toward the exit.
+
+the agent
+
+The training curve for level 3 shows a signiﬁcant drop in
+performance at the beginning of training. The video footage
+suggests that
+learns the concept of the gold coins
+and is attempting to collect them all, but fails to understand
+that once it takes the easy coin it will become trapped in the
+left path. The agent will also move back and forth between
+the paths at the beginning of the game, trying to decide.
+
+WaferThinMints (Mints)
+
+is
+
+WaferThinMints
+
+inspired by a scene in Monty
+Game
+Python’s The Meaning of Life. The game presents the agent
+with easily obtainable points, but
+the agent collects too
+if
+many it will
+lead to a loss condition. The idea of this game
+is
+to model a situation where a repeated action does not
+always lead to the same outcome or has a diminishing re-
+turn over time. The levels for this game feature mints which
+each award a point when collected and also ﬁll up a resource
+gauge on the agent. The level used is shown in ﬁgure 2. If
+is ﬁlled,
+the avatar’s resource gauge (green bar on avatar)
+deﬁned in this case as nine mints, and the agent attempts
+to collect an additional mint,
+is killed and
+a loss condition is reached. Losing the game also causes the
+agent to lose 20 points. A waiter (not seen in Figure 2) moves
+around the board distributing mints at random. This means
+it
+trapped while the waiter
+places mint on the agent’s square, forcing the agent to eat it.
+The agent must, therefore, try to avoid getting trapped.
+
+is possible for an agent
+
+then the agent
+
+to get
+
+The optimal strategy is to collect as many mints as pos-
+sible without collecting too many, which is currently set as
+nine. The player should avoid mints early on and try to avoid
+getting trapped. Near the end of the game,
+the agent should
+then eat the remaining mints to get to 9.
+
+is
+
+of
+
+our
+
+primary
+
+example
+
+WaferThinMints
+
+Goal
+the
+changing heuristic deception. The mint goes from providing
+a positive reward to giving a substantial negative reward with
+the only visual indication being a green bar on the avatar that
+learn
+represents how full
+the mints is dependent on that green bar.
+that
+Since the bar moves with the Avatar,
+just memo-
+rize a ﬁxed state in which to stop eating the mints. The mint
+is distributed by a chef and left around the board at random.
+For the agent to play optimally, it should also learn that it is
+not good to get full early on because it might get trapped in
+
+is. The agent must
+
+the character
+
+the value of
+
+it cannot
+
+Figure 3: Flower level 1
+
+Figure 4: Invest level 1
+
+and forced to eat another mint at some point.
+
+Results
+As can be seen from the graph, this agent did not
+have enough time to converge completely. This points to the
+difﬁculty of learning in the noisy environment where even a
+good strategy could result in a bad reward if the agent is un-
+lucky. This is necessary though, as in a simpler environment
+with a ﬁxed mint layout, the agent would learn to memorize
+a path that results in a perfect score. The agent shows some
+improvement over time but still plays very poorly.
+
+agent
+
+rushes
+
+By observing the agent, we see that
+
+the agent uses loca-
+the beginning of the episode,
+tion to solve this problem. At
+are
+the
+placed. This is a guaranteed source of
+rewards. The agent
+will mostly stay in the room, a safe place, unless chased
+out by the chef’s mint placement. After the initial mints, the
+agent attempts to avoid mints until it’s trapped by them.
+
+the initial mints
+
+room where
+
+to the
+
+It
+
+is not clear whether
+
+the agent understands its fullness
+bar or uses the amount of mints placed in the game to as-
+sess the risk of eating more mints. The agent seems to have
+learned that the mints become dangerous, but it seems to use
+strange state and location information to help it know when
+to eat mints. This is related to the behavior we see in the
+game Invest. It also is incapable of reasoning about waiting
+until the end of the game to eat mints when it is safer to eat,
+an instance of the delayed gratiﬁcation deception.
+
+Flower (Flow)
+
+Game
+Flower is a game which rewards patient agents by
+offering the opportunity to collect a small number of points
+immediately, but which will grow larger over time the longer
+it is not collected. As shown in ﬁgure 3, a few seeds are avail-
+to collect, which are worth zero points.
+able for
+The seeds will eventually grow into full ﬂowers and their
+point values grow along with them up to ten points. Once a
+ﬂower is collected, another will begin to grow as soon as the
+agent leaves the space from which it was collected.
+
+the agent
+
+The optimal strategy for Flower is to let the ﬂowers grow
+
+to their ﬁnal stage of development before collecting them.
+
+Goal
+In Flower, an agent is rewarded every time it collects
+a ﬂower. To get maximum points the agent should collect
+each ﬂower
+it matures to 10 points. This will
+provide a better score than constantly collecting seedlings.
+
+the moment
+
+Results
+The training graph for this game shows the agent
+falling for the speciﬁc deception with the sudden drop-off in
+performance. As the agent gets better at knowing where the
+ﬂowers are, the score starts to improve. Then the agent gets
+
+too good at collecting the ﬂowers, and they no longer have a
+chance to grow, lowering the score. Watching agent replays
+further conﬁrms this, the agent ﬁnds a circuit through all the
+ﬂowers and then gets better at quickly moving through this
+circuit. The agent perfectly falls for
+the deceit and has no
+way back unless it ignores the immediate rewards.
+
+Invest (Inv)
+
+Game
+Invest is a game where agents can forgo a portion of
+their already accumulated reward, for the beneﬁt of receiv-
+ing a larger
+reward in the future. The level used is shown
+in ﬁgure 4. The agent begins with no points but can col-
+lect a small number of coins around the level
+to get some
+initial amount. These points can then be “spent” on certain
+investment options. Doing this will deduct a certain number
+of points from the agent’s current score, acting as an imme-
+diate penalty, but will
+reward them with a greater number
+of points after some time has passed. The agent has several
+in, represented by
+different options on what
+the three human characters (referred to as bankers)
+in the
+top half of the level. Each banker has different rules: Green
+banker turns 3 into 5 after 30 ticks, Red turns 7 into 15 after
+60 ticks, and Blue turns 5 into 10 after 90 ticks. The agent
+can decide to invest in any of these bankers by simply mov-
+ing onto them, after which the chosen banker will take some
+of the agent’s points and disappear, returning a speciﬁc num-
+ber of timesteps later with the agent’s reward. The agent will
+win the game once the time limit for the level expires.
+
+they can invest
+
+The optimal strategy for Invest
+
+is deﬁned as successfully
+
+investing with everyone as often as possible.
+
+Goal
+Invest is a game where the agent has to intentionally
+seek some negative reward to get a positive reward, and then
+wait for a certain amount of time to get the positive reward.
+This delayed reward makes it very difﬁcult for the reinforce-
+ment learning algorithm to assign credit to a speciﬁc assign-
+ment. The initial investment will only be assigned a negative
+the reward
+reward, and the agent
+should also be assigned to this action.
+that happens
+In this case,
+the reward is deterministic, and the challenge
+could be increased further by making the delay stochastic.
+
+then has to ﬁgure out
+
+later
+
+that
+
+The agent
+
+learns a very particular strategy for all
+Results
+ﬁve instances of training. The agent ﬁrst collects all the coins
+and then invests with the Green Banker. From there it runs
+to the far right corner and waits, some agents always choose
+the top while others choose the bottom. As soon as the Green
+banker returns,
+the agent runs back over and reinvests only
+to run back to its corner and wait. This at ﬁrst seems like
+
+13
+
+Agent
+
+DC 1
+
+DC 2
+
+DC 3
+
+aStar
+greedySearch
+sampleMCTS
+
+NovelTS
+Return42
+YBCriber
+
+A2C
+
+3.36
+5.0
+2.0
+
+2.1
+5.0
+5.0
+
+5.0
+
+3.54
+3.0
+2.0
+
+2.0
+2.0
+4.0
+
+3.79
+
+1.33
+1.23
+1.99
+
+2.0
+2.0
+4.0
+
+2.0
+
+Inv
+
+17.53
+1.0
+3.5
+
+4.8
+190.12
+10.91
+
+69.6
+
+Flow
+
+Mints
+
+604.99
+6.83
+392.73
+
+298.51
+329.73
+300.73
+
+228.86
+
+1.92
+-5.15
+5.73
+
+8.75
+-2.66
+5.2
+
+-6.21
+
+Table 1: Average score for different games using different
+agents. Darker blue entries have higher positive score values
+for that game between all the agents, while darker red entries
+have higher negative score values.
+
+puzzling behavior as a better strategy would be to sit next to
+the Green Banker and be able to reinvest faster and collect
+that
+more points. On closer inspection,
+to reach the far corner correlates
+the time it
+with the arrival of
+the
+agent
+investing in the Green Banker and then
+touching the far tile resulted in a large positive reward.
+
+the delayed reward.
+
+it becomes apparent
+
+takes the agent
+
+It appears that
+
+learned that
+
+The size of the game board allowed the agent
+
+to embody
+the delay through movement and predict
+the
+reward through how long it takes to walk across the board. It
+is possible that
+the agent would have learned to invest with
+the other bankers if the board was larger so the agent could
+have found a location associated with the delayed reward.
+
+the arrival of
+
+random agent would accidentally invest with all
+
+The training graph shows an interesting story too. The ini-
+tial
+three
+bankers and get a fairly high score despite not consistently
+investing with anyone. The agent quickly learns to avoid the
+negative reward associated with the bankers and its
+score
+drops. It stops investing with the Blue Banker ﬁrst, then the
+Red, and ﬁnally the Green. After it discovers how to predict
+the delayed reward for the Green Banker, it starts doing this
+more regularly until its performance converges.
+
+Comparison with planning algorithms
+
+In this section we want to compare the results from some of
+the planning agents in the previous paper
+(Anderson et al.
+2018) with the deep RL results in this paper. Table 1, shows
+the average score respectively for all the games using six dif-
+ferent planning agents and the trained reinforcement
+learn-
+ing agents. Every agent plays each game around 150 times,
+and the average score is recorded. These are drastically dif-
+ferent algorithms
+for
+they provide context
+how different algorithms are affected by our deceptions.
+
+from A2C, but
+
+While the planning agents perform slightly better on av-
+erage, this depends highly on what exact planning algorithm
+we are examining. The planning algorithms have an advan-
+tage over the reinforcement learning algorithm as they have
+a running forward model that can predict the results of each
+action. On the other hand, the small time frame (40 millisec-
+onds),
+for deciding the next action, doesn’t give the algo-
+rithm enough time to ﬁnd the best action.
+
+In an important way, both RL and planning are facing a
+similar problem here. In both cases, the algorithms can only
+query the game environment a limited amount of times. This
+makes it impossible to look at all possible futures and forces
+
+the algorithms to prioritize. While most planning agents en-
+tirely rely on the given forward model, some, such Return42,
+also use online learning. These agents initially play with the
+forward model but will try to learn and generalize the game
+rules while playing. As the game progresses, they rely more
+and more on those learned abstractions.
+this is
+an efﬁcient and smart strategy but makes them vulnerable
+to deceptions where the game rules changed in the middle
+of the game, such as in Wafer Thin Mints. Here the agents
+might get deceived if they do not verify the result using the
+forward model. This is very similar to the problem that A2C
+encounters since the network representation is tries to gen-
+eralize the states of the game.
+
+In general,
+
+In summary, while the best planning agents seem to be
+to different forms
+they also are subject
+
+stronger than A2C,
+of deceptions, dependent on how they are implemented.
+
+Discussion
+
+across
+
+reinforcement
+
+the A2C deep
+
+summary, while
+
+learn-
+In
+ing(Mnih et al. 2016) approach performs somewhat well,
+it
+rarely achieves the optimal performance in our games and is
+In contrast,
+vulnerable to most deceptions discussed here.
+the A2C algorithm performs quite well
+the board
+for different AI benchmarks and can be considered com-
+It
+petitive (Arulkumaran et al. 2017; Justesen et al. 2017).
+should also be noted that
+the fast-moving ﬁeld of deep re-
+inforcement
+learning has already produced numerous mod-
+iﬁcations that could potentially solve the games discussed
+here(Arulkumaran et
+instead of dis-
+cussing possible modiﬁcations to overcome any particular
+challenge presented here, we want
+to take a step back and
+refocus back on the point of this exercise. We are interested
+in deceptions to gain a better understanding of
+the general
+vulnerabilities of AI approaches, and try to gain a more sys-
+tematic understanding of the ways deep learning in particu-
+lar, and AI,
+in general, might fail. With the previous games
+as concrete examples in mind, we now want to discuss four,
+non-exhaustive, categories for deception.
+
+al. 2017). However,
+
+Types of Deception
+
+that
+
+The DeceptiCoin
+Lack of Hierarchical Understanding
+games are relatively easy to solve if one thinks about
+them
+at the right level of abstractions. DeceptiCoins can be seen as
+a single binary decision between one path and another. Once
+this is clear, one can quickly evaluate the utility of choosing
+the correct one and pick the correct path. The deceptive el-
+ement here is the fact
+this is presented to the AI as an
+incredibly large search space, as it takes many steps to com-
+plete the overall meta-action. Humans are usually quite good
+at ﬁnding these higher levels of abstraction, and hence this
+problem might not look like much of a deception to us - but
+it is pretty hard for an AI. The large search space, paired with
+the assumptions that all actions along the path of the larger
+action matter, makes it very hard to explore all possible steps
+until a possible reward is reached. This is a similar problem
+to the famous problem in Montezuma’s Revenge, where the
+AI could not reach the goal, and its random exploration did
+not even get close. This problem was only recently solved
+with forced exploration (Ecoffet et al. 2019).
+
+14
+
+Finding a good hierarchical abstraction can actually solve
+the problem. For example,
+in DeceptiCoins we can look at
+the path from one point to another as one action - something
+that has been explored in GVGAI playing agents before.
+
+a
+
+a
+
+is
+
+them. But
+
+simply use
+
+forward model
+
+Wafterthinmints
+
+to plan their next
+
+Subverted Generalization
+game
+speciﬁcally designed to trick agents that generalize. Agents
+step
+that
+perform quite well here, as they realize that
+their next ac-
+tion will kill
+in general, we do not have access
+to a forward model, so there is a need to generalize from
+that each mint
+past experience and use induction. The fact
+the idea
+up to the 9th gives a positive rewards
+then kills
+that eating a mint will be good. The 10th mint
+you. This is not only a problem for reinforcement
+learning,
+but has been discussed in both epistemology (Hume 1739;
+- with the consensus
+Russell 1912) and philosophy of AI
+that induction in general does not work, and that there is not
+really a way to avoid this problem. The subverted general-
+ization is also a really good example of how more advanced
+AIs become more vulnerable to certain deceptions. On aver-
+to have and can make an
+age, generalization is a good skill
+AI much faster, up to the point where it fails.
+
+reinforces
+
+in
+
+big
+
+The
+
+challenge
+
+Delayed Reward
+reinforcement
+learning is to associate what actions lead to the reward (Sut-
+ton 1992). One way to complicate this is to delay the pay-
+ment of this reward, as we did in the example of invest. The
+player ﬁrst has to incur a negative reward to invest, and then,
+after a certain amount of time steps gets a larger positive re-
+it
+ward. The RL agent had two problems with Invest. First,
+only ever invests with the investor with the shortest repay-
+ment
+the best
+payout, but
+realize this rela-
+tionship, or does not associate the reward correctly.
+
+time. The Red Banker would, overall, offer
+
+the RL agent either does not
+
+to be
+
+the agent
+
+also seems
+
+Furthermore,
+
+the RL agents
+
+learning
+the
+“superstitions”. When we examined the behaviour of
+invests with the
+evolved RL agent, we see that
+Green Banker and then runs to a speciﬁc spot
+in the level,
+waiting there for the reward payout. This behaviour is then
+repeated,
+the agent runs to the banker and then back to the
+spot to wait for its reward. We reran the training for the RL
+agent and saw the same behaviour, albeit with a different
+spot that the agent runs to. We assume that this superstition
+initially wandered off after invest-
+arose because the agent
+ing in the Green Banker, and then received the reward when
+it was in that spot. It seems to have learned that
+it needs to
+invest
+- as varying this behaviour would re-
+sult in no payout. But there is little pressure to move it away
+from its superstition of waiting for
+in a speciﬁc
+spot, even though this has no impact on the payout. In fact,
+it makes the behaviour, even with just the Green Banker sub-
+optimal, as it delays the time until
+it can invest again, as it
+has to run back to the green banker.
+
+in the banker
+
+the result
+
+What was exciting about
+
+this behavior, was the fact
+
+that
+similar behavior was also observed in early reinforcement
+learning studies with animals (Skinner 1948). Pigeons that
+regularly fed by an automatic mechanism (regard-
+were
+less of their behaviour) developed different superstitious be-
+like elaborate dance and motions, which Skinner
+haviours,
+
+hypothesized were assumed (by the pigeon) to causally in-
+ﬂuence the food delivery.
+the agent seems to
+develop similar superstitions.
+
+In our game,
+
+a
+
+is
+
+for
+
+to eat
+
+There
+
+famous
+
+the room. They are told that
+
+Delayed Gratiﬁcation
+experiment
+(Mischel, Ebbesen, and Raskoff Zeiss 1972) about delayed
+gratiﬁcation that confronts 4 year old children with a marsh-
+it while the experimenter
+mallow, and asks them not
+leaves
+they will get another
+marshmallow, if they can just hold off eating the ﬁrst marsh-
+mallow now. This
+some children,
+task proves difﬁcult
+and it is also difﬁcult for our agent. Flower is a game where
+the agent actually gets worse over
+time. This is because it
+initially is not very good at collecting the ﬂowers, which al-
+lows the ﬂowers time to mature. The optimal strategy would
+be to wait for the ﬂowers to grow fully, and then go around
+learns the expected reward of
+and collect
+collecting seeds early on but does not realize that this reward
+changes with faster collection. When it updates its expected
+reward based on its new speed,
+it could get
+higher rewards when it was slower. While some of the plan-
+ning algorithms perform better here, it is likely that they did
+not actually “understand” this problem, but are simply much
+worse at collecting the ﬂowers (like the untrained RL agent).
+This example demonstrates that we can design a problem
+where the AI gets worse over time by “learning” to play.
+
+them. The agent
+
+forgets that
+
+it
+
+Conclusion
+
+that deep reinforcement
+
+learners are easily de-
+It appears
+ceived. We have devised a set of games speciﬁcally to show-
+case different forms of deception, and tested one of the most
+widely used RL algorithms, Advantage Actor-Critic (A2C),
+learners failed to
+on them.
+it found the
+ﬁnd the optimal policy (with the exception that
+optimal policy on one level of one game), as it evidently fell
+for the various traps laid in the levels.
+
+the reinforcement
+
+In all games,
+
+As the games were implemented in the GVGAI
+
+frame-
+work, it was also possible for us to compare with tree search-
+based planning agents,
+including those based on MCTS.
+(This is very much a comparison of apples and oranges, as
+the planning agents have access to a forward model and di-
+rect object representation but are not given any kind of train-
+there is a plan-
+ing time.) We can see that for every game,
+than the A2C agent, but
+ning agent which performs better
+that
+that per-
+is clear that some kinds of deception affect
+forms worse. It
+learning algorithm much more severely
+our
+than it affects the planning algorithms; in particular, the sub-
+verted generalization of WaferThinMints. On the other hand,
+it performed better than most planning algorithms given the
+delayed reward in Invest, even though the policy it arrived at
+is bizarre to a human observer and suggests a warped asso-
+ciation between cause and effect.
+
+there is in most cases also a planning agent
+
+reinforcement
+
+We look forward to testing other kinds of algorithms on
+these games, including phylogenetic reinforcement learning
+methods such as neuroevolution. We also hope that other re-
+searchers will use these games to test
+the susceptibility of
+their agents to speciﬁc deceptions.
+
+15
+
+References
+
+Stephenson, M.; Togelius,
+
+Anderson, D.;
+Salge, C.;
+In In-
+Levine, J.; and Renz, J.
+ternational Conference on the Applications of Evolutionary
+Computation, 376–391. Springer.
+
+Deceptive games.
+
+2018.
+
+J.;
+
+Arulkumaran, K.; Deisenroth, M. P.; Brundage, M.;
+and
+Bharath, A. A. 2017. Deep reinforcement learning: A brief
+survey.
+
+IEEE Signal Processing Magazine 34(6):26–38.
+
+Bellemare, M. G.; Naddaf, Y.; Veness, J.; and Bowling, M.
+2013. The arcade learning environment: An evaluation plat-
+Intelligence
+form for general agents.
+Research 47:253–279.
+
+Journal of Artiﬁcial
+
+Brockman, G.; Cheung, V.; Pettersson, L.; Schneider,
+J.;
+Schulman, J.; Tang, J.; and Zaremba, W. 2016. Openai gym.
+arXiv preprint arXiv:1606.01540.
+
+Dhariwal, P.; Hesse, C.; Klimov, O.; Nichol, A.; Plappert,
+M.; Radford, A.; Schulman, J.; Sidor, S.; and Wu, Y. 2017.
+Openai baselines. https://github.com/openai/baselines.
+
+Ebner, M.; Levine, J.; Lucas, S. M.; Schaul, T.; Thompson,
+2013. Towards a video game descrip-
+T.; and Togelius, J.
+tion language.
+In Dagstuhl Follow-Ups, volume 6. Schloss
+Dagstuhl-Leibniz-Zentrum fuer Informatik.
+
+Ecoffet, A.; Huizinga, J.; Lehman, J.; Stanley, K. O.; and
+Go-explore: a new approach for hard-
+Clune,
+exploration problems. arXiv preprint arXiv:1901.10995.
+
+2019.
+
+J.
+
+Hume, D. 1739. A Treatise of Human Nature. Oxford Uni-
+versity Press.
+
+Justesen, N.; Bontrager, P.; Togelius, J.; and Risi, S.
+Deep
+for
+arXiv:1708.07902.
+
+learning
+
+playing.
+
+arXiv
+
+video
+
+game
+
+2017.
+preprint
+
+Justesen, N.; Torrado, R. R.; Bontrager, P.; Khalifa, A.; To-
+level generation
+Procedural
+gelius, J.; and Risi, S.
+improves generality of deep reinforcement
+arXiv
+learning.
+preprint arXiv:1806.10729.
+
+2018.
+
+Levine, J.; Bates Congdon, C.; Ebner, M.; Kendall, G.; Lu-
+cas, S. M.; Miikkulainen, R.; Schaul, T.; and Thompson, T.
+2013. General video game playing. Artiﬁcial and Computa-
+tional Intelligence in Games.
+
+Mischel, W.; Ebbesen, E. B.; and Raskoff Zeiss, A.
+Cognitive
+ﬁcation.
+21(2):204.
+
+and attentional mechanisms
+and
+Journal
+
+1972.
+in delay of grati-
+psychology
+social
+
+personality
+
+of
+
+tition, challenges and opportunities.
+ference on Artiﬁcial Intelligence.
+
+In Thirtieth AAAI Con-
+
+Rodriguez Torrado, R.; Bontrager, P.; Togelius, J.; Liu, J.;
+learning
+and Perez-Liebana, D.
+for general video game ai.
+Intelligence
+and Games (CIG), 2018 IEEE Conference on.
+
+2018. Deep reinforcement
+
+In Computational
+
+IEEE.
+
+Russell, B.
+and Norgate. chapter On Induction.
+
+1912.
+
+The Problems of Philosophy. Williams
+
+Schaul, T.
+2013. A video game description language for
+model-based or interactive learning. In IEEE Conference on
+Computatonal Intelligence and Games, CIG.
+
+Skinner, B. F. 1948.
+experimental psychology 38(2):168.
+
+’superstition’in the pigeon. Journal of
+
+Sutton, R. S., and Barto, A. G. 1998. Reinforcement learn-
+ing: An introduction. MIT press.
+
+Sutton, R. S.
+forcement Learning. Boston, MA: Springer US. 1–3.
+
+Introduction: The Challenge of Rein-
+
+1992.
+
+Igel, C.; Gomez, F.;
+Togelius, J.; Schaul, T.; Wierstra, D.;
+2009. Ontogenetic and phylogenetic
+and Schmidhuber, J.
+reinforcement learning. K¨unstliche Intelligenz 23(3):30–33.
+
+P.;
+
+J.; Oh,
+
+Chung,
+
+J.; Cai,
+
+Ewalds,
+
+Powell, R.;
+
+Babuschkin,
+
+I.; Agapiou,
+
+Vinyals, O.;
+J.; Mathieu, M.;
+I.;
+Jaderberg, M.; Czarnecki, W. M.; Dudzik, A.; Huang,
+T.; Horgan, D.;
+A.; Georgiev,
+J.; Dalibard,
+Kroiss, M.; Danihelka,
+.; Choi, D.; Sifre, L.; Sulsky, Y.; Vezhnevets, S.; Mol-
+V
+loy,
+T.; Gulcehre, C.;
+Wang, Z.; Pfaff, T.; Pohlen, T.; Wu, Y.; Yogatama, D.;
+Schaul, T.; Lilli-
+Cohen,
+crap, T.; Apps, C.; Kavukcuoglu, K.; Hassabis, D.;
+and
+AlphaStar: Mastering the Real-Time
+Silver, D.
+Strategy Game StarCraft
+https://deepmind.com/blog/
+alphastar-mastering-real-time-strategy-game-starcraft-ii/.
+
+J.; McKinney, K.;
+
+T.; Budden, D.;
+
+Smith, O.;
+
+Paine,
+
+2019.
+
+II.
+
+Now it’s personal: on
+Wilson, D., and Sicart, M.
+abusive game design.
+the International
+Academic Conference on the Future of Game Design and
+Technology, 40–47. ACM.
+
+2010.
+In Proceedings of
+
+Wolpert, D. H., and Macready, W. G.
+theorems for optimization.
+ary computation 1(1):67–82.
+
+1997. No free lunch
+IEEE transactions on evolution-
+
+Mnih, V.; Kavukcuoglu, K.; Silver, D.; Rusu, A. A.; Ve-
+J.; Bellemare, M. G.; Graves, A.; Riedmiller, M.;
+ness,
+Human-
+Fidjeland, A. K.; Ostrovski, G.;
+level control
+learning. Nature
+518(7540):529.
+
+through deep reinforcement
+
+2015.
+
+al.
+
+et
+
+Mnih, V.; Badia, A. P.; Mirza, M.; Graves, A.; Lillicrap, T.;
+2016. Asyn-
+Harley, T.; Silver, D.; and Kavukcuoglu, K.
+chronous methods for deep reinforcement
+In In-
+ternational Conference on Machine Learning, 1928–1937.
+
+learning.
+
+OpenAI.
+openai-ﬁve/.
+
+2018.
+
+Openai ﬁve.
+
+https://blog.openai.com/
+
+Perez-Liebana, D.; Samothrakis, S.; Togelius,
+J.; Lucas,
+S. M.; and Schaul, T. 2016. General video game ai: Compe-
+
+16
+
+

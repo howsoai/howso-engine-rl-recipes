@@ -1,0 +1,607 @@
+Title: Leaderboard
+
+URL Source: https://github.com/openai/gym/wiki/Leaderboard
+
+Markdown Content:
+* * *
+
+This page tracks the performance of user algorithms for various tasks in gym. Previously, users could submit their scores directly to [gym.openai.com/envs](https://gym.openai.com/envs/), but it has been decided that a simpler wiki might do this task more efficiently.
+
+This wiki page is a community driven page. Anyone can edit this page and add to it. We encourage you to contribute and modify this page and add your scores and links to your write-ups and code to reproduce your results. We also encourage you to add new tasks with the gym interface, but not in the core gym library (such as roboschool) to this page as well.
+
+Links to videos are optional, but encouraged. Videos can be youtube, instagram, a tweet, or other public links. Write-ups should explain how to reproduce the result, and can be in the form of a simple gist link, blog post, or github repo.
+
+We have begun to copy over the previous performance scores and write-up links over from the [previous page](https://gym.openai.com/envs/). This is an ongoing effort, and we can use some help.
+
+Environments
+------------
+
+[](https://github.com/openai/gym/wiki/Leaderboard#environments)
+Classic control
+---------------
+
+[](https://github.com/openai/gym/wiki/Leaderboard#classic-control)
+### CartPole-v0
+
+[](https://github.com/openai/gym/wiki/Leaderboard#cartpole-v0)
+![Image 1](https://user-images.githubusercontent.com/8510097/31701291-3b9f3d94-b384-11e7-8ee1-70fb1e7deb63.PNG) A pole is attached by an un-actuated joint to a cart, which moves along a frictionless track. The system is controlled by applying a force of +1 or -1 to the cart. The pendulum starts upright, and the goal is to prevent it from falling over. A reward of +1 is provided for every timestep that the pole remains upright. The episode ends when the pole is more than 15 degrees from vertical, or the cart moves more than 2.4 units from the center.
+
+*   [Environment Details](https://github.com/openai/gym/wiki/CartPole-v0)
+
+*   _CartPole-v0 defines "solving" as getting average reward of 195.0 over 100 consecutive trials._
+
+*   _This environment corresponds to the version of the cart-pole problem described by Barto, Sutton, and Anderson [Barto83]._
+
+| User | Episodes before solve | Write-up | Video |
+| --- | --- | --- | --- |
+| [Zhiqing Xiao](https://github.com/zhiqingxiao) | 0 (use close-form preset policy) | [writeup](https://github.com/ZhiqingXiao/OpenAIGymSolution/tree/master/CartPole-v0) |  |
+| [Henry Jia](https://github.com/henryjia) | 0 (use close-form PID policy) | [code/writeup](https://gist.github.com/HenryJia/23db12d61546054aa43f8dc587d9dc2c) |  |
+| [Keavnn](https://github.com/StepNeverStop) | 0 | [writeup](https://github.com/StepNeverStop/RLs/tree/archived_gym_leaderboard/gym_Leaderboard/CartPole-v0) |  |
+| [Shakti Kumar](https://github.com/shaktikshri) | 0 | [writeup](https://github.com/shaktikshri/adaptiveSystems/blob/master/RL_Benchmarks/README.md) | [Video](https://github.com/shaktikshri/adaptiveSystems/blob/master/RL_Benchmarks/episode.gif) |
+| [Mathias Åsberg 🔥](https://github.com/nextgrid/deep-learning-labs-openAI) | 0 | [writeup](https://github.com/nextgrid/deep-learning-labs-openAI/blob/main/cartpole/README.md) | [Video](https://www.youtube.com/watch?v=a0oA5VmVFhQ&feature=youtu.be) |
+| [Adrien Kegreisz] ([https://github.com/Adrienkgz](https://github.com/Adrienkgz)) | 0 ( pre-trained q-network / Infinite Cartpole ) | [writeup](https://github.com/Adrienkgz/Projects/tree/main/CartpoleV1) |  |
+| [iRyanBell](https://github.com/iRyanBell) | 2 | [writeup](https://github.com/iRyanBell/dqn_cartpole/blob/master/cartpole.ipynb) |  |
+| [Adam](https://github.com/adamprice97) | 3 (36) | [writeup](https://github.com/adamprice97/Control/blob/master/PSOCartpole.ipynb) |  |
+| [Daniel Sallander](https://github.com/DanielSallander) | 4 | [writeup](https://github.com/DanielSallander/Cartpole-XGBoost/blob/master/Cartpole.ipynb) |  |
+| [Kapil Chauhan](https://github.com/kapilnchauhan77) | 4 | [writeup](https://github.com/kapilnchauhan77/CartPole_DQN/blob/master/CartPole_v0.ipynb) |  |
+| [Ritika Kapoor](https://github.com/ratikapoor) | 7 (use genetic algorithm) | [writeup](https://github.com/ratikapoor/evolutionary.git) |  |
+| [Ben Harris](https://github.com/Ben-C-Harris) | 12 | [writeup](https://github.com/Ben-C-Harris/reinforcement-learning-pole-balance) | [video](https://github.com/Ben-C-Harris/reinforcement-learning-pole-balance/blob/master/GIFs/RunningModelExample.gif) |
+| [Tiger37](https://github.com/Tiger767) | 14 (0) | [writeup](https://github.com/Tiger767/OpenAIGymResults/tree/master/CartPole-v0) | [video](https://www.youtube.com/watch?v=0d3U2tkhEkM) |
+| [Blake Richey](https://github.com/BlakeERichey) | 20 | [writeup](https://github.com/BlakeERichey/AI-Environment-Development/tree/master/Deep%20Q%20Learning/cartpole) |  |
+| [LukaszFuszara](https://github.com/lfuszara1) | 22 | [writeup](https://github.com/lfuszara1/rl-fast/tree/master/CartPole-v0) | [video](https://www.youtube.com/watch?v=GIqH8GSRBc4) |
+| [MisterTea](https://github.com/MisterTea), [econti](https://github.com/econti) | 24 | [writeup](https://github.com/facebookresearch/BlueWhale) |  |
+| [Roald Brønstad](https://github.com/Roaldb86/) | 24 | [writeup](https://github.com/Roaldb86/Reinforcement_learning/blob/master/cartpole.py) |  |
+| [yingzwang](https://github.com/yingzwang) | 32 | [writeup](https://gist.github.com/yingzwang/2c5b455907942c7bdf3c0fece640095b#file-deepq-cartpole-ipynb) |  |
+| [sharvar](https://github.com/sharvar/gym) | 33 | [writeup](https://github.com/sharvar/gym/blob/master/cartpole_train_ppo_v2.py) |  |
+| [nuggfr](https://github.com/nuggfr) | 38 | [writeup](https://github.com/nuggfr/cartpole-xcs-rc) |  |
+| [SurenderHarsha](https://github.com/SurenderHarsha/OpenAIGym-Cartpole-Evolution-) | 40 | [writeup](https://github.com/SurenderHarsha/OpenAIGym-Cartpole-Evolution-) |  |
+| [Chrispresso](https://github.com/chrispresso) | 45 | [writeup](https://nbviewer.jupyter.org/github/Chrispresso/reinforcement_learning/blob/master/gym_solutions/CartPole-v0/dqn_notebook.ipynb) |  |
+| [n1try](https://github.com/n1try) | 85 | [writeup](https://gist.github.com/n1try/2a6722407117e4d668921fce53845432#file-dqn_cartpole-py) |  |
+| [khev](https://github.com/Khev/RL-practice-keras) | 96 | [writeup](https://github.com/Khev/RL-practice-keras/blob/master/DDQN/write_up_for_openai.ipynb) | [video](https://github.com/Khev/RL-practice-keras/blob/master/DDQN/movies/cartpole_trained.gif) |
+| [ceteke](https://github.com/ceteke) | 99 | [writeup](https://github.com/ceteke/RL/blob/master/Approximation/Linear%20Sarsa.ipynb) |  |
+| [manikanta](https://github.com/manikantanallagatla) | 100 | [writeup](https://github.com/manikantanallagatla/openai-cartpole-v0) | [video](https://github.com/manikantanallagatla/openai-cartpole-v0/blob/master/openaicartpole.mp4) |
+| [BS Haney](https://github.com/Bhaney44) | 100 | [Write-up](https://github.com/Bhaney44/CartPole) | [YouTube](https://www.youtube.com/watch?v=T4SejVqE0X4) |
+| [Trevor McInroe](https://github.com/trevormcinroe/) | 130 | [writeup](https://github.com/trevormcinroe/gym_leaderboard/blob/master/cart_pole/cart_pole_v0.ipynb) |  |
+| [JamesUnicomb](https://github.com/JamesUnicomb) | 145 | [writeup](https://github.com/JamesUnicomb/ReinforcementLearning/blob/master/DynaQLearning/CartPole.py) | [video](https://www.youtube.com/watch?v=9-BVscTVvlw) |
+| [Nihal T Rao](https://github.com/nihal-rao) | 184 | [writeup](https://github.com/nihal-rao/RL-Double-DQN) | [video](https://github.com/nihal-rao/RL-Double-DQN/blob/master/cartpole.gif) |
+| [Harshit Singh Lodha](https://github.com/harshitandro) | 265 | [writeup](https://github.com/harshitandro/Deep-Q-Network) | [gif](https://github.com/harshitandro/Deep-Q-Network/blob/master/results/agent_play/agentplay_CartPole-v0_1534607382.5808585.gif) |
+| [XYTriste](https://github.com/XYTriste) | 286 | [writeup](https://github.com/XYTriste/ReinforcementEnv/blob/master/CartPole/CartPoleTest.py) |  |
+| [mbalunovic](https://github.com/mbalunovic) | 306 | [writeup](https://gist.github.com/mbalunovic/fb7392e2c09b2c3895a354c3ad36497e#file-cartpole_q_network-py) |  |
+| [onimaru](https://github.com/onimaru) | 355 | [writeup](https://gist.github.com/onimaru/ea2f88c2156a77ce7262fb5e2f112fe0#CartPole_solving.py) | [video](https://youtu.be/q48fVY0Vsso) |
+| [Google Search "M Kunthe"](https://github.com/SanthoshMKunthe) | 382 | [writeup](https://github.com/SanthoshMKunthe/CartPole/blob/master/main.py) |  |
+
+### MountainCar-v0
+
+[](https://github.com/openai/gym/wiki/Leaderboard#mountaincar-v0)
+![Image 2](https://user-images.githubusercontent.com/8510097/31701297-3ebf291c-b384-11e7-8289-24f1d392fb48.PNG) A car is on a one-dimensional track, positioned between two "mountains". The goal is to drive up the mountain on the right; however, the car's engine is not strong enough to scale the mountain in a single pass. Therefore, the only way to succeed is to drive back and forth to build up momentum.
+
+*   [Environment details](https://github.com/openai/gym/wiki/MountainCar-v0)
+*   _MountainCar-v0 defines "solving" as getting average reward of -110.0 over 100 consecutive trials._
+*   _This problem was first described by Andrew Moore in his PhD thesis [Moore90]._
+
+| User | Episodes before solve | Write-up | Video |
+| --- | --- | --- | --- |
+| [Zhiqing Xiao](https://github.com/ZhiqingXiao) | 0 (use close-form preset policy) | [writeup](https://github.com/ZhiqingXiao/OpenAIGymSolution/blob/master/MountainCar-v0_close_form/mountaincar_v0_close_form.ipynb) |  |
+| [Leocus](https://github.com/leocus) | 10 (1150) | [writeup](https://arxiv.org/abs/2012.07723) |  |
+| [Keavnn](https://github.com/StepNeverStop) | 47 | [writeup](https://github.com/StepNeverStop/RLs/tree/archived_gym_leaderboard/gym_Leaderboard/MountainCar-v0) |  |
+| [Zhiqing Xiao](https://github.com/ZhiqingXiao) | 75 | [writeup](https://github.com/ZhiqingXiao/OpenAIGymSolution/tree/master/MountainCar-v0) | [video](https://github.com/ZhiqingXiao/OpenAIGymSolution/tree/master/MountainCar-v0/records) |
+| [Mohith Sakthivel](https://github.com/roboticist-by-day) | 90 | [writeup](https://github.com/roboticist-by-day/learn_rl_notebook/tree/master/scripts/openai_leaderboard) |  |
+| [Tiger37](https://github.com/Tiger767) | 224 | [writeup](https://github.com/Tiger767/OpenAIGymResults/tree/master/MountainCar-v0) | [video](https://www.youtube.com/watch?v=V2eJdqS8T9Q) |
+| [Anas Mohamed](https://github.com/amohamed11) | 341 | [Link](https://github.com/amohamed11/OpenAIGym-Solutions#openaigym-solutions) | [Link](https://streamable.com/sro3q) |
+| [Harshit Singh Lodha](https://github.com/harshitandro) | 643 | [writeup](https://github.com/harshitandro/Deep-Q-Network) | [gif](https://github.com/harshitandro/Deep-Q-Network/blob/master/results/agent_play/agentplay_MountainCar-v0_1534667457.5695965.gif) |
+| [Colin M](https://github.com/CM-Data) | 944 | [writeup](https://github.com/CM-Data/Noisy-Dueling-Double-DQN-MountainCar/) | [gif](https://raw.githubusercontent.com/CM-Data/Noisy-Dueling-Double-DQN-MountainCar/master/trained.gif) |
+| [jing582](https://github.com/jing582) | 1119 |  |  |
+| [DaveLeongSingapore](https://github.com/DaveLeongSingapore) | 1967 |  |  |
+| [Pechckin](https://github.com/Pechckin) | 30 | [writeup](https://github.com/Pechckin/MountainCar/blob/master/MountainCar-v0.py) |  |
+| [Amit](https://github.com/amitkvikram) | 1000-1200 | [writeup](https://github.com/amitkvikram/rl-agent/blob/master/mountainCar-v0-sarsa.ipynb) | [video](https://github.com/amitkvikram/rl-agent/blob/master/mountainCar.mov) |
+| [Gleb I](https://github.com/elcrion/mountain_car) | 100 | [writeup](https://github.com/elcrion/mountain_car/blob/master/Mountain_Car_nn_2.ipynb) |  |
+
+### MountainCarContinuous-v0
+
+[](https://github.com/openai/gym/wiki/Leaderboard#mountaincarcontinuous-v0)
+![Image 3](https://user-images.githubusercontent.com/8510097/31701297-3ebf291c-b384-11e7-8289-24f1d392fb48.PNG) A car is on a one-dimensional track, positioned between two "mountains". The goal is to drive up the mountain on the right; however, the car's engine is not strong enough to scale the mountain in a single pass. Therefore, the only way to succeed is to drive back and forth to build up momentum. Here, the reward is greater if you spend less energy to reach the goal
+
+Here, this is the continuous version.
+
+*   [Environment details](https://github.com/openai/gym/wiki/MountainCarContinuous-v0)
+*   _MountainCarContinuous-v0 defines "solving" as getting average reward of 90.0 over 100 consecutive trials._
+*   _This problem was first described by Andrew Moore in his PhD thesis [Moore90]._
+
+| User | Episodes before solve | Write-up | Video |
+| --- | --- | --- | --- |
+| [Zhiqing Xiao](https://github.com/zhiqingxiao) | 0 (use close-form preset policy) | [writeup](https://github.com/ZhiqingXiao/OpenAIGymSolution/tree/master/MountainCarContinuous-v0) |  |
+| [Ashioto](https://github.com/Ashioto) | 1 | [writeup](https://gist.github.com/Ashioto/10ec680395db48ddac1ad848f5f7382c#file-actorcritic-py) |  |
+| [timurgepard](https://github.com/timurgepard) | 5 (Symphony🎹 ver 2.0) | [writeup](https://github.com/timurgepard/Simphony) | [video](https://youtu.be/vLXf3-zSaPY) |
+| [Mathias Åsberg 🤖](https://github.com/nextgrid/deep-learning-labs-openAI) | 9 | [writeup](https://github.com/nextgrid/deep-learning-labs-openAI/tree/main/MountainCarContinuous-v0) | [Video](https://github.com/nextgrid/deep-learning-labs-openAI/tree/main/MountainCarContinuous-v0) |
+| [Keavnn](https://github.com/StepNeverStop) | 11 | [writeup](https://github.com/StepNeverStop/RLs/tree/archived_gym_leaderboard/gym_Leaderboard/MountainCarContinuous-v0) |  |
+| [camigord](https://github.com/camigord) | 18 | [writeup](https://gist.github.com/camigord/48d193a61c624a20071465bcf3504565#file-readme-md) |  |
+| [Tobias Steidle](https://github.com/tobiassteidle) | 32 | [writeup](https://github.com/tobiassteidle/Reinforcement-Learning/tree/master/OpenAI/MountainCarContinuous-v0) | [video](https://www.youtube.com/watch?v=RGKRfxfEFEA) |
+| [lirnli](https://github.com/lirnli) | 33 | [writeup](https://gist.github.com/lirnli/d46639c867e1a4620fa3002326bd2f1f#file-ddpg-md) |  |
+| [khev](https://github.com/Khev/RL-practice-keras/blob/master/DDPG/writeup_for_openai.ipynb) | 130 | [writeup](https://github.com/Khev/RL-practice-keras/tree/master/DDPG) | [video](https://github.com/Khev/RL-practice-keras/blob/master/DDPG/movies/mountain_trained.gif) |
+| [Sanket Thakur](https://github.com/sanketsans/openAIenv/tree/master/CEM/mountainCar_Cont) | 140 | [writeup](https://github.com/sanketsans/openAIenv/blob/master/CEM/mountainCar_Cont/CEM.ipynb) | [video](https://github.com/sanketsans/openAIenv/blob/master/CEM/mountainCar_Cont/mountainCar/openaigym.video.0.8526.video000000.mp4) |
+| [Pechckin](https://github.com/Pechckin) | 1 | [writeup](https://github.com/Pechckin/MountainCar) |  |
+| [Nikhil Barhate](https://github.com/nikhilbarhate99) | 200 (HAC) | [writeup](https://github.com/nikhilbarhate99/Hierarchical-Actor-Critic-HAC-PyTorch) | [gif](https://github.com/nikhilbarhate99/Hierarchical-Actor-Critic-HAC-PyTorch/blob/master/gif/MountainCarContinuous-v0.gif) |
+
+### Pendulum-v0
+
+[](https://github.com/openai/gym/wiki/Leaderboard#pendulum-v0)
+![Image 4](https://user-images.githubusercontent.com/8510097/31701471-726f54c0-b385-11e7-9f05-5c50f2affbb4.PNG) The inverted pendulum swingup problem is a classic problem in the control literature. In this version of the problem, the pendulum starts in a random position, and the goal is to swing it up so it stays upright.
+
+*   [Environment details](https://github.com/openai/gym/wiki/Pendulum-v0)
+*   _Pendulum-v0 is an unsolved environment, which means it does not have a specified reward threshold at which it's considered solved._
+
+| User | Best 100-episode performance | Write-up | Video |
+| --- | --- | --- | --- |
+| [KanishkNavale](https://github.com/KanishkNavale) | -106.9528 | [MultiAgent Policy](https://github.com/KanishkNavale/Naive-MultiAgent-ReinforcementLearning) |  |
+| [msinto93](https://github.com/msinto93) | -123.11 ± 6.86 | [D4PG](https://github.com/msinto93/D4PG) |  |
+| [msinto93](https://github.com/msinto93) | -123.79 ± 6.90 | [DDPG](https://github.com/msinto93/DDPG) |  |
+| [heerad](https://github.com/heerad) | -134.48 ± 9.07 | [writeup](https://gist.github.com/heerad/1983d50c6657a55298b67e69a2ceeb44#file-ddpg-pendulum-v0-py) |  |
+| [BS Haney](https://github.com/Bhaney44) | -135 | [Write-up](https://github.com/Bhaney44/Pendulum) | [YouTube](https://www.youtube.com/watch?v=v6IEpH4vYq0) |
+| [ThyrixYang](https://github.com/ThyrixYang) | -136.16 ± 11.97 | [writeup](https://gist.github.com/ThyrixYang/0422de21ed1aa7de29f2c946eff78faf#file-cem_pendulum-py) |  |
+| [MaelFrancesc](https://github.com/DevMaelFranceschetti) | -146.4 (mean 900 ep) | [writeup](https://github.com/DevMaelFranceschetti/TD3_Pendulum-v0) |  |
+| [lirnli](https://github.com/lirnli) | -152.24 ± 10.87 | [writeup](https://gist.github.com/lirnli/de83ef1cdf57b9ac030cc30aa231102f#file-ddpg-pendulum-v0-md) |  |
+
+### Acrobot-v1
+
+[](https://github.com/openai/gym/wiki/Leaderboard#acrobot-v1)
+![Image 5](https://user-images.githubusercontent.com/8510097/32645660-4117b140-c59d-11e7-8290-43ed1b384dac.PNG)
+
+The acrobot system includes two joints and two links, where the joint between the two links is actuated. Initially, the links are hanging downwards, and the goal is to swing the end of the lower link up to a given height.
+
+*   _Acrobot-v1_ is an unsolved environment, which means it does not have a specified reward threshold at which it's considered solved.*
+*   _Control of Acrobot around equilibrium was described by J. Hauser and R. Murray in ACC 1990. Swing-up control of Acrobot is in M. W. Spong, IEEE Control Systems Magazine, 1995._
+*   _Learning control on Acrobot was first described by Sutton [Sutton96]. We are using the version from RLPy [Geramiford15], which uses Runge-Kutta integration for better accuracy._
+
+| User | Best 100-episode performance | Write-up | Video |
+| --- | --- | --- | --- |
+| mallochio | -42.37 ± 4.83 |  | [taken down](https://gym.openai.com/evaluations/eval_AXtZeKiTzilcUHfpwjrwA/#reproducibility) |
+| marunowskia | -59.31 ± 1.23 |  |  |
+| MontrealAI | -60.82 ± 0.06 |  |  |
+| [BS Haney](https://github.com/Bhaney44) | -61.8 | [Write-up](https://github.com/Bhaney44/Acrobot/tree/master) | [YouTube](https://www.youtube.com/watch?v=7x5KrtiOaCM&feature=youtu.be) |
+| [Felix Nica](https://github.com/FelixNica) | -63.13 ± 2.65 | [Write-up](https://github.com/FelixNica/OpenAI_Acrobot_D3QN) | [YouTube](https://www.youtube.com/watch?v=JQP8gL-WAwE) |
+| [Nick Kaparinos](https://github.com/NickKaparinos) | -64.30 ± 4.10 | [Write-up](https://github.com/NickKaparinos/OpenAI-Gym-Projects) | [gif](https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Classic%20Control/Acrobot/results/openaigym.video.38.37714.video000000.gif) |
+| Daniel Barbosa | -67.18 | [writeup](https://github.com/danielnbarbosa/angela) |  |
+| [Mahmood Khordoo](https://gihub.com/khordoo) | -68.63 | [writeup](https://github.com/khordoo/Deep-Reinforcement-Learning-with-PyTorch/blob/example/examples/DQN/acrobat_v1_rainbow.ipynb) | [gif](https://github.com/khordoo/Deep-Reinforcement-Learning-with-PyTorch/tree/example/examples) |
+| lirnli | -72.09 ± 1.15 |  |  |
+| [Tiger37](https://github.com/Tiger767) | -74.49 ± 10.87 | [writeup](https://github.com/Tiger767/OpenAIGymResults/tree/master/Acrobot-v1) |  |
+| tsdaemon | -77.87 ± 1.54 |  |  |
+| a7b23 | -80.68 ± 1.18 |  |  |
+| [Tzoof Avny Brosh](https://github.com/tzoof) | -80.73 | [writeup](https://github.com/tzoof/ControlFreakES) |  |
+| DaveLeongSingapore | -84.02 ± 1.46 |  |  |
+| Sanket Thakur | -89.29 | [writeup](https://github.com/sanketsans/openAIenv/blob/master/REINFORCE/Acrobot/readme.md) | [video](https://github.com/sanketsans/openAIenv/blob/master/REINFORCE/Acrobot/acrobot/openaigym.video.0.11466.video000000.mp4) |
+| loicmarie | -99.18 ± 2.60 |  |  |
+| simonoso | -113.66 ± 5.15 |  |  |
+| alebac | -427.26 ± 15.02 |  |  |
+| mehdimerai | -500.00 ± 0.00 |  |  |
+
+Box2D
+-----
+
+[](https://github.com/openai/gym/wiki/Leaderboard#box2d)
+### LunarLander-v2
+
+[](https://github.com/openai/gym/wiki/Leaderboard#lunarlander-v2)
+![Image 6](https://user-images.githubusercontent.com/8510097/31702728-c2b8db88-b38d-11e7-8d1e-d15450303bdd.PNG) Landing pad is always at coordinates (0,0). Coordinates are the first two numbers in state vector. Reward for moving from the top of the screen to landing pad and zero speed is about 100..140 points. If lander moves away from landing pad it loses reward back. Episode finishes if the lander crashes or comes to rest, receiving additional -100 or +100 points. Each leg ground contact is +10. Firing main engine is -0.3 points each frame. Solved is 200 points. Landing outside landing pad is possible. Fuel is infinite, so an agent can learn to fly and then land on its first attempt. Four discrete actions available: do nothing, fire left orientation engine, fire main engine, fire right orientation engine.
+
+*   _LunarLander-v2 defines "solving" as getting average reward of 200 over 100 consecutive trials._=
+*   _by @olegklimov_
+
+| User | Episodes before solve | Write-up | Video |
+| --- | --- | --- | --- |
+| [Keavnn](https://github.com/StepNeverStop) | 16 | [writeup](https://github.com/StepNeverStop/RLs/tree/archived_gym_leaderboard/gym_Leaderboard/LunarLander-v2) |  |
+| [liu](https://github.com/createamind/DRL) | 29 (Average:100) | [Write-up](https://github.com/createamind/DRL/tree/master/spinup/envs/LunarLander) |  |
+| [Ash Bellett](https://github.com/ashbellett) | 101 | [Write-up](https://github.com/ashbellett/reinforcement-learning/tree/master/dqn) | [Video](https://github.com/ashbellett/reinforcement-learning/tree/master/dqn/output/video) |
+| [Mathias Åsberg 🔥](https://github.com/nextgrid/deep-learning-labs-openAI) | 133 | [writeup](https://github.com/nextgrid/deep-learning-labs-openAI/tree/main/lunarlander) | [Video](https://www.youtube.com/watch?v=OKQFbvNj6JI&feature=youtu.be) |
+| [Aman Arora](https://github.com/amanaroratc) | 141 | [Write-up](https://github.com/amanaroratc/rlthesis/blob/main/Final_presentation.pdf) | [Under progress] |
+| [A. Myachin](https://github.com/furfa) and [R. Potemin](https://github.com/poteminr) | 231 | [Write-up](https://github.com/poteminr/LunarLander-v2.0-BestSolve/blob/master/Scripts/MAIN.py) | [GIF](https://github.com/furfa/LunarLander-v2-Solve/blob/master/img/preview.gif) |
+| [Daniel T. Plop](https://github.com/plopd) | 295 | [Write-up](https://github.com/plopd/deep-reinforcement-learning/blob/master/dqn/Deep_Q_Network.ipynb) | [GIF](https://github.com/plopd/deep-reinforcement-learning/blob/master/dqn/results/trained_agent.gif) |
+| [Nick Kaparinos](https://github.com/NickKaparinos) | 420 | [Write-up](https://github.com/NickKaparinos/OpenAI-Gym-Projects) | [gif](https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Box2D/LunarLander/results/lunarlander.gif) |
+| [Sanket Thakur](https://github.com/sanketsans/openAIenv/tree/master/DQN/LunarLander) | 454 | [Write-up](https://github.com/sanketsans/openAIenv/blob/master/DQN/LunarLander/LunarLander_DQN.ipynb) | [Video](https://github.com/sanketsans/openAIenv/blob/master/DQN/LunarLander/LunarLander_DQN/openaigym.video.4.10315.video000000.mp4) |
+| [Mahmood Khordoo](https://github.com/khordoo) | 602 | [Writup](https://github.com/khordoo/Deep-Reinforcement-Learning-with-PyTorch/blob/example/examples/DQN/lunarlander_v2-dqn-n-step.py) | [gif](https://github.com/khordoo/Deep-Reinforcement-Learning-with-PyTorch/tree/example/examples) |
+| [Christoph Powazny](https://github.com/cpow-89) | 658 | [writeup](https://github.com/cpow-89/Extended-Deep-Q-Learning-For-Open-AI-Gym-Environments) | [gif](https://raw.githubusercontent.com/cpow-89/Extended-Deep-Q-Learning-For-Open-AI-Gym-Environments/master/images/Lunar_Lander_v2.gif) |
+| [Daniel Barbosa](https://github.com/danielnbarbosa) | 674 | [writeup](https://github.com/danielnbarbosa/angela) | [gif](https://github.com/danielnbarbosa/angela/blob/master/results/videos/lunarlander.gif) |
+| [Xinli Yu](https://github.com/XinliYu) | 805 | [writeup](https://github.com/XinliYu/RL-Projects/tree/master/LunarLander) | [gif](https://github.com/XinliYu/RL-Projects/blob/master/LunarLander/demo.gif) |
+| [Ruslan Miftakhov](https://github.com/RMiftakhov) | 814 | [writeup](https://github.com/RMiftakhov/LunarLander-v2-drlnd) | [gif](https://github.com/RMiftakhov/LunarLander-v2-drlnd/blob/master/LunarLander.gif) |
+| [Ollie Graham](https://github.com/Cozmo25) | 987 | [writeup](https://github.com/Cozmo25/openai-lunar-lander-v2) | [gif](https://media.giphy.com/media/cXRdX62pnY4gU0USxg/giphy.gif) |
+| [Leocus](https://github.com/leocus) | 1000 (21000) | [writeup](https://arxiv.org/abs/2012.07723) |  |
+| [Nikhil Barhate](https://github.com/nikhilbarhate99) | 1500 | [writeup](https://github.com/nikhilbarhate99/Actor-Critic) | [gif](https://github.com/nikhilbarhate99/Actor-Critic/blob/master/gif/1.gif) |
+| [Udacity DRLND Team](https://www.udacity.com/course/deep-reinforcement-learning-nanodegree--nd893) | 1504 | [writeup](https://github.com/udacity/deep-reinforcement-learning/blob/master/dqn/solution/Deep_Q_Network_Solution.ipynb) | [gif](https://user-images.githubusercontent.com/10624937/42135612-cbff24aa-7d12-11e8-9b6c-2b41e64b3bb0.gif) |
+| [Sigve Rokenes](https://github.com/evgiz) | 1590 | [writeup](http://evgiz.net/article/2019/02/02/) | [gif](https://github.com/evgiz/learning-rl/blob/master/gym/lunarlander-v2/lunarlander.gif) |
+| [JamesUnicomb](https://github.com/JamesUnicomb) | 2100 | [writeup](https://github.com/JamesUnicomb/ReinforcementLearning/blob/master/PolicyGradients/LunarLander.py) | [video](https://www.youtube.com/watch?v=gdfSkWu2aio) |
+| [ksankar](https://github.com/xsankar?tab=repositories) | 2148 | Working on it |  |
+| [koltafrickenfer](https://github.com/koltafrickenfer) | 499474 | [writeup](https://gist.github.com/koltafrickenfer/7465e70d0f0f34581eda42d8342318d0#file-gistfile1-txt) | [youtube](https://www.youtube.com/watch?v=EZ5rxSCGUw4) |
+
+### LunarLanderContinuous-v2
+
+[](https://github.com/openai/gym/wiki/Leaderboard#lunarlandercontinuous-v2)
+![Image 7](https://user-images.githubusercontent.com/8510097/31702728-c2b8db88-b38d-11e7-8d1e-d15450303bdd.PNG) Landing pad is always at coordinates (0,0). Coordinates are the first two numbers in state vector. Reward for moving from the top of the screen to landing pad and zero speed is about 100..140 points. If lander moves away from landing pad it loses reward back. Episode finishes if the lander crashes or comes to rest, receiving additional -100 or +100 points. Each leg ground contact is +10. Firing main engine is -0.3 points each frame. Solved is 200 points. Landing outside landing pad is possible. Fuel is infinite, so an agent can learn to fly and then land on its first attempt. Action is two real values vector from -1 to +1. First controls main engine, -1..0 off, 0..+1 throttle from 50% to 100% power. Engine can't work with less than 50% power. Second value -1.0..-0.5 fire left engine, +0.5..+1.0 fire right engine, -0.5..0.5 off.
+
+*   _LunarLanderContinuous-v2 defines "solving" as getting average reward of 200 over 100 consecutive trials._
+
+| User | Episodes before solve | Write-up | Video |
+| --- | --- | --- | --- |
+| [Keavnn](https://github.com/StepNeverStop) | 30 | [writeup](https://github.com/StepNeverStop/RLs/tree/archived_gym_leaderboard/gym_Leaderboard/LunarLanderContinuous-v2) |  |
+| [timurgepard](https://github.com/timurgepard) | 40 (Symphony🎹 ver 2.1) without exploration episodes | [writeup](https://github.com/timurgepard/Simphony) | [video](https://youtu.be/7RA7GqHfdb0) |
+| [liu](https://github.com/createamind/DRL) | 57 (Average:100) | [Write-up](https://github.com/createamind/DRL/tree/master/spinup/envs/LunarLander) |  |
+| [timurgepard](https://github.com/timurgepard) | 90 (Symphony🎹 ver 2.0) without exploration episodes | [writeup](https://github.com/timurgepard/Simphony) | [video](https://youtu.be/7RA7GqHfdb0) |
+| [BS Haney](https://github.com/Bhaney44) | 100 | [Write-up](https://github.com/Bhaney44/OpenAI_Lunar_Lander_B) | [YouTube](https://www.youtube.com/watch?v=vb15JFOEtLg) |
+| [Mathias Åsberg 🔥](https://github.com/nextgrid/deep-learning-labs-openAI) | 178 | [writeup](https://github.com/nextgrid/deep-learning-labs-openAI/blob/main/lunarlandercontinues) | [Video](https://www.youtube.com/watch?v=yhj-t5V9TkY) |
+| [Nick Kaparinos](https://github.com/NickKaparinos) | 300 | [Write-up](https://github.com/NickKaparinos/OpenAI-Gym-Projects) | [gif](https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Box2D/LunarLanderContinuous/results/gif.gif) |
+| [shnippi](https://github.com/shnippi) | 422 | [writeup](https://github.com/shnippi/GYM) |  |
+| [Nandino Cakar](https://github.com/nandinocakar) | 474 | [writeup](https://github.com/NandinoCakar/BipedalWalker-SAC) |  |
+| [Felix Nica](https://github.com/FelixNica) | 556 | [Write-up](https://github.com/FelixNica/OpenAI_LunarLanderContinuous_TD3) | [YouTube](https://www.youtube.com/watch?v=u2_a69Mgask) |
+| [Nikhil Barhate](https://github.com/nikhilbarhate99) | 1500 | [Write-up](https://github.com/nikhilbarhate99/TD3-PyTorch-BipedalWalker-v2) | [GIF](https://github.com/nikhilbarhate99/TD3-PyTorch-BipedalWalker-v2/blob/master/gif/GIF-TWO.gif) |
+| [Jootten](https://github.com/jootten) | 2472 | [Write-up](https://github.com/jootten/A2C_Lunar_Lander) | [YouTube](https://youtu.be/ok_LtkVtMFo) |
+| [Tom](https://github.com/TomeASilva) | 5000 | [Write-up](https://github.com/TomeASilva/A3C-algorithm-implementation-for-continous-and-multidimensional-actions) | [YouTube](https://www.youtube.com/watch?v=YH27CMsuSN4&feature=youtu.be) |
+| [Sigve Rokenes](https://github.com/evgiz) | 5300 | [Write-up](http://evgiz.net/article/2019/02/10/) | [GIF](http://evgiz.net/article/2019/02/10/img/lunarlander.gif) |
+
+### BipedalWalker-v2 and BipedalWalker-v3
+
+[](https://github.com/openai/gym/wiki/Leaderboard#bipedalwalker-v2-and-bipedalwalker-v3)
+![Image 8](https://user-images.githubusercontent.com/8510097/31702845-786ae5a2-b38e-11e7-8a8c-0952bf6490c0.PNG) Reward is given for moving forward, total 300+ points up to the far end. If the robot falls, it gets -100. Applying motor torque costs a small amount of points, more optimal agent will get better score. State consists of hull angle speed, angular velocity, horizontal speed, vertical speed, position of joints and joints angular speed, legs contact with ground, and 10 lidar rangefinder measurements. There's no coordinates in the state vector.
+
+*   [Environment Details](https://github.com/openai/gym/wiki/BipedalWalker-v2)
+*   _BipedalWalker-v2 defines "solving" as getting average reward of 300 over 100 consecutive trials._
+*   _by @olegklimov_
+
+| User | Version | Episodes before solve | Write-up | Video |
+| --- | --- | --- | --- | --- |
+| [timurgepard](https://github.com/timurgepard) | 3.0 | 28 (Symphony🤖 ver 3.0) | [writeup](https://github.com/timurgepard/Simphony/tree/main/3_0) | [video](https://youtu.be/j6QcECrFvX8) |
+| [timurgepard](https://github.com/timurgepard) | 3.0 | 40 (Symphony🎹 ver 2.0) | [writeup](https://github.com/timurgepard/Simphony/tree/main) | [video](https://youtu.be/j6QcECrFvX8) |
+| [Benjamin](https://github.com/Belon18)&[Thor](https://github.com/ThorKampOpstrup) | 3.0 | 57 (TRPO with OU action noise) | [writeup](https://github.com/ThorKampOpstrup/Project-in-Artificial-Intelligence-gym-challenge-) |  |
+| [timurgepard](https://github.com/timurgepard) | 3.0 | 100 (Monte-Carlo🌊 & Temporal Difference🔥) | [writeup](https://github.com/timurgepard/uDDPG/tree/main) |  |
+| [Lauren](https://github.com/Lauren-Stumpf) | 2.0 | 110 | [writeup](https://github.com/Lauren-Stumpf/Reinforcement_Learning_Coursework) | [Video](https://github.com/Lauren-Stumpf/Reinforcement_Learning_Coursework/blob/main/bipedal_walker_score%3D330.gif) |
+| [Mathias Åsberg 😎](https://github.com/nextgrid/deep-learning-labs-openAI) | 2.0 | 164 | [writeup](https://github.com/nextgrid/deep-learning-labs-openAI/tree/main/BipedalWalker-v3) | [Video](https://youtu.be/7PJFJWpD-sM) |
+| [liu](https://github.com/createamind/DRL) | 2.0 | 200 (AverageEpRet:338) | [writeup](https://github.com/createamind/DRL/blob/master/spinup/envs/BipedalWalkerHardcore) |  |
+| [Nandino Cakar](https://github.com/nandinocakar) | 3.0 | 474 | [writeup](https://github.com/NandinoCakar/BipedalWalker-SAC) |  |
+| [Yoggi Voltbro](https://github.com/yoggi56) | 3.0 | 696 | [write-up](https://github.com/yoggi56/bipedal_walker_research) | [video](https://youtu.be/p78kRgPZoAA) |
+| [Nikhil Barhate](https://github.com/nikhilbarhate99) | 2.0 | 800 | [writeup](https://github.com/nikhilbarhate99/TD3-PyTorch-BipedalWalker-v2) | [gif](https://github.com/nikhilbarhate99/TD3-PyTorch-BipedalWalker-v2/blob/master/gif/GIF-ONE.gif) |
+| [Nick Kaparinos](https://github.com/NickKaparinos) | 3.0 | 800 | [Write-up](https://github.com/NickKaparinos/OpenAI-Gym-Projects) | [gif](https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Box2D/BipedalWalker/results/gif2.gif) |
+| [Vinit & Abhimanyu](https://github.com/vinits5/augmented-random-search.git) | 2.0 | 910 | [writeup](https://github.com/vinits5/augmented-random-search) | [Video](https://www.youtube.com/watch?v=oZ55u_Vveao&feature=youtu.be) |
+| [shnippi](https://github.com/shnippi) | 3.0 | 925 | [writeup](https://github.com/shnippi/GYM) |  |
+| [M](https://github.com/Mindgames) | 2.0 | 960 | [writeup](https://github.com/Mindgames/BipedalWalker-V2/blob/master/README.md) | [Video](https://www.youtube.com/watch?v=oJHE2c7ZU40&feature=youtu.be) |
+| [mayurmadnani](https://github.com/mayurmadnani) | 2.0 | 1000 | [Write-up](https://github.com/mayurmadnani/BipedalWalker/) | [Youtube](https://www.youtube.com/watch?v=jFnHAG23TDs) |
+| [Rafael1s](https://github.com/Rafael1s/Deep-Reinforcement-Learning-Udacity) | 2.0 | 1795 | [Write-up](https://github.com/Rafael1s/Deep-Reinforcement-Learning-Udacity/tree/master/BipedalWalker-TwinDelayed-DDPG%20(TD3)) | [Youtube](https://youtu.be/g01mIFbxVns) |
+| [chitianqilin](https://github.com/chitianqilin) | 2.0 | 47956 | [writeup](https://github.com/InsectRobotics/DynamicSynapseSimplifiedPublic/tree/master) | [Youtube](https://youtu.be/B7mLVY1NKgI) |
+| [ZhiqingXiao](https://github.com/zhiqingxiao) | 3.0 | 0 (use close-form preset policy) | [writeup](https://github.com/ZhiqingXiao/OpenAIGymSolution/blob/master/BipedalWalker-v3/bipedalwalker_v3_close_form.ipynb) |  |
+| [koltafrickenfer](https://github.com/koltafrickenfer) | 2.0 | N/A | [writeup](https://gist.github.com/koltafrickenfer/7465e70d0f0f34581eda42d8342318d0#file-gistfile1-txt) | [youtube](https://www.youtube.com/watch?v=kq5GK4zndHw) |
+| [alirezamika](https://github.com/alirezamika) | 2.0 | N/A | [writeup](https://gist.github.com/alirezamika/c7144e4961708ef3481e0b5c34c38600#file-bipedal-es-gist) |  |
+| [404akhan](https://github.com/404akhan) | 2.0 | N/A | [writeup](https://gist.github.com/404akhan/44f39c9a13f28d59d0000ab8bdb22e21#file-bipedal-py) |  |
+| [Udacity DRLND Team](https://www.udacity.com/course/deep-reinforcement-learning-nanodegree--nd893) | 2.0 | N/A | [writeup](https://github.com/udacity/deep-reinforcement-learning/blob/master/ddpg-bipedal/DDPG.ipynb) | [gif](https://user-images.githubusercontent.com/10624937/42135608-be87357e-7d12-11e8-8eca-e6d5fabdba6b.gif) |
+
+### BipedalWalkerHardcore-v2 and BipedalWalkerHardcore-v3
+
+[](https://github.com/openai/gym/wiki/Leaderboard#bipedalwalkerhardcore-v2-and-bipedalwalkerhardcore-v3)
+![Image 9](https://user-images.githubusercontent.com/8510097/31704513-996d6a56-b396-11e7-8a05-5bd45b35d352.PNG) Hardcore version with ladders, stumps, pitfalls. Time limit is increased due to obstacles. Reward is given for moving forward, total 300+ points up to the far end. If the robot falls, it gets -100. Applying motor torque costs a small amount of points, more optimal agent will get better score. State consists of hull angle speed, angular velocity, horizontal speed, vertical speed, position of joints and joints angular speed, legs contact with ground, and 10 lidar rangefinder measurements. There's no coordinates in the state vector.
+
+*   _BipedalWalkerHardcore-v2 defines "solving" as getting average reward of 300 over 100 consecutive trials._
+
+| User | Version | Episodes before solve | 100-Episode Average Score | Write-up | Video |
+| --- | --- | --- | --- | --- | --- |
+| [honghaow](https://github.com/honghaow) | 3.0 | 3593 | 312.10 | [write-up](https://github.com/honghaow/FORK/blob/master/BipedalWalkerHardcore/) | [video](https://www.youtube.com/watch?v=pzzP8fA5Ipg) |
+| [Yoggi Voltbro](https://github.com/yoggi56/bipedal_walker_research) | 3.0 | 7280 | 302.92 ± 10.82 | [write-up](https://github.com/yoggi56) | [video](https://youtu.be/h9M4VnhJPTs) |
+| [Nick Kaparinos](https://github.com/NickKaparinos) | 3.0 | 15500 | 305.40 ± 21.35 | [Write-up](https://github.com/NickKaparinos/OpenAI-Gym-Projects) | [gif](https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/Box2D/BipedalWalkerHardcore/results/hardcore.gif) |
+| [liu](https://github.com/createamind/DRL) | 2.0 | N/A | 319 (average of 10000 trials) | [writeup](https://github.com/createamind/DRL/blob/master/spinup/envs/BipedalWalkerHardcore) |  |
+| [DollarAkshay](https://github.com/DollarAkshay) | 2.0 | N/A | N/A | [writeup](https://gist.github.com/DollarAkshay/0453d8ef144b2dd35056180229ec42f4#file-openai_bipedalwalkerhardcore_v2-py) |  |
+| [ryogrid](https://github.com/ryogrid) | 2.0 | N/A | N/A | [writeup](https://gist.github.com/ryogrid/f344aa0909c5eda5ecbf95d3ccbd99f7#file-ai_gym_dqn-py) |  |
+| [dgriff777](https://github.com/dgriff777) | 2.0 | N/A | 300 | [writeup](https://github.com/dgriff777/a3c_continuous/blob/master/README.md) | [video](https://github.com/dgriff777/a3c_continuous/blob/master/README.md) |
+| [lerrytang](https://github.com/lerrytang/) and [hardmaru](https://github.com/hardmaru) | 2.0 | N/A | 300 | [writeup](https://cloud.google.com/blog/products/ai-machine-learning/how-to-run-evolution-strategies-on-google-kubernetes-engine) | [video](http://blog.otoro.net/2017/11/12/evolving-stable-strategies/) |
+| [hardmaru](https://github.com/hardmaru) | 2.0 | N/A | 313 ± 53 | [writeup](https://github.com/hardmaru/estool) | [video](https://github.com/hardmaru/estool) |
+| [Alister Maguire](https://github.com/aowen87) | 3.0 | N/A | 313 | [Write-up](https://github.com/aowen87/ppo_and_friends) | [gif](https://github.com/aowen87/ppo_and_friends/blob/main/gifs/BipedalWalkerHardcore.gif) |
+
+### CarRacing-v0
+
+[](https://github.com/openai/gym/wiki/Leaderboard#carracing-v0)
+![Image 10](https://user-images.githubusercontent.com/8510097/31704419-298c707e-b396-11e7-8858-b9041db8198e.PNG) Easiest continuous control task to learn from pixels, a top-down racing environment. Discreet control is reasonable in this environment as well, on/off discretisation is fine. State consists of 96x96 pixels. Reward is -0.1 every frame and +1000/N for every track tile visited, where N is the total number of tiles in track. For example, if you have finished in 732 frames, your reward is 1000 - 0.1*732 = 926.8 points. Episode finishes when all tiles are visited. Some indicators shown at the bottom of the window and the state RGB buffer. From left to right: true speed, four ABS sensors, steering wheel position, gyroscope.
+
+*   by @olegklimov
+*   _CarRacing-v0 defines "solving" as getting average reward of 900 over 100 consecutive trials._
+
+| User | Episodes before solve | 100-Episode Average Score | Write-up | Video |
+| --- | --- | --- | --- | --- |
+| [irvpet](https://github.com/irvpet/SSCI) | N/A | 913 ± 26 | [writeup](https://arxiv.org/abs/2111.02202) | [video](https://www.youtube.com/watch?v=KSoXwt77ueY) |
+| [lmclupr](https://github.com/lmclupr) | N/A | N/A | [writeup](https://gist.github.com/lmclupr/b35c89b2f8f81b443166e88b787b03ab#file-race-car-cv2-nn-network-td0-15-possible-actions-ipynb) |  |
+| [IPAM-AMD](https://github.com/AMD-RIPS/RL-2018) | 900 | 907 ± 24 | [writeup](https://github.com/AMD-RIPS/RL-2018/blob/master/documents/leaderboard/IPAM-AMD-Car_Racing.ipynb) | [Video](https://drive.google.com/file/d/1DQU4yCsq6nbVJB6WKoXlED9YFGDselIu/view) |
+| [hardmaru](https://github.com/hardmaru) | N/A | 906 ± 21 | [writeup](https://worldmodels.github.io/) | [Videos](http://blog.otoro.net/2018/06/09/world-models-experiments/) |
+| [Rafael1s](https://github.com/Rafael1s) | 2760 | 901 (*) | [writeup](https://github.com/Rafael1s/Deep-Reinforcement-Learning-Udacity/tree/master/CarRacing-From-Pixels-PPO) | [Video](https://www.youtube.com/watch?v=55buBR2pPdc) |
+| [sebastianrisi](https://github.com/sebastianrisi/) | N/A | 903 ± 72 | [writeup](http://sebastianrisi.com/wp-content/uploads/risi_gecco19.pdf) | [video](https://twitter.com/risi1979/status/1123240575858302976) |
+| [ctallec](https://github.com/ctallec) | N/A | 870 ± 120 | [writeup](https://ctallec.github.io/world-models/) | [video](https://ctallec.github.io/world-models/) |
+| [agaier](http://github.com/agaier/) and [hardmaru](https://github.com/hardmaru) | N/A | 893 ± 74 | [writeup](https://weightagnostic.github.io/) | [video](https://weightagnostic.github.io/) |
+| [jperod](https://github.com/jperod/) | N/A | 905 ± 24 | [writeup](https://github.com/jperod/AI-self-driving-race-car-Deep-Reinforcement-Learning/blob/master/SI_Final_Project.pdf) | [Video](https://youtu.be/C9CZpbuOz04) |
+| [JinayJain](https://github.com/JinayJain/) | N/A | 909 ± 10 | [writeup](https://github.com/JinayJain/deep-racing) | [video](https://youtu.be/s1uKkmNiNhM) |
+
+(*) They used reward shaping (added some score back when the agent dies) during training to make training work better, but unfortunately kept the artificial shaped score for evaluation. When testing their agent using their model (and also trying to train it from scratch, which performed worse), we got a score of 820. We have filed an [issue](https://github.com/Rafael1s/Deep-Reinforcement-Learning-Udacity/issues/3). We found a similar problem with another PPO repo [here](https://github.com/xtma/pytorch_car_caring/issues/2).
+
+### CarRacing-v1
+
+[](https://github.com/openai/gym/wiki/Leaderboard#carracing-v1)
+v1: Changed track completion logic and added domain randomization (0.24.0)
+
+| User | Episodes before solve | 100-Episode Average Score | Write-up | Video |
+| --- | --- | --- | --- | --- |
+| [Ray Coden Mercurius](https://github.com/Ceudan) | 925 | 917 | [writeup](https://github.com/Ceudan/Car-Racing) | [video](https://user-images.githubusercontent.com/78922263/177021714-fc82a6ff-e44c-4936-bf50-61a8f3a372f1.mp4) |
+
+MuJoCo
+------
+
+[](https://github.com/openai/gym/wiki/Leaderboard#mujoco)
+### Inverted Pendulum
+
+[](https://github.com/openai/gym/wiki/Leaderboard#inverted-pendulum)
+This environment involves a cart that can be moved linearly, with a pole fixed on it at one end and having another end free. The cart can be pushed left or right, and the goal is to balance the pole on the top of the cart by applying forces on the cart.
+
+| User | Episode | 100-Episode Average Score | Write-up | Video |
+| --- | --- | --- | --- | --- |
+| [timurgepard](https://github.com/timurgepard/Simphony/tree/main) | 56 | 1000.0 (Symphony🎹 ver 2.0) | [writeup](https://github.com/timurgepard/Simphony/tree/main) |  |
+
+### Walker2d-v1 and Walker 2d-v2
+
+[](https://github.com/openai/gym/wiki/Leaderboard#walker2d-v1-and-walker-2d-v2)
+![Image 11](https://user-images.githubusercontent.com/8510097/31702336-36cd4606-b38b-11e7-9b59-4d5018de8572.PNG) Make a two-dimensional bipedal robot walk forward as fast as possible.
+
+*   _Walker2d-v1 is an unsolved environment, which means it does not have a specified reward threshold at which it's considered solved._
+*   _The robot model is based on work by Erez, Tassa, and Todorov [Erez11]._
+
+| User | Episode | 100-Episode Average Score | Write-up | Video |
+| --- | --- | --- | --- | --- |
+| [timurgepard](https://github.com/timurgepard/Simphony/tree/main) | 500 | 7920.0 (ep limit 2000 steps) (Symphony🎹 ver 2.0) | [writeup](https://github.com/timurgepard/Simphony/tree/main) | [video](https://youtu.be/S5L0Kglf9UY) |
+| [timurgepard](https://github.com/timurgepard/Simphony/tree/main) | 450 | 7670.0 (ep limit 2000 steps) (Symphony🎹 ver 2.0) | [writeup](https://github.com/timurgepard/Simphony/tree/main) | [video](https://youtu.be/KS0Dqa24e_o) |
+| [zlw21gxy](https://github.com/zlw21gxy) | N/A | 7197.15 | [writeup](https://arxiv.org/pdf/1908.11494.pdf) |  |
+| [pat-coady](https://github.com/pat-coady/) | N/A | 7167.24 | [link](https://gist.github.com/pat-coady/e9aab9b1de85c28f5eff4d55d63db5cf#file-walker2d-ipynb) | [video](https://gym.openai.com/evaluations/eval_ntItD029SsiNvxn0WGJdw/) |
+| [joschu](https://gist.github.com/joschu/) | N/A | 5594.75 | [link](https://gist.github.com/joschu/6de0710846dff7230543016fc7639f82#file-2-trpo-scripts-txt) | [video](https://gym.openai.com/evaluations/eval_3KevpXcVQnifFFwGX70xag/) |
+| [Nick Kaparinos](https://github.com/NickKaparinos) | N/A | 5317.38 ± 15.86 | [Write-up](https://github.com/NickKaparinos/OpenAI-Gym-Projects) | [gif](https://github.com/NickKaparinos/OpenAI-Gym-Projects/blob/master/MuJoCo/Walker2d/results/walker2d.gif) |
+| [songrotek](https://github.com/songrotek) | N/A | 1222.12 | [link](https://gist.github.com/songrotek/72a901b4570006f84a98dfa295555e75#file-ddpg) | [video](https://gym.openai.com/evaluations/eval_JYZtl35TryxzjnhJJIWA/) |
+| [BS Haney](https://github.com/Bhaney44) | N/A | 1190 | [Write-up](https://github.com/Bhaney44/Walker2d-v2) | [YouTube](https://www.youtube.com/watch?v=3z7H-ivud-U) |
+
+### Ant-v1
+
+[](https://github.com/openai/gym/wiki/Leaderboard#ant-v1)
+![Image 12](https://user-images.githubusercontent.com/8510097/31752126-30384f76-b43e-11e7-94b9-2b32b52abe85.PNG) Make a four-legged creature walk forward as fast as possible.
+
+*   _Ant-v1 defines "solving" as getting average reward of 6000.0 over 100 consecutive trials._
+*   _This task originally appeared in [Schulman15]._
+
+| User | Episode | 100-Episode Average Score | Write-up | Video |
+| --- | --- | --- | --- | --- |
+| [timurgepard](https://github.com/timurgepard/Simphony/tree/main) | 700 | 9320.0 (ep limit 2000 steps) (Symphony🎹 ver 2.0) | [writeup](https://github.com/timurgepard/Simphony/tree/main) | [video](https://youtu.be/tA7D6aakUA4) |
+| [zlw21gxy](https://github.com/zlw21gxy) | 1000 | N/A | [writeup](https://arxiv.org/pdf/1908.11494.pdf) |  |
+| [pat-coady](https://github.com/pat-coady) | 69154 | N/A | [writeup](https://gist.github.com/pat-coady/bac60888f011199aad72d2f1e6f5a4fa#file-ant-ipynb) |  |
+| [joschu](https://github.com/joschu) | N/A | N/A | [writeup](https://gist.github.com/joschu/f8c5e6ba94d8bbd8c13ee2fbd6c4a604#file-1-cem-v1-writeup-md) |  |
+
+### HalfCheetah-v4
+
+[](https://github.com/openai/gym/wiki/Leaderboard#halfcheetah-v4)
+![Image 13: half_cheetah](https://private-user-images.githubusercontent.com/60650661/275287678-461b6400-9851-4f51-8d5d-70042772f0f3.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjA0NTkxMzksIm5iZiI6MTc2MDQ1ODgzOSwicGF0aCI6Ii82MDY1MDY2MS8yNzUyODc2NzgtNDYxYjY0MDAtOTg1MS00ZjUxLThkNWQtNzAwNDI3NzJmMGYzLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTEwMTQlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUxMDE0VDE2MjAzOVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWQ0MjUwN2UwM2E5YTJiMGVkNDZlZjk5MzMyY2VmNWE2MjliZDNkODZhOTViM2Q5NmY1ZjBkMDY0NDQxNjc3MDImWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.lm8PvdsNnMgdt-dF9VrR4PLVzxUVSPHABVn83SnyXxs) Make a 2-dimensional robot walk forward as fast as possible.
+
+*   The HalfCheetah is a 2-dimensional robot consisting of 9 body parts and 8 joints connecting them (including two paws).
+*   The goal is to apply a torque on the joints to make the cheetah run forward (right) as fast as possible.
+*   _This environment is based on the work by P. Wawrzyński_
+
+| User | Episodes before solve | Write-up | Video |
+| --- | --- | --- | --- |
+| [timurgepard](https://github.com/timurgepard) | 25 (Symphony🎹 ver 2.0) | [writeup](https://github.com/timurgepard/Simphony/tree/main) | [video](https://youtu.be/aAuvCO_LDvA) |
+| [tareknaser](https://github.com/tareknaser) | N/A | [writeup](https://github.com/tareknaser/GSoC23-mlpack-RL-Report/blob/main/src/half_cheetah/HalfCheetah_Writeup.md) | [video](https://github.com/tareknaser/GSoC23-mlpack-RL-Report/blob/main/src/half_cheetah/half_cheetah.gif) |
+
+### Humanoid-v4
+
+[](https://github.com/openai/gym/wiki/Leaderboard#humanoid-v4)
+![Image 14](https://user-images.githubusercontent.com/13238473/274489739-bc4c08e4-f5ff-4cb1-83c8-9bc531eab61f.png) Make 3D humanoid robot walk forward as fast as possible.
+
+*   Humanoid-v4 is an unsolved environment, which means it does not have a specified reward threshold at which it's considered solved.
+*   The 3D bipedal robot is designed to simulate a human. Humanoid-v4 defines "solving" as acquiring human like motions.
+*   The robot model is based on work by Tassa, Erez, and Todorov [Tassa12].*
+
+| User | Episodes before solve | 100-Episode Average Score | Write-up | Video |
+| --- | --- | --- | --- | --- |
+| [timurgepard](https://github.com/timurgepard) | 1500 | 12,600.0 (ep limit 2000 steps) (Symphony🎹 ver 2.0) | [writeup](https://github.com/timurgepard/Simphony/tree/main) | [video](https://youtu.be/20yuPY0lA-M) |
+
+### HumanoidStandup-v4
+
+[](https://github.com/openai/gym/wiki/Leaderboard#humanoidstandup-v4)
+![Image 15](https://user-images.githubusercontent.com/13238473/283983923-3c467b84-0034-4dd2-8878-11704f734635.png)
+
+Make the humanoid standup and then keep it standing by applying torques on the various hinges.
+
+*   The environment starts with the humanoid laying on the ground, and then the goal of the environment is to make the humanoid standup and then keep it standing by applying torques on the various hinges.
+*   The 3D bipedal robot is designed to simulate a human. It has a torso (abdomen) with a pair of legs and arms. The legs each consist of two links, and so the arms (representing the knees and elbows respectively).
+*   This environment is based on the environment introduced by Tassa, Erez and Todorov in [“Synthesis and stabilization of complex behaviors through online trajectory optimization”](https://ieeexplore.ieee.org/document/6386025).
+
+| User | Episodes before solve | 100-Episode Average Score | Write-up | Video |
+| --- | --- | --- | --- | --- |
+| [timurgepard](https://github.com/timurgepard) | 3200 (step 960k, ep steps 300) | ~320000.0 (Symphony🎹 ver 2.0) | [writeup](https://github.com/timurgepard/Simphony/tree/main) | [video](https://youtu.be/GrOEHvgwMAs) |
+
+### Pusher-v4
+
+[](https://github.com/openai/gym/wiki/Leaderboard#pusher-v4)
+![Image 16](https://private-user-images.githubusercontent.com/13238473/300699741-9ec11eab-d119-46dd-a491-44db9d7552f3.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjA0NTkxMzksIm5iZiI6MTc2MDQ1ODgzOSwicGF0aCI6Ii8xMzIzODQ3My8zMDA2OTk3NDEtOWVjMTFlYWItZDExOS00NmRkLWE0OTEtNDRkYjlkNzU1MmYzLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTEwMTQlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUxMDE0VDE2MjAzOVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTY4NWVkNWUxNTVkNzc1MGJlMmI5YTg5NDY1MTZkMzRmMDY4OTIzYjI5ZDgyNGVmMmNkZDU3MzhkNjhkMWY1NzUmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.aZFegiMjhkqCINwCDBSCot3C9vUigTBdpWKaK7K3GhY)
+
+“Pusher” is a multi-jointed robot arm which is very similar to that of a human. The goal is to move a target cylinder (called object) to a goal position using the robot’s end effector (called fingertip). The robot consists of shoulder, elbow, forearm, and wrist joints.
+
+| User | Episodes before solve | 100-Episode Average Score | Write-up | Video |
+| --- | --- | --- | --- | --- |
+| [timurgepard](https://github.com/timurgepard) | 350 | -45.0 (Symphony🎹 ver 2.0) | [writeup](https://github.com/timurgepard/Simphony/tree/main) | [video](https://youtu.be/QTG2-n-pWEI) |
+
+### Swimmer-v4
+
+[](https://github.com/openai/gym/wiki/Leaderboard#swimmer-v4)
+![Image 17](https://private-user-images.githubusercontent.com/13238473/300699425-a267238f-c996-43c1-9739-91dcbeadf3da.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjA0NTkxMzksIm5iZiI6MTc2MDQ1ODgzOSwicGF0aCI6Ii8xMzIzODQ3My8zMDA2OTk0MjUtYTI2NzIzOGYtYzk5Ni00M2MxLTk3MzktOTFkY2JlYWRmM2RhLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTEwMTQlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUxMDE0VDE2MjAzOVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTQzZjIwMDA4N2Y4YmViNDZjYmQ3Y2FlN2FhZjQ0MzcxNDRiNWIxYWU0MDUwMGM0NDMxMGU3NDA1YjdjY2YwZmYmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.k-PGyY1hko359bALgbVPr27UAejg5qUM3y-SPeV1h20)
+
+The swimmer consist of three segments ('links') and two articulation joints (’rotors’) - one rotor joint connecting exactly two links to form a linear chain. The swimmer is suspended in a two dimensional pool, and the goal is to move as fast as possible towards the right by applying torque on the rotors and using the fluids friction.
+
+| User | Episodes before solve | 100-Episode Average Score | Write-up | Video |
+| --- | --- | --- | --- | --- |
+| [timurgepard](https://github.com/timurgepard) | 55 | 205.0 (Symphony🎹 ver 2.0) | [writeup](https://github.com/timurgepard/Simphony/tree/main) |  |
+
+PyGame Learning Environment
+---------------------------
+
+[](https://github.com/openai/gym/wiki/Leaderboard#pygame-learning-environment)
+### FlappyBird-v0
+
+[](https://github.com/openai/gym/wiki/Leaderboard#flappybird-v0)
+![Image 18](https://user-images.githubusercontent.com/8510097/31752540-4e2cf6f6-b440-11e7-9186-852fa5b93ccf.PNG)
+
+This environment adapts a game from the [PyGame Learning Environment](https://pygame-learning-environment.readthedocs.io/en/latest/) (PLE). To run it, you will need to install gym-ple from [https://github.com/lusob/gym-ple](https://github.com/lusob/gym-ple).
+
+Flappybird is a side-scrolling game where the agent must successfully navigate through gaps between pipes. The up arrow causes the bird to accelerate upwards. If the bird makes contact with the ground or pipes, or goes above the top of the screen, the game is over. For each pipe it passes through it gains a positive reward of +1. Each time a terminal state is reached it receives a negative reward of -1.
+
+*   _FlappyBird-v0 is an unsolved environment, which means it does not have a specified reward threshold at which it's considered solved._
+*   _by @lusob_
+
+| User | Best 100-episode performance | Write-up | Video |
+| --- | --- | --- | --- |
+| [dguoy](https://github.com/dguoy) | 264.0 ± 0.0 | [writeup](https://github.com/dguoy/flappy_bird/blob/master/README.md) | [video](https://youtu.be/uO4asatedV4) |
+| [andreimuntean](https://github.com/andreimuntean) | 261.12 ± 2.61 | [writeup](https://gist.github.com/andreimuntean/4357873dcbcb33657a667f3688cef5b2#file-readme-md) |  |
+| [Kunal Arora](https://github.com/curiousguy13) | 90.83 | [writeup](https://github.com/curiousguy13/flappy-bird-agent/blob/master/README.md) |  |
+| [chuchro3](https://github.com/chuchro3) | 62.26 ± 7.81 | [writeup](https://gist.github.com/chuchro3/eb454a8e2a5e96e536938e2d6f050fa0#file-flappybird-dqn) |  |
+| [warmar](https://github.com/warmar) | 11.28 ± 14.25 | [writeup](https://github.com/warmar/AIExam2018/blob/master/README.md) | [video1](https://youtu.be/NeGO07zwkHM)[video2](https://youtu.be/B6Rk3b-ZgBE) |
+
+### Snake-v0
+
+[](https://github.com/openai/gym/wiki/Leaderboard#snake-v0)
+Snake is a game where the agent must maneuver a line which grows in length each time food is touched by the head of the segment. The line follows the previous paths taken which eventually become obstacles for the agent to avoid.
+
+The food is randomly spawned inside of the valid window while checking it does not make contact with the snake body.
+
+| User | Best 100-episode performance | Write-up | Video |
+| --- | --- | --- | --- |
+| [carsonprindle](https://github.com/carsonprindle) | .44 ± .04 | [writeup](https://github.com/carsonprindle/OpenAIExam2018) |  |
+
+Atari Games
+-----------
+
+[](https://github.com/openai/gym/wiki/Leaderboard#atari-games)
+### Atlantis-v0
+
+[](https://github.com/openai/gym/wiki/Leaderboard#atlantis-v0)
+| User | Best 100-episode performance | Write-up |
+| --- | --- | --- |
+| msemple1111 | 62,500 ± 0 | [writeup](https://github.com/MElena14/COMP341/blob/main/assignment2.ipynb) |
+
+### Breakout-v0
+
+[](https://github.com/openai/gym/wiki/Leaderboard#breakout-v0)
+| User | Best 100-episode performance | Write-up |
+| --- | --- | --- |
+| ppwwyyxx | 760.07 ± 18.37 | [writeup](https://github.com/tensorpack/tensorpack/tree/master/examples/A3C-Gym) |
+
+### Pong-v5
+
+[](https://github.com/openai/gym/wiki/Leaderboard#pong-v5)
+| User | Best 100-episode performance | Write-up |
+| --- | --- | --- |
+| [Nick Kaparinos](https://github.com/NickKaparinos) | 21.00 ± 0.00 | [Write-up](https://github.com/NickKaparinos/OpenAI-Gym-Projects) |
+| ppwwyyxx | 20.81 ± 0.04 | [writeup](https://github.com/tensorpack/tensorpack/tree/master/examples/A3C-Gym) |
+
+### MsPacman-v0
+
+[](https://github.com/openai/gym/wiki/Leaderboard#mspacman-v0)
+| User | Best 100-episode performance | Write-up |
+| --- | --- | --- |
+| ppwwyyxx | 5738.30 ± 171.99 | [writeup](https://github.com/tensorpack/tensorpack/tree/master/examples/A3C-Gym) |
+
+### SpaceInvaders-v0
+
+[](https://github.com/openai/gym/wiki/Leaderboard#spaceinvaders-v0)
+| User | Best 100-episode performance | Write-up |
+| --- | --- | --- |
+| ppwwyyxx | 3454.00 ± 0 | [writeup](https://github.com/tensorpack/tensorpack/tree/master/examples/A3C-Gym) |
+
+### Seaquest-v0
+
+[](https://github.com/openai/gym/wiki/Leaderboard#seaquest-v0)
+| User | Best 100-episode performance | Write-up |
+| --- | --- | --- |
+| ppwwyyxx | 50209 ± 2440.07 | [writeup](https://github.com/tensorpack/tensorpack/tree/master/examples/A3C-Gym) |
+
+Toy text
+--------
+
+[](https://github.com/openai/gym/wiki/Leaderboard#toy-text)
+Simple text environments to get you started.
+
+### Taxi-v2
+
+[](https://github.com/openai/gym/wiki/Leaderboard#taxi-v2)
+This task was introduced in [Dietterich2000] to illustrate some issues in hierarchical reinforcement learning. There are 4 locations (labeled by different letters) and your job is to pick up the passenger at one location and drop him off in another. You receive +20 points for a successful dropoff, and lose 1 point for every timestep it takes. There is also a 10 point penalty for illegal pick-up and drop-off actions.
+
+[Dietterich2000] T Erez, Y Tassa, E Todorov, "Hierarchical Reinforcement Learning with the MAXQ Value Function Decomposition", 2011.
+
+| User | 100 Episodes Best Average Reward | Write-up | Video | Solved In Episode |
+| --- | --- | --- | --- | --- |
+| [Michael Schock](https://github.com/mjschock) | 9.716 | [writeup](https://github.com/mjschock/deep-reinforcement-learning/blob/a97df2bbb8735590d622befe14b0059efbeb2457/lab-taxi/OpenAI%20Gym%20Taxi-v2.ipynb) |  | 19790 |
+| [giskmov](https://github.com/giskmov) | 9.700 | [writeup](https://github.com/giskmov/OpenAI-Gym-Taxi-v2/blob/master/taxi_v2_97.ipynb) |  |  |
+| [Hari Iyer](https://github.com/iyerhari5) | 9.634 | [writeup](https://github.com/iyerhari5/reinforcement-learning/blob/master/Taxi-v2/agent.py) |  |  |
+| [Jin.P](https://github.com/parkjin-nim) | 9.617 | [writeup](https://github.com/parkjin-nim/Deep_reinforcement_learning/tree/master/lab-taxi) |  |  |
+| [jo4x962k7JL](https://github.com/jo4x962k7JL) | 9.600 | [writeup](https://github.com/jo4x962k7JL/OpenAI-Gym-Taxi-v2/blob/master/Taxi-v2.ipynb) |  |  |
+| [Delton Oliver](https://github.com/the-john) | 9.59 | [writeup](https://github.com/the-john/OpenAI_Gym_Taxi-v2/blob/master/OpenAI_Gym_Taxi-v2.ipynb) |  |  |
+| [Eka Kurniawan](https://github.com/ekaakurniawan) | 9.59 | [writeup](https://github.com/ekaakurniawan/DRLND/blob/master/assignments/P1-Intro/L8-Lab-Taxi/lab-taxi.ipynb) |  |  |
+| [Daniel T. Plop](https://github.com/plopd) | 9.582 | [writeup](https://github.com/plopd/openai-gym-baselines/blob/master/Taxi-v2.ipynb) |  |  |
+| [Roald Brønstad](https://github.com/Roaldb86) | 9.574 | [writeup](https://github.com/Roaldb86/Reinforcement_learning/blob/master/taxi_v2.py) |  |  |
+| [andyharless](https://github.com/andyharless) | 9.57 | [writeup](https://github.com/andyharless/openai-gym-taxi-v2-udacity) |  |  |
+| [ksankar](https://github.com/xsankar?tab=repositories) | 9.530 | [writeup](https://github.com/xsankar/OpenAI-Taxi-V2/blob/master/agent.py) |  |  |
+| [Tom Roth](https://github.com/puzzler10) | 9.500 | [writeup](http://www.puzzlr.org/sarsa-expected-sarsa-and-q-learning-on-the-openai-taxi-environment/) |  |  |
+| [mostoo45](https://github.com/mostoo45) | 9.492 | [writeup](https://github.com/mostoo45/lab-taxi/blob/master/taxi_2.ipynb) |  |  |
+| [crazyleg](https://github.com/crazyleg) | 9.49 | [writeup](https://github.com/crazyleg/gym-taxi-v2-v3-solution) |  |  |
+| [Akshay Sathe](https://github.com/AkshayS21) | 9.471 | [writeup](https://github.com/AkshayS21/Deep-Reinforced-Learning/blob/master/Taxi-v2-OpenAI-9.47.ipynb) |  |  |
+| [Ridhwan Luthra](https://github.com/ridhwanluthra) | 9.461 | [writeup](https://github.com/Ridhwanluthra/deep-reinforcement-learning/tree/master/lab-taxi) |  | 15000 |
+| [newwaylw](https://github.com/newwaylw) | 9.459 | [writeup](https://github.com/newwaylw/deep_reinforcement_learning/blob/master/OpenAI-Gym-Taxi-v2/Taxi_v2.ipynb) |  | 20000 |
+| [romOlivo](https://github.com/romOlivo) | 9.449 | [writeup](https://github.com/romOlivo/NanodegreeExercises/tree/master/lab-taxi) |  |  |
+| [Herimiaina ANDRIA-NTOANINA](https://github.com/kotogasy) | 9.446 | [writeup](https://github.com/kotogasy/OpenAI-Gym-Taxi-v2/blob/master/openai-gym-taxi-v2.ipynb) |  |  |
+| [aleckretch](https://github.com/aleckretch) | 9.426 | [writeup](https://github.com/aleckretch/OpenAI-Gym-Taxi-v2/blob/master/sarsa0-implementation-scoring-9.426.ipynb) |  |  |
+| [Cihan Soylu](https://github.com/CihanSoylu) | 9.423 | [writeup](https://github.com/CihanSoylu/OpenAIGym-Taxi-v2-env/blob/master/Taxi-v2.ipynb) |  |  |
+| [Tristan Frizza](https://github.com/tfrizza) | 9.358 | [writeup](https://github.com/tfrizza/deep-reinforcement-learning/blob/master/lab-taxi/agent.py) |  |  |
+| [Jhon Muñoz](https://github.com/JKWalleiee) | 9.334 | [writeup](https://github.com/JKWalleiee/Deep-Reinforcement-Learning-Nanodegree/tree/main/Taxi-v2) |  |  |
+| [Mahaveer Jain](https://github.com/mjain85) | 9.296 | [writeup](https://github.com/mjain85/openAI-Taxi/blob/master/taxi.ipynb) |  |  |
+| [Mostafa Elhoushi](https://github.com/mostafaelhoushi) | 9.2926 | [writeup](https://github.com/mostafaelhoushi/OpenAI-Gym-Taxi-v2) |  |  |
+| [Rajiv Krishnakumar](https://github.com/rajkk1) | 9.277 | [writeup](https://github.com/rajkk1/deep-reinforcement-learning/tree/master/lab-taxi) |  | 20000 |
+| [Brungi Vishwa Sourab](https://github.com/vishwasourab) | 9.23 | [writeup](https://github.com/vishwasourab/openai_Taxi_v2/blob/master/Taxi_V2.ipynb) |  |  |
+
+### Taxi-v3
+
+[](https://github.com/openai/gym/wiki/Leaderboard#taxi-v3)
+This task was introduced in [Dietterich2000] to illustrate some issues in hierarchical reinforcement learning. There are 4 locations (labeled by different letters) and your job is to pick up the passenger at one location and drop him off in another. You receive +20 points for a successful dropoff, and lose 1 point for every timestep it takes. There is also a 10 point penalty for illegal pick-up and drop-off actions.
+
+[Dietterich2000] T Erez, Y Tassa, E Todorov, "Hierarchical Reinforcement Learning with the MAXQ Value Function Decomposition", 2011.
+
+| User | 100 Episodes Best Average Reward | Write-up | Video | Solved In Episode |
+| --- | --- | --- | --- | --- |
+| [andyharless](https://github.com/andyharless) | 9.26 | [writeup](https://github.com/andyharless/openai-gym-taxi-v3-udacity) |  |  |
+| [chillage](https://github.com/chillage) | 9.249 | [writeup](https://github.com/chillage/deep-reinforcement-learning/blob/master/lab-taxi/ParameterExplore.ipynb) |  |  |
+| [morakanhan](https://github.com/MoraKanHan) | 9.247 | [writeup](https://github.com/MoraKanHan/Openai_Taxi_V3.git) |  | 20000 |
+| [yurkovak](https://github.com/yurkovak) | 9.19 | [writeup](https://github.com/yurkovak/deep-reinforcement-learning/blob/master/lab-taxi/Hyper_search.ipynb) |  | 20000 |
+| [crazyleg](https://github.com/crazyleg) | 9.07 | [writeup](https://github.com/crazyleg/gym-taxi-v2-v3-solution) |  |  |
+| [rahulkaplesh](https://github.com/rahulkaplesh) | 8.97 | [writeup+Notebook](https://github.com/rahulkaplesh/ReinforcementLearning/tree/master/Taxi-v3) |  | 20000 |
+| [Mattia-Scarpa](https://github.com/Mattia-Scarpa) | 8.83 | [writeup](https://github.com/Mattia-Scarpa/RL-openai-gym-Taxy-v3_solution/tree/main) |  | 20000 |
+| [Tiger37](https://github.com/Tiger767) | 8.8 | [writeup](https://github.com/Tiger767/OpenAIGymResults/tree/master/Taxi-v3) |  | 20000 |
+| [take2rohit](https://github.com/tak2rohit) | 8.57 | [writeup+Notebook](https://github.com/take2rohit/taxi_v3_openai) | [video](https://github.com/take2rohit/taxi_v3_openai/blob/master/result.gif) | 5000 |
+
+### GuessingGame-V0
+
+[](https://github.com/openai/gym/wiki/Leaderboard#guessinggame-v0)
+The goal of the game is to guess within 1% of the randomly chosen number within 200 time steps
+
+After each step the agent is provided with one of four possible observations which indicate where the guess is in relation to the randomly chosen number
+
+| User | Average Episode Steps | Write-up | Video | Solved In Episode |
+| --- | --- | --- | --- | --- |
+| [Anandha Krishnan H](https://github.com/AKing1998) | 51 (use close-form preset policy) | [writeup](https://github.com/AKing1998/Gym-Toy-Text-Guessing-Game-V0) |  |  |
+| [Britto Sabu](https://github.com/brittosabu) | 53 (use close-form preset policy) | [writeup](https://github.com/brittosabu/Guessing-game) |  |  |
+
+### FrozenLake-v0
+
+[](https://github.com/openai/gym/wiki/Leaderboard#frozenlake-v0)
+The agent controls the movement of a character in a grid world. Some tiles of the grid are walkable, and others lead to the agent falling into the water. Additionally, the movement direction of the agent is uncertain and only partially depends on the chosen direction. The agent is rewarded for finding a walkable path to a goal tile.
+
+| User | Episodes Before Solve | Write-up | Video | Solved In Episode |
+| --- | --- | --- | --- | --- |
+| [Nitish tom michael](https://github.com/knitemblazor) | 100 | [writeup](https://github.com/knitemblazor/frozen_lake_openaigym) |  |  |
+
+### FrozenLake8x8-v0
+
+[](https://github.com/openai/gym/wiki/Leaderboard#frozenlake8x8-v0)
+The agent controls the movement of a character in a grid world. Some tiles of the grid are walkable, and others lead to the agent falling into the water. Additionally, the movement direction of the agent is uncertain and only partially depends on the chosen direction. The agent is rewarded for finding a walkable path to a goal tile.
+
+| User | 100 Episodes Best Average Reward | Write-up | Video | Solved In Episode |
+| --- | --- | --- | --- | --- |
+| [Sukesh Shenoy](https://github.com/sukesh167) | 85 | [writeup](https://github.com/sukesh167/OpenAI_GYM_TOY_TEXT_FrozenLake8x8-v0/tree/master) |  |  |

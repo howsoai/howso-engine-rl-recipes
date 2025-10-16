@@ -1,0 +1,3 @@
+Source ID,Algorithm (+version),Observation type,"Solved" definition,Median episodes/steps to solve (N),Training compute,Seeds,Year,Paper DOI/URL,Code,Notes
+RL-C1,"REINFORCE (baseline)",state,"Average reward ≥195 across 100 episodes (Gym)","650 episodes (N=10)",,10,2019,https://sha2nkt.github.io/assets/deep-rl-final.pdf,,"Figure 6a"
+RL-C1,"REINFORCE + learned dynamics",state,"Same as above","400 episodes (N=10)",,10,2019,https://sha2nkt.github.io/assets/deep-rl-final.pdf,,"Figure 6b alternates real and model-generated rollouts"

@@ -1,0 +1,4 @@
+algorithm,observation_type,solved_definition,median_episodes_to_solve,best_reward_if_not_solved,seeds,year,paper_url,code_url,notes
+"A2C (pixels)",pixels,"Train 5M frames; WaferThinMints 150 rounds averaged; solver would sustain positive score",,"-6.21","5 seeds",2019,https://www.aaai.org/ojs/index.php/AIIDE/article/download/5218/5074,,"Table 1 (Mints column) gives average score -6.21; text notes runs did not converge"
+"NovelTS planning",state,"Planning agents run ~150 games; success measured by mean score (higher better)",,"8.75","~150 plays",2019,https://www.aaai.org/ojs/index.php/AIIDE/article/download/5218/5074,,"Table 1 reports +8.75 average score"
+"Return42 planning",state,"Same experimental setup as above",,"-2.66","~150 plays",2019,https://www.aaai.org/ojs/index.php/AIIDE/article/download/5218/5074,,"Table 1 reports −2.66 average score"

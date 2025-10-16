@@ -1,0 +1,15 @@
+environment,cartpole
+agent_type,time-series
+total_runs,5
+winning_runs,4
+non_winning_runs,1
+win_rate_pct,80.0
+median_rounds_to_win,210.5
+mean_rounds_to_win,267
+median_high_score,500.0
+median_total_cases,19424.0
+median_avg_score_final_window,196.07
+median_avg_score_total,133.03027636599137
+loss_rounds_mean,1000
+loss_avg_score_mean,16.203203203203202
+loss_avg_score_median,16.203203203203202

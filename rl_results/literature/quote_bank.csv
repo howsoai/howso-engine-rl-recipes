@@ -1,0 +1,6 @@
+env,algorithm,exact_quote,where,doi_or_url,notes
+CartPole,"REINFORCE (model-free)","Averaging over 10 runs, REINFORCE alone solved the environment in 650 episodes whereas model-free with model dynamics solved it in 400.","Shaikh et al. 2019, Sec. 4.1 (p.5)",https://sha2nkt.github.io/assets/deep-rl-final.pdf,"Sentence covers both baseline and model-augmented variants; see Figure 6"
+Wafer-Thin-Mints,"A2C","One stochastic environment, WaferThinMints, did not converge and might have benefited from more training time.","Bontrager et al. 2019, Sec. 3 (p.3)",https://www.aaai.org/ojs/index.php/AIIDE/article/download/5218/5074,"Explains failure to solve the level"
+Wafer-Thin-Mints,"A2C (Table 1)","A2C 5.0 3.79 2.0 69.6 228.86 -6.21","Bontrager et al. 2019, Table 1 (p.5)",https://www.aaai.org/ojs/index.php/AIIDE/article/download/5218/5074,"Mints column last value corresponds to average score −6.21"
+Wafer-Thin-Mints,"NovelTS (Table 1)","NovelTS 2.1 2.0 2.0 4.8 298.51 8.75","Bontrager et al. 2019, Table 1 (p.5)",https://www.aaai.org/ojs/index.php/AIIDE/article/download/5218/5074,"Mints column value 8.75"
+Wafer-Thin-Mints,"Return42 (Table 1)","Return42 5.0 2.0 2.0 190.12 329.73 -2.66","Bontrager et al. 2019, Table 1 (p.5)",https://www.aaai.org/ojs/index.php/AIIDE/article/download/5218/5074,"Mints column value −2.66"

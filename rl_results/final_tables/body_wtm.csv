@@ -1,0 +1,2 @@
+Algorithm (ours),Metric,Our Result,Literature Comparator (range/median),Sources (IDs)
+"Howso RL (basic)","Average score at 150 rounds (median of winning runs, N=14/20)","6.98 (high score 9; win rate 70%)","A2C −6.21; NovelTS 8.75; Return42 −2.66",RL-W1

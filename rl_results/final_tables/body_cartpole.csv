@@ -1,0 +1,2 @@
+Algorithm (ours),Metric,Our Result,Literature Comparator (range/median),Sources (IDs)
+"Howso RL (basic, state)","Episodes to reach Gym solve (median, N=5)","273 (IQR 38; CartPole-v1)","REINFORCE baseline 650; REINFORCE+dynamics 400",RL-C1

@@ -1,0 +1,4 @@
+Source ID,Algorithm (+version),Observation type,"Solved" definition,Median episodes/steps to solve (N),Training compute,Seeds,Year,Paper DOI/URL,Code,Notes
+RL-W1,"A2C (OpenAI Baselines)",pixels,"Mean score over ~150 GVGAI plays","Average score −6.21 (150 games)","5M frames (reported)","5 seeds",2019,https://www.aaai.org/ojs/index.php/AIIDE/article/download/5218/5074,,"Table 1, Mints column; Section 3 notes non-convergence"
+RL-W1,"NovelTS planning",state,"Same","Average score 8.75 (150 games)",,"N/A (planning)",2019,https://www.aaai.org/ojs/index.php/AIIDE/article/download/5218/5074,,"Table 1, Mints column"
+RL-W1,"Return42 planning",state,"Same","Average score −2.66 (150 games)",,"N/A (planning)",2019,https://www.aaai.org/ojs/index.php/AIIDE/article/download/5218/5074,,"Table 1, Mints column"

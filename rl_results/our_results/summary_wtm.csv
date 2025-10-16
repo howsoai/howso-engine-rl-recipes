@@ -1,0 +1,14 @@
+environment,wtm
+total_runs,20
+winning_runs,14
+non_winning_runs,6
+win_rate_pct,70.0
+source_log,rl_results_wtm.log
+median_rounds_to_win,150.0
+iqr_rounds_to_win,0.0
+median_high_score,9.0
+median_total_cases,1258.5
+median_avg_score_final_window,6.983333333333333
+median_avg_score_total,6.983333333333333
+best_reward_unsolved,9
+median_avg_score_unsolved,4.470000000000001

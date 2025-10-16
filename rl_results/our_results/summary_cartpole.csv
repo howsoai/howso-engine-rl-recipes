@@ -1,0 +1,12 @@
+environment,cartpole
+total_runs,5
+winning_runs,5
+non_winning_runs,0
+win_rate_pct,100.0
+source_log,rl_results_cartpole.log
+median_rounds_to_win,273
+iqr_rounds_to_win,38.0
+median_high_score,500.0
+median_total_cases,26564
+median_avg_score_final_window,196.16
+median_avg_score_total,136.70682730923696

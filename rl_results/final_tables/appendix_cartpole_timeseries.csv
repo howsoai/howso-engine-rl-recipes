@@ -1,0 +1,3 @@
+Agent type,Observation type,"Solved" definition,Mean episodes to solve (N),Median episodes to solve,IQR episodes,Win rate,Mean high score,Mean total cases,Notes
+Howso RL (basic),state,"Avg reward ≥195 over last 100 episodes",340 (N=5),273,38,100%,500.0,35,172.6,Baseline basic agent
+Howso RL (time-series),state,"Avg reward ≥195 over last 100 episodes",267 (N=4 wins of 5),282,146.5,80%,492.5,25,195.5,One seed hit 1,000-episode cap
