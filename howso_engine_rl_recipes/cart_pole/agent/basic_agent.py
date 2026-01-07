@@ -52,7 +52,7 @@ class BasicAgent(BaseAgent[np.ndarray, int]):
                 # 1 = right
                 'type': 'nominal',
                 'data_type': 'number',
-                'bounds': {'allowed': [0, 1]}
+                'bounds': {'allowed': [0, 1], 'allow_null': False}
             },
             # Context
             'score': {'type': 'continuous'},
