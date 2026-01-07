@@ -66,7 +66,7 @@ class TimeSeriesAgent(BaseAgent[np.ndarray, int]):
                 # 1 = right
                 'type': 'nominal',
                 'data_type': 'number',
-                'bounds': {'allowed': [0, 1]},
+                'bounds': {'allowed': [0, 1], 'allow_null': False},
                 'time_series': {'type': 'rate'}
             },
             # Context
