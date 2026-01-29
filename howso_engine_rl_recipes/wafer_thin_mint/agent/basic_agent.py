@@ -63,7 +63,7 @@ class BasicAgent(BaseAgent[int, int]):
 
     def act(self, observation, round_num, step) -> int:
         """React to the observation to get the action."""
-        desired_conviction = 1
+        desired_conviction = 1.5
 
         details = {}
         if self.explanation_level >= 2:
