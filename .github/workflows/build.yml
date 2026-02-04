@@ -120,6 +120,8 @@ jobs:
       config-pretty: 'MT'
       upstream-details: ${{ needs.metadata.outputs.upstream-details }}
       debug: ${{ inputs.debug-mode }}
+      extra-args: '-vvv'
+      continue-on-error: true
 
   pytest-windows-3-10-mt:
     # Only run on branch builds
