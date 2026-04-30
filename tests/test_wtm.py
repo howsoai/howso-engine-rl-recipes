@@ -28,6 +28,9 @@ def test_wafer_thin_mint(agent_type, iterations):
     assert metrics['average-win-high-score'] >= 8.7
     assert metrics['average-rounds-to-win'] > 2
 
+    # uncomment this print for debugging with `pytest -s tests\test_wtm.py``
+    # print("metrics: ", metrics)
+
     # Make sure there are at least 2 cases or games, which is the minimum to
     # learn the domain.
     for run in results['runs'].values():
