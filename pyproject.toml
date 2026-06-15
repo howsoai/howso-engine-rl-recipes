@@ -11,7 +11,7 @@ authors = [
     {name = "Howso Incorporated"},
     {email = "support@howso.com"},
 ]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 keywords = ["machine", "learning", "artificial", "intelligence"]
 license = {file = "LICENSE.txt"}
 classifiers = [
@@ -20,9 +20,10 @@ classifiers = [
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
         "License :: OSI Approved :: GNU Affero General Public License v3",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
+        "Programming Language :: Python :: 3.14",
         "Operating System :: MacOS",
         "Operating System :: MacOS :: MacOS X",
         "Operating System :: Microsoft :: Windows",
@@ -35,7 +36,8 @@ dependencies = [
    "gymnasium",
    "gymnasium[classic-control]",
    "pandas",
-   "numpy",
+   "numpy>=2.3; python_version >= '3.14'", # Minimum version supporting 3.14
+   "numpy;      python_version < '3.14'",
 ]
 
 [project.optional-dependencies]
