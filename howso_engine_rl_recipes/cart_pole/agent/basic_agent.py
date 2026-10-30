@@ -75,7 +75,8 @@ class BasicAgent(BaseAgent[np.ndarray, int]):
         self.trainee.set_auto_analyze_params(
             auto_analyze_enabled=True,
             context_features=self.context_features + self.action_features,
-            rebalance_features=self.goal_features
+            # TODO 26254: Improve rebalance features for RL
+            # rebalance_features=self.goal_features
         )
         self.goal_map = dict(zip(self.goal_features, [{"goal": "max"}]))
 
