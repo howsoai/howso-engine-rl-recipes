@@ -29,21 +29,21 @@ class BasicAgent(BaseAgent[np.ndarray, int]):
     Use a desired conviction of 5 instead of 1 to reduce exploratory decisions
     since similar previous cases were successful at lasting this long.
 
-    Train on played game, assigning cases a reward score from N to 1 based on
-    on the number of steps in the game, thus the cases that were furthest from
-    failure have higher scores than those immediately prior to failure. The
-    score is capped to the max average score since all those cases are equally
-    good with respect to temporal distance from failure.
-
-    Additionally, only games that managed to achieve a score that's at least as
-    good as the maximum average are trained, such that the model only trains on
-    improving performances.
+    Train on every played game, scoring each move by the discounted sum of the
+    game's reward (1 per step) from that move on. Discounting makes a move's
+    score mostly reflect the steps soon after it, rather than when in the game
+    it was made or how the rest of the game went. When a game ends by reaching
+    the step limit (rather than by being lost), the state it ended in counts
+    as safe instead of worth nothing, since the pole was still up. Losing
+    games are trained too, so that the model knows which situations and moves
+    lead to losing.
     """
+
+    #: The discount applied to each later step's reward when scoring a move.
+    discount = 0.98
 
     def setup(self) -> None:
         """Setup the agent."""
-        self.max_avg_score = 0
-
         # Setup Howso features
         self.features = {
             # Action
@@ -124,23 +124,25 @@ class BasicAgent(BaseAgent[np.ndarray, int]):
         score = scores[-1]
         # avg of the last 100 games (or however many win_threshold is)
         avg_score = np.mean(scores[-self.win_threshold:])
-        self.max_avg_score = max(self.max_avg_score, avg_score)
 
-        # assign each action a score, high to low, representing how many ticks before failure
-        rewards = [
-            [score - i]
-            for i in range(step)
-        ]
+        # the game was lost if it ended before the step limit, else it was cut off with the pole
+        # still up, so count the state it ended in as safe: worth the most any state can be
+        # (1 + discount + discount^2 + ... = 1 / (1 - discount))
+        lost = score < self.env.spec.max_episode_steps
+        value = 0.0 if lost else 1 / (1 - self.discount)
 
-        # only train on games that did better than the current max avg score
-        if score >= self.max_avg_score + 1:
-            self.trainee.train(
-                features=self.goal_features,
-                cases=rewards,
-                series=str(round_num),
-            )
-        else:
-            self.trainee.remove_series_store()
+        # score each move by the discounted reward from it to the end of the game, last move first
+        move_scores = []
+        for _ in range(step):
+            value = 1 + self.discount * value
+            move_scores.append([value])
+        move_scores.reverse()
+
+        self.trainee.train(
+            features=self.goal_features,
+            cases=move_scores,
+            series=str(round_num),
+        )
 
         logger.info(
             'Round %s: score=%.0f high_score=%.0f avg_score=%.0f',

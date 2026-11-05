@@ -25,15 +25,22 @@ class BasicAgent(BaseAgent[int, int]):
     attempting to find similar situations from previous games where the score
     of those situations was similar to the desired score.
 
-    Train on played game, assigning all cases in the round the final reward of
-    the round.
+    Train on played game, scoring each move by the discounted sum of the
+    round's rewards from that move on: 1 for each wafer eaten, with the last
+    move bringing the total to the round's final score. Unlike assigning every
+    move the round's final score, this keeps a good move followed by a bad one
+    (such as eating a wafer early in a round that later explodes) from being
+    scored as badly as the bad move.
     """
+
+    #: The discount applied to each later move's reward when scoring a move.
+    discount = 0.98
 
     def setup(self) -> None:
         """Setup the agent."""
         self.features = {
             'wafer_count': {'type': 'ordinal', 'data_type': 'number'},
-            'score': {'type': 'ordinal', 'data_type': 'number'},
+            'score': {'type': 'continuous'},
             'action': {
                 'type': 'nominal',
                 'data_type': 'number',
@@ -95,9 +102,20 @@ class BasicAgent(BaseAgent[int, int]):
         """Assign reward to model."""
         score = scores[-1]
 
+        # 1 for each wafer eaten, with the last move bringing the total to the round's score
+        rewards = [1] * (step - 1) + [score - (step - 1)]
+
+        # score each move by the discounted reward from it to the end of the round, last move first
+        move_scores = []
+        value = 0.0
+        for reward in reversed(rewards):
+            value = reward + self.discount * value
+            move_scores.append([value])
+        move_scores.reverse()
+
         self.trainee.train(
             features=self.goal_features,
-            cases=[[score]],
+            cases=move_scores,
             series=str(round_num),
         )
 
